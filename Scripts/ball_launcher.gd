@@ -1,10 +1,10 @@
 extends Node3D
 
 @export var left_right_range := .5
-@export var max_tilt := 15.0
-@export var max_power := 30.0
-@export var power_charge_speed := 20.0
-@onready var power_bar = get_node("../PowerBar")
+@export var max_tilt := 40.0
+@export var max_power := 15.0
+@export var power_charge_speed := 15.0
+@onready var power_bar = get_node("../UI/PowerBar")
 
 var position_input := 0.0
 var tilt_input := 0.0
@@ -69,6 +69,12 @@ func _process(delta):
 	update_aim_line()
 
 func shoot_ball():
+	
+	if GameManager.balls_left <= 0:
+		print("no balls")
+		return
+	
+	GameManager.use_ball()
 	print("ball shot")
 	var ball = ball_scene.instantiate()
 	get_parent().add_child(ball)
