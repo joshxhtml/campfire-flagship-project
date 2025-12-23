@@ -1,18 +1,24 @@
 extends Node3D
 
-@export var move_range := 1
-@export var tilt_min := -5
-@export var tilt_max := -10
+@export var mouse_senseivity := 0.15
+@export var max_leftright := 12.0
+@export var max_updown := 8.0
+@export var return_speed := 6.0
 
-@onready var pivot = $Pivot
+var leftright := 0.0
+var updown := 0.0
+var mouse_active := true
 
-var move_input := 0.0
-var tilt_input := 0.0
-
-func _process(delta: float) -> void:
-	move_input = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	position.x = clamp(position.x + move_input * delta * 2.0, -move_range, move_range)
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	var t = abs(position.x) / move_range
-	var tilt = lerp(tilt_min, tilt_max, t)
-	pivot.rotation_degrees.x = tilt
+func _input(event):
+	if event is InputEventMouseMotion and mouse_active:
+		leftright -= event.relative.x * mouse_senseivity 
+		updown -= event.relative.y * mouse_senseivity 
+		leftright = clamp(leftright, -max_leftright, max_leftright)
+		updown = clamp(updown, -max_updown, max_updown)
+
+func _process(delta):
+	rotation_degrees.y = lerp(rotation_degrees.y, leftright, return_speed * delta)
+	rotation_degrees.x = lerp(rotation_degrees.x, updown, return_speed * delta)

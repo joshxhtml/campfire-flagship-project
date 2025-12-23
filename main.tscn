@@ -1,7 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://petr62ss25eu"]
+[gd_scene load_steps=19 format=3 uid="uid://petr62ss25eu"]
 
 [ext_resource type="Texture2D" uid="uid://ci2k2oinld8rl" path="res://images/black.png" id="1_0xm2m"]
 [ext_resource type="Script" uid="uid://2wxo078s6m4g" path="res://Scripts/camera_rig.gd" id="2_h2yge"]
+[ext_resource type="Script" uid="uid://b6fwo03syl0so" path="res://Scripts/ball_launcher.gd" id="3_h2yge"]
+[ext_resource type="PackedScene" uid="uid://2hksf06eh24j" path="res://ball.tscn" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://dbf3lh0tn0p06" path="res://images/brown.png" id="5_lquwl"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -32,13 +35,22 @@ size = Vector3(5, 1, 0.2)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kek77"]
 albedo_texture = ExtResource("1_0xm2m")
 
-[node name="SkeeBall Game" type="Node3D"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7mycd"]
+albedo_texture = ExtResource("5_lquwl")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_272bh"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_7mycd"]
+
+[node name="Main" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1bvp3")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0.5, 0)
 shadow_enabled = true
 
 [node name="Machine" type="Node3D" parent="."]
@@ -47,19 +59,22 @@ transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0
 [node name="Ramp" type="StaticBody3D" parent="Machine"]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Machine/Ramp"]
-transform = Transform3D(5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(5, 0, 0, 0, 0.5, 0, 0, 0, 1, 0, 0.5, 0)
 mesh = SubResource("BoxMesh_1bvp3")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Machine/Ramp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_lquwl")
 
 [node name="Right Wall" type="StaticBody3D" parent="Machine"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Machine/Right Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_7mycd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Machine/Right Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_272bh")
 mesh = SubResource("BoxMesh_5vw27")
 
@@ -67,16 +82,45 @@ mesh = SubResource("BoxMesh_5vw27")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.6)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Machine/Left Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_7mycd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Machine/Left Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_kek77")
 mesh = SubResource("BoxMesh_5vw27")
 
-[node name="CameraRig" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.79818356, 3.0501797)
+[node name="CameraPivot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.98458874, 0.17488559, 0, -0.17488559, 0.98458874, 0, 0.71222997, 3.1239235)
 script = ExtResource("2_h2yge")
 
-[node name="Pivot" type="Node3D" parent="CameraRig"]
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraRig/Pivot"]
+[node name="BallLauncher" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85443926, 1.4130702)
+script = ExtResource("3_h2yge")
+ball_scene = ExtResource("4_1bvp3")
+
+[node name="PowerBar" type="ProgressBar" parent="."]
+offset_right = 207.0
+offset_bottom = 27.0
+
+[node name="Room" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(7, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_7mycd")
+mesh = SubResource("PlaneMesh_272bh")
+
+[node name="BackWall" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(14, 0, 0, 0, 3, 0, 0, 0, 0.5, 0, 1.5, -4.25)
+mesh = SubResource("BoxMesh_lquwl")
+
+[node name="LeftWall" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(0.5, 0, 0, 0, 3, 0, 0, 0, 8, -7.25, 1.5, 0)
+mesh = SubResource("BoxMesh_7mycd")
+
+[node name="RightWall" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(0.5, 0, 0, 0, 3, 0, 0, 0, 8, 7.25, 1.5, 0)
+mesh = SubResource("BoxMesh_7mycd")

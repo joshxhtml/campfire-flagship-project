@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://2hksf06eh24j"]
+
+[ext_resource type="Texture2D" uid="uid://ci2k2oinld8rl" path="res://images/black.png" id="1_x8fbi"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_41u45"]
+albedo_texture = ExtResource("1_x8fbi")
+
+[sub_resource type="SphereMesh" id="SphereMesh_cbx31"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_x8fbi"]
+
+[node name="RigidBody3D" type="RigidBody3D"]
+linear_damp = 0.2
+angular_damp = 0.1
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_41u45")
+mesh = SubResource("SphereMesh_cbx31")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+shape = SubResource("SphereShape3D_x8fbi")
+debug_fill = false
