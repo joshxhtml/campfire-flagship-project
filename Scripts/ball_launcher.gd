@@ -14,6 +14,36 @@ var charging := false
 
 @export var ball_scene: PackedScene
 
+@export var aim_line_lenght := 6.0
+
+
+@onready var aim_line := $AimLine
+
+
+func update_aim_line():
+	var mesh := ImmediateMesh.new()
+	
+	var material := StandardMaterial3D.new()
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
+	if tilt_mode:
+		material.albedo_color = Color(0.2, 0.5, 1.0) 
+	else:
+		material.albedo_color = Color(1.0, 0.2, 0.2) 
+		
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES, material)
+	
+	var start := Vector3.ZERO
+	var direction := -transform.basis.z.normalized()
+	var end := direction * aim_line_lenght
+	
+	mesh.surface_add_vertex(start)
+	mesh.surface_add_vertex(end)
+	
+	mesh.surface_end()
+	
+	$AimLine.mesh = mesh
+
 func _process(delta):
 	if Input.is_action_just_pressed("change_mode"):
 		tilt_mode = !tilt_mode
@@ -35,6 +65,8 @@ func _process(delta):
 		shoot_ball()
 		charging = false
 		power = 0.0
+	
+	update_aim_line()
 
 func shoot_ball():
 	print("ball shot")
