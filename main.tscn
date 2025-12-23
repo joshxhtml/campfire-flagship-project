@@ -1,8 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://petr62ss25eu"]
+[gd_scene load_steps=29 format=3 uid="uid://petr62ss25eu"]
 
 [ext_resource type="Texture2D" uid="uid://bu31k310ch42x" path="res://images/placeholder2.jpg" id="1_kek77"]
 [ext_resource type="Texture2D" uid="uid://nqnootr7gtmu" path="res://images/placeholder3.webp" id="2_4c57u"]
-[ext_resource type="Texture2D" uid="uid://cpj8cyfr6qpr1" path="res://images/placeholder.jpg" id="2_7mycd"]
 [ext_resource type="Script" uid="uid://2wxo078s6m4g" path="res://Scripts/camera_rig.gd" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://b6fwo03syl0so" path="res://Scripts/ball_launcher.gd" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://2hksf06eh24j" path="res://ball.tscn" id="4_1bvp3"]
@@ -13,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://bk0aukvageigw" path="res://textures/floor_tiles_06_rough_4k.png" id="10_w48qg"]
 [ext_resource type="Material" uid="uid://qxhnkrqdookj" path="res://textures/brickwall.tres" id="11_vivmo"]
 [ext_resource type="PackedScene" uid="uid://surya05s0tah" path="res://Target.gltf" id="12_ycdy4"]
+[ext_resource type="Texture2D" uid="uid://bdw24vii2ctii" path="res://images/Round_Clear____3_-removebg-preview.png" id="14_w48qg"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -34,6 +34,9 @@ albedo_texture = ExtResource("1_kek77")
 [sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
 size = Vector3(5, 0.5, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
+albedo_texture = ExtResource("1_kek77")
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_7mycd"]
 size = Vector3(5, 1, 0.2)
 
@@ -45,14 +48,6 @@ size = Vector3(5, 1, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vivmo"]
 albedo_texture = ExtResource("2_4c57u")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2cqfq"]
-albedo_texture = ExtResource("1_kek77")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5vw27"]
-albedo_texture = ExtResource("2_7mycd")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_kek77"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yaehf"]
 disable_fog = true
@@ -94,6 +89,14 @@ mesh = SubResource("BoxMesh_1bvp3")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_lquwl")
 
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Machine/Ramp"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26262861, 0.678, 0.5)
+material_override = SubResource("StandardMaterial3D_2cqfq")
+use_collision = true
+collision_layer = 3
+polygon = PackedVector2Array(-0.09098043, -0.062283933, 0.5597307, 0.2094996, 0.9629481, 0.47455454, 1, 0)
+smooth_faces = true
+
 [node name="Right Wall" type="StaticBody3D" parent="Machine"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.6)
 
@@ -118,46 +121,45 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_vivmo")
 mesh = SubResource("BoxMesh_5vw27")
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Machine"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.678, 0.5)
-material_override = SubResource("StandardMaterial3D_2cqfq")
-use_collision = true
-collision_layer = 3
-polygon = PackedVector2Array(0, 0, 0.8699058, 1.9287529, 0.9629481, 0.47455454, 1, 0)
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Machine"]
-transform = Transform3D(-2.1855694e-08, -1, -3.4969112e-08, 1.9106855e-15, 4.371139e-08, -0.8, 0.5, -4.371139e-08, 1.5285485e-15, 2.1702535, 1.910017, -1.571297)
-material_override = SubResource("StandardMaterial3D_5vw27")
-mesh = SubResource("PlaneMesh_kek77")
-skeleton = NodePath("../../Room/BackWall")
-
 [node name="10 Points" parent="Machine" instance=ExtResource("7_272bh")]
-transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 1.6958785, 1.4372095, -0.02260375)
+transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 1.8916171, 1.2590569, -0.022603743)
+visible = false
 score_value = 10
 
 [node name="20 Points" parent="Machine" instance=ExtResource("7_272bh")]
-transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 1.7645135, 1.635213, -0.011733365)
+transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 1.960252, 1.4570605, -0.011733357)
+visible = false
 score_value = 20
 
 [node name="30 Points" parent="Machine" instance=ExtResource("7_272bh")]
-transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 1.8692312, 1.7675319, -0.020772435)
+transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 2.0649698, 1.5893793, -0.020772427)
+visible = false
 score_value = 30
 
 [node name="40 Points" parent="Machine" instance=ExtResource("7_272bh")]
-transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 2.023438, 1.9780345, -0.020561235)
+transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 2.2191765, 1.7998819, -0.020561226)
+visible = false
 score_value = 40
 
 [node name="50 Points" parent="Machine" instance=ExtResource("7_272bh")]
-transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 2.1042044, 2.202484, -0.016901253)
+transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 2.299943, 2.0243313, -0.016901243)
+visible = false
 
 [node name="100 Points Left" parent="Machine" instance=ExtResource("7_272bh")]
-transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 2.201209, 2.3054123, -0.38168842)
+transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 2.3969476, 2.1272597, -0.3816884)
+visible = false
 
 [node name="100 Points Right" parent="Machine" instance=ExtResource("7_272bh")]
-transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 2.2160234, 2.3018706, 0.34161046)
+transform = Transform3D(-5.2453664e-09, -0.00070710684, -0.0848528, 0, 0.0007071067, -0.084852815, 0.12, -3.090862e-11, -3.7090337e-09, 2.411762, 2.123718, 0.3416105)
+visible = false
+
+[node name="0 Points" parent="Machine" instance=ExtResource("7_272bh")]
+transform = Transform3D(0.5, 0, 0, 0, -2.1855694e-08, -0.5, 0, 0.5, -2.1855694e-08, 1.5779574, 0.6200117, -0.022603756)
+visible = false
+score_value = 0
 
 [node name="Target" parent="Machine" instance=ExtResource("12_ycdy4")]
-transform = Transform3D(-3.9340248e-10, -0.0015628337, -0.008863269, 0, 0.008863269, -0.0015628337, 0.009, -6.831363e-11, -3.8742579e-10, -1.707149, -0.0800612, -0.5500001)
+transform = Transform3D(-3.9340248e-10, -0.0015628337, -0.008863269, 0, 0.008863269, -0.0015628337, 0.009, -6.831363e-11, -3.8742579e-10, -1.5114105, -0.25821376, -0.5500001)
 
 [node name="Right Wall2" type="StaticBody3D" parent="Machine"]
 transform = Transform3D(0.35, 0, 0, 0, 1, 0, 0, 0, 1, 1.62, 1, 0.6)
@@ -167,7 +169,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_7mycd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Machine/Right Wall2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1.25, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 material_override = SubResource("StandardMaterial3D_w48qg")
 mesh = SubResource("BoxMesh_5vw27")
 
@@ -179,7 +181,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_7mycd")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Machine/Left Wall2"]
+transform = Transform3D(1.25, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+material_override = SubResource("StandardMaterial3D_w48qg")
+mesh = SubResource("BoxMesh_5vw27")
+
+[node name="Back Wall" type="StaticBody3D" parent="Machine"]
+transform = Transform3D(-1.5298985e-08, 0, 1, 0, 4, 0, -0.35, 0, -4.371139e-08, 2.9398284, 0, 1.922551e-08)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Machine/Back Wall"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("BoxShape3D_7mycd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Machine/Back Wall"]
+transform = Transform3D(0.8, 0, 0, 0, 0.75, 0, 0, 0, 1, -2.842171e-14, 0.37865674, -0.25)
 material_override = SubResource("StandardMaterial3D_w48qg")
 mesh = SubResource("BoxMesh_5vw27")
 
@@ -235,18 +249,24 @@ mesh = SubResource("PlaneMesh_272bh")
 [node name="UI" parent="." instance=ExtResource("10_4c57u")]
 
 [node name="HoleCamView" type="SubViewportContainer" parent="UI"]
-offset_left = 20.0
-offset_top = 15.0
+offset_left = 1.0
 offset_right = 210.0
-offset_bottom = 184.0
+offset_bottom = 207.0
 stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="UI/HoleCamView"]
-size = Vector2i(190, 169)
+handle_input_locally = false
+size = Vector2i(209, 207)
 render_target_update_mode = 4
 
 [node name="HoleCamera" type="Camera3D" parent="UI/HoleCamView/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 2.6096616, -1.1636484)
+transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 2.431509, -1.3593869)
 fov = 70.0
 near = 0.1
 far = 50.0
+
+[node name="So Inefficent" type="TextureRect" parent="UI"]
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("14_w48qg")
+expand_mode = 1

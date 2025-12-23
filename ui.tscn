@@ -1,54 +1,135 @@
-[gd_scene load_steps=3 format=3 uid="uid://buy4jrshrgg66"]
+[gd_scene load_steps=4 format=3 uid="uid://buy4jrshrgg66"]
 
 [ext_resource type="Script" uid="uid://6x21ppnkouyb" path="res://Scripts/UIManager.gd" id="1_m6e0p"]
 [ext_resource type="Texture2D" uid="uid://cd5cd7kx3hghp" path="res://images/placeholder7.png" id="2_27fn8"]
+[ext_resource type="Texture2D" uid="uid://4ofbdpwe6qw5" path="res://images/UI-Image.png" id="2_nltto"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_m6e0p")
 
-[node name="RoundLabel" type="Label" parent="."]
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
 offset_right = 40.0
-offset_bottom = 23.0
+offset_bottom = 40.0
 
-[node name="ScoreLabel" type="Label" parent="."]
-offset_left = 1020.0
-offset_top = 45.0
-offset_right = 1060.0
-offset_bottom = 68.0
+[node name="ColorRect" type="ColorRect" parent="HUD"]
+layout_mode = 0
+offset_left = -55.0
+offset_top = 577.0
+offset_right = 1186.0
+offset_bottom = 662.0
 
-[node name="GoalLabel" type="Label" parent="."]
-offset_left = 1011.0
-offset_top = 9.0
-offset_right = 1051.0
-offset_bottom = 32.0
-
-[node name="BallsCountainer" type="HBoxContainer" parent="."]
-offset_left = 899.0
-offset_top = 573.0
-offset_right = 1129.0
-offset_bottom = 647.0
-
-[node name="BallIcon" type="TextureRect" parent="BallsCountainer"]
-layout_mode = 2
-texture = ExtResource("2_27fn8")
-expand_mode = 2
-
-[node name="BallIcon2" type="TextureRect" parent="BallsCountainer"]
-layout_mode = 2
-texture = ExtResource("2_27fn8")
-expand_mode = 2
-
-[node name="BallIcon3" type="TextureRect" parent="BallsCountainer"]
-layout_mode = 2
-texture = ExtResource("2_27fn8")
-expand_mode = 2
-
-[node name="PowerBar" type="ProgressBar" parent="."]
+[node name="ColorRect" type="ColorRect" parent="HUD/ColorRect"]
+layout_mode = 0
 offset_left = 898.0
-offset_top = 541.0
-offset_right = 1130.0
-offset_bottom = 568.0
+offset_top = -69.0
+offset_right = 2139.0
 
-[node name="RoundFlash" type="Label" parent="."]
+[node name="UiI-Image" type="TextureRect" parent="HUD"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_nltto")
+
+[node name="RoundLabel" type="Label" parent="HUD"]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 921.0
+offset_top = 10.0
+offset_right = 1137.0
+offset_bottom = 37.0
+
+[node name="GoalLabel" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 921.0
+offset_top = 54.0
+offset_right = 1158.0
+offset_bottom = 77.0
+
+[node name="BallsCountainer" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 914.0
+offset_top = 567.0
+offset_right = 1144.0
+offset_bottom = 641.0
+
+[node name="BallIcon" type="TextureRect" parent="HUD/BallsCountainer"]
+layout_mode = 2
+texture = ExtResource("2_27fn8")
+expand_mode = 2
+
+[node name="BallIcon2" type="TextureRect" parent="HUD/BallsCountainer"]
+layout_mode = 2
+texture = ExtResource("2_27fn8")
+expand_mode = 2
+
+[node name="BallIcon3" type="TextureRect" parent="HUD/BallsCountainer"]
+layout_mode = 2
+texture = ExtResource("2_27fn8")
+expand_mode = 2
+
+[node name="PowerBar" type="ProgressBar" parent="HUD"]
+layout_mode = 0
+offset_left = 912.0
+offset_top = 525.0
+offset_right = 1144.0
+offset_bottom = 552.0
+
+[node name="RoundFlash" type="Label" parent="HUD"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="ColorRect2" type="ColorRect" parent="HUD"]
+layout_mode = 0
+offset_left = -7.0
+offset_top = 1.0
+offset_right = 268.0
+offset_bottom = 205.0
+
+[node name="ColorRect2" type="ColorRect" parent="HUD/ColorRect2"]
+layout_mode = 0
+offset_left = -9.0
+offset_top = 65.0
+offset_right = 214.0
+offset_bottom = 271.0
+
+[node name="ColorRect3" type="ColorRect" parent="HUD/ColorRect2"]
+layout_mode = 0
+offset_left = 194.0
+offset_top = 203.0
+offset_right = 234.0
+offset_bottom = 265.0
+
+[node name="ColorRect4" type="ColorRect" parent="HUD/ColorRect2"]
+layout_mode = 0
+offset_left = 209.0
+offset_top = 193.0
+offset_right = 249.0
+offset_bottom = 258.0
+
+[node name="ColorRect3" type="ColorRect" parent="HUD/ColorRect2/ColorRect4"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = -9.0
+offset_right = 49.0
+offset_bottom = 56.0
+
+[node name="ColorRect3" type="ColorRect" parent="HUD/ColorRect2/ColorRect4/ColorRect3"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = -9.0
+offset_right = 48.0
+offset_bottom = 56.0
+
+[node name="ColorRect3" type="ColorRect" parent="HUD/ColorRect2/ColorRect4/ColorRect3/ColorRect3"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = -15.0
+offset_right = 49.0
+offset_bottom = 50.0

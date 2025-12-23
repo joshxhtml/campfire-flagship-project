@@ -13,6 +13,14 @@ signal score_changed(score)
 signal round_failed
 signal round_completed
 
+enum GameState {
+	PLAYING,
+	ROUND_TRANSITION,
+	GAME_OVER
+}
+
+var game_state := GameState.PLAYING
+
 func start_round():
 	balls_left = balls_per_round
 	round_score_goal = 10 * roundnum
