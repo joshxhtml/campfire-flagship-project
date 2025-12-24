@@ -95,7 +95,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.26262861, 0.678, 0.5)
 material_override = SubResource("StandardMaterial3D_2cqfq")
 use_collision = true
 collision_layer = 3
-polygon = PackedVector2Array(-0.09098043, -0.062283933, 0.5597307, 0.2094996, 0.9629481, 0.47455454, 1, 0)
+polygon = PackedVector2Array(-0.09098043, -0.062283933, 0.68502295, 0.40521872, 0.9629481, 0.47455454, 1, 0)
 smooth_faces = true
 
 [node name="Right Wall" type="StaticBody3D" parent="Machine"]
@@ -203,7 +203,7 @@ transform = Transform3D(1, 0, 0, 0, 0.98458874, 0.17488559, 0, -0.17488559, 0.98
 script = ExtResource("2_h2yge")
 
 [node name="Camera3D" type="Camera3D" parent="CameraPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27016526, 0.42246103)
 
 [node name="BallLauncher" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7650659, 2.2110624)
@@ -252,6 +252,7 @@ mesh = SubResource("PlaneMesh_272bh")
 [node name="SubViewportContainer" type="SubViewportContainer" parent="UI"]
 offset_right = 512.0
 offset_bottom = 512.0
+metadata/_edit_use_anchors_ = true
 
 [node name="SubViewport" type="SubViewport" parent="UI/SubViewportContainer"]
 handle_input_locally = false

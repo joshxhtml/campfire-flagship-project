@@ -8,6 +8,7 @@ extends CanvasLayer
 @onready var game_over_overlay = $GameOverOverlay
 @onready var final_score_label = $GameOverOverlay/TextureRect
 
+@onready var greg := $HUD/Greg
 
 func update_balls(count):
 	for i in balls_countainer.get_child_count():
@@ -34,6 +35,7 @@ func _ready():
 	GameManager.start_round()
 
 func on_round_started(_roundnum):
+	greg.set_emotion(greg.Emotion.NUETRAL)
 	hud.visible = false
 	round_image.visible = true
 	round_image.texture = preload("res://images/Round_Cleared.png")
@@ -45,6 +47,9 @@ func on_round_started(_roundnum):
 
 func update_round_score(score):
 	$HUD/RoundScoreLabel.text = "Round: %d / %d" % [score, GameManager.round_score_goal]
+	
+	if score >= GameManager.round_score_goal:
+		greg.set_emotion(greg.Emotion.HAPPY)
 	
 func update_total_score(score):
 	$HUD/TotalScoreLabel.text = "Total: %d" % score
@@ -59,6 +64,7 @@ func on_round_completed(_roundnum):
 
 
 func on_round_failed(_roundnum):
+	greg.set_emotion(greg.Emotion.DISAPPOINTED)
 	hud.visible = false
 	round_image.visible = true
 	round_image.texture = preload("res://images/Round_Failed.png")

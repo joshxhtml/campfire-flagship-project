@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bd3kapf54ccpn"]
+
+[ext_resource type="Script" uid="uid://w3kii18fk4t6" path="res://Scripts/ShopManager.gd" id="1_7ccoy"]
+[ext_resource type="PackedScene" uid="uid://dyqh3kg1hbuiu" path="res://ShopItemCard.tscn" id="2_c7y6t"]
+[ext_resource type="Script" uid="uid://bkiolfu13kwr" path="res://Scripts/PowerUp.gd" id="2_r12bu"]
+[ext_resource type="Resource" uid="uid://capqpvw5jhg4a" path="res://PowerUps/score_multiplier.tres" id="3_kxf26"]
+
+[node name="ShopScene" type="CanvasLayer"]
+script = ExtResource("1_7ccoy")
+powerup_pool = Array[ExtResource("2_r12bu")]([ExtResource("3_kxf26")])
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 562.0
+offset_bottom = 322.0
+
+[node name="ItemsContainer" type="HBoxContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ShopCard" parent="ItemsContainer" instance=ExtResource("2_c7y6t")]
+layout_mode = 2
+
+[node name="ShopCard2" parent="ItemsContainer" instance=ExtResource("2_c7y6t")]
+layout_mode = 2
+
+[node name="ShopCard3" parent="ItemsContainer" instance=ExtResource("2_c7y6t")]
+layout_mode = 2
+
+[node name="ExitButton" type="Button" parent="."]
+offset_right = 8.0
+offset_bottom = 8.0
