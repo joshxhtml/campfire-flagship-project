@@ -39,12 +39,19 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 23.0
 
-[node name="ScoreLabel" type="Label" parent="HUD"]
+[node name="RoundScoreLabel" type="Label" parent="HUD"]
 layout_mode = 0
 offset_left = 921.0
 offset_top = 10.0
-offset_right = 1137.0
+offset_right = 1034.0
 offset_bottom = 37.0
+
+[node name="TotalScoreLabel" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 1052.0
+offset_top = 10.0
+offset_right = 1137.0
+offset_bottom = 33.0
 
 [node name="GoalLabel" type="Label" parent="HUD"]
 layout_mode = 0

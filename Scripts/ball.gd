@@ -5,7 +5,9 @@ var resolved := false
 
 func _ready():
 	sleeping = false
-	
+	start_new_timeout()
+
+func start_new_timeout():
 	await get_tree().create_timer(lifetime).timeout
 	if not resolved:
 		resolve()

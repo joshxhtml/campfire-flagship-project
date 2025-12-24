@@ -87,8 +87,8 @@ func shoot_ball():
 	ball.global_position = global_position
 	
 	var direction = -global_transform.basis.z.normalized()
-	
 	var launch_force = lerp(min_launch_force, max_launch_force, power)
+	
 	ball.apply_impulse(direction * launch_force)
 	print("Launch force:", launch_force)
 	

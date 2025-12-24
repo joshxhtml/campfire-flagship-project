@@ -9,9 +9,6 @@ extends CanvasLayer
 @onready var final_score_label = $GameOverOverlay/TextureRect
 
 
-
-
-
 func update_balls(count):
 	for i in balls_countainer.get_child_count():
 		balls_countainer.get_child(i).visible = i < count
@@ -29,10 +26,10 @@ func _ready():
 	
 	GameManager.round_started.connect(on_round_started)
 	GameManager.balls_changed.connect(update_balls)
-	GameManager.score_changed.connect(update_score)
+	GameManager.round_score_changed.connect(update_round_score)
+	GameManager.total_score_changed.connect(update_total_score)
 	GameManager.round_completed.connect(on_round_completed)
 	GameManager.round_failed.connect(on_round_failed)
-	
 	
 	GameManager.start_round()
 
@@ -46,9 +43,12 @@ func on_round_started(_roundnum):
 	hud.visible = true
 	GameManager.state = GameManager.GameState.PLAYING
 
-func update_score(score):
-	$HUD/ScoreLabel.text = "Score: %d" % score
-
+func update_round_score(score):
+	$HUD/RoundScoreLabel.text = "Round: %d / %d" % [score, GameManager.round_score_goal]
+	
+func update_total_score(score):
+	$HUD/TotalScoreLabel.text = "Total: %d" % score
+	
 func on_round_completed(_roundnum):
 	hud.visible = false
 	round_image.visible = true
