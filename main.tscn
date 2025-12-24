@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://petr62ss25eu"]
+[gd_scene load_steps=30 format=3 uid="uid://petr62ss25eu"]
 
 [ext_resource type="Texture2D" uid="uid://bu31k310ch42x" path="res://images/placeholder2.jpg" id="1_kek77"]
 [ext_resource type="Texture2D" uid="uid://nqnootr7gtmu" path="res://images/placeholder3.webp" id="2_4c57u"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://buy4jrshrgg66" path="res://ui.tscn" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://bk0aukvageigw" path="res://textures/floor_tiles_06_rough_4k.png" id="10_w48qg"]
 [ext_resource type="Material" uid="uid://qxhnkrqdookj" path="res://textures/brickwall.tres" id="11_vivmo"]
+[ext_resource type="Script" uid="uid://pbloiejk2kbl" path="res://Scripts/hole_camera.gd" id="12_w48qg"]
 [ext_resource type="PackedScene" uid="uid://surya05s0tah" path="res://Target.gltf" id="12_ycdy4"]
 [ext_resource type="Texture2D" uid="uid://bdw24vii2ctii" path="res://images/Round_Clear____3_-removebg-preview.png" id="14_w48qg"]
 
@@ -248,24 +249,23 @@ mesh = SubResource("PlaneMesh_272bh")
 
 [node name="UI" parent="." instance=ExtResource("10_4c57u")]
 
-[node name="HoleCamView" type="SubViewportContainer" parent="UI"]
-offset_left = 1.0
-offset_right = 210.0
-offset_bottom = 207.0
-stretch = true
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI"]
+offset_right = 512.0
+offset_bottom = 512.0
 
-[node name="SubViewport" type="SubViewport" parent="UI/HoleCamView"]
+[node name="SubViewport" type="SubViewport" parent="UI/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(209, 207)
+size = Vector2i(210, 205)
 render_target_update_mode = 4
 
-[node name="HoleCamera" type="Camera3D" parent="UI/HoleCamView/SubViewport"]
+[node name="HoleCamera" type="Camera3D" parent="UI/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 0.7071068, 0.7071068, 0, -0.7071068, 0.7071068, 0, 2.431509, -1.3593869)
 fov = 70.0
 near = 0.1
 far = 50.0
+script = ExtResource("12_w48qg")
 
-[node name="So Inefficent" type="TextureRect" parent="UI"]
+[node name="So Inefficent2" type="TextureRect" parent="UI"]
 offset_right = 1152.0
 offset_bottom = 648.0
 texture = ExtResource("14_w48qg")

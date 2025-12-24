@@ -16,6 +16,7 @@ var tilt_mode := false
 var charging := false
 
 
+
 @export var ball_scene: PackedScene
 
 @export var aim_line_lenght := 6.0
@@ -49,6 +50,7 @@ func update_aim_line():
 	$AimLine.mesh = mesh
 
 func _process(delta):
+	
 	if Input.is_action_just_pressed("change_mode"):
 		tilt_mode = !tilt_mode
 		
@@ -73,10 +75,11 @@ func _process(delta):
 	update_aim_line()
 
 func shoot_ball():
-	if GameManager.balls_left <= 0:
+	if GameManager.state != GameManager.GameState.PLAYING:
 		return
-	if GameManager.state != GameManager.GameState.Playing:
+	if not GameManager.can_shoot():
 		return
+	
 	GameManager.use_ball()
 	
 	var ball = ball_scene.instantiate()

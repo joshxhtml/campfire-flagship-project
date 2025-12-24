@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://buy4jrshrgg66"]
+[gd_scene load_steps=6 format=3 uid="uid://buy4jrshrgg66"]
 
 [ext_resource type="Script" uid="uid://6x21ppnkouyb" path="res://Scripts/UIManager.gd" id="1_m6e0p"]
 [ext_resource type="Texture2D" uid="uid://cd5cd7kx3hghp" path="res://images/placeholder7.png" id="2_27fn8"]
 [ext_resource type="Texture2D" uid="uid://4ofbdpwe6qw5" path="res://images/UI-Image.png" id="2_nltto"]
+[ext_resource type="Texture2D" uid="uid://ce14asask8qqi" path="res://images/Round_Clear__-removebg-preview.png" id="4_ibotj"]
+[ext_resource type="Texture2D" uid="uid://cxosgx6gxwi4h" path="res://images/Round_Clear____1_-removebg-preview.png" id="5_n5ude"]
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_m6e0p")
@@ -133,3 +135,31 @@ offset_left = 9.0
 offset_top = -15.0
 offset_right = 49.0
 offset_bottom = 50.0
+
+[node name="RoundOverlay" type="Control" parent="."]
+z_index = 12
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="TextureRect" type="TextureRect" parent="RoundOverlay"]
+visible = false
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("4_ibotj")
+
+[node name="GameOverOverlay" type="Control" parent="."]
+z_index = 12
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="TextureRect" type="TextureRect" parent="GameOverOverlay"]
+visible = false
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("5_n5ude")

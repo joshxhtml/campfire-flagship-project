@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://2hksf06eh24j"]
+[gd_scene load_steps=7 format=3 uid="uid://2hksf06eh24j"]
 
+[ext_resource type="Script" uid="uid://ds2ai0pb7snq0" path="res://Scripts/ball.gd" id="1_41u45"]
 [ext_resource type="Texture2D" uid="uid://ci2k2oinld8rl" path="res://images/black.png" id="1_x8fbi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x8fbi"]
@@ -21,6 +22,7 @@ physics_material_override = SubResource("PhysicsMaterial_x8fbi")
 continuous_cd = true
 linear_damp = 0.1
 angular_damp = 0.05
+script = ExtResource("1_41u45")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.09, 0, 0, 0, 0.09, 0, 0, 0, 0.09, 0, 0, 0)
