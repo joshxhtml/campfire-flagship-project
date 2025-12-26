@@ -18,16 +18,15 @@ offset_bottom = 40.0
 
 [node name="ColorRect" type="ColorRect" parent="HUD"]
 layout_mode = 0
-offset_left = -55.0
 offset_top = 577.0
-offset_right = 1186.0
-offset_bottom = 662.0
+offset_right = 1152.0
+offset_bottom = 648.0
 
 [node name="ColorRect" type="ColorRect" parent="HUD/ColorRect"]
 layout_mode = 0
 offset_left = 898.0
 offset_top = -69.0
-offset_right = 2139.0
+offset_right = 1152.0
 
 [node name="UiI-Image" type="TextureRect" parent="HUD"]
 layout_mode = 0
@@ -97,7 +96,7 @@ offset_bottom = 205.0
 
 [node name="ColorRect2" type="ColorRect" parent="HUD/ColorRect2"]
 layout_mode = 0
-offset_left = -9.0
+offset_left = 7.0
 offset_top = 65.0
 offset_right = 214.0
 offset_bottom = 271.0

@@ -7,7 +7,7 @@ signal balls_changed(count)
 signal round_score_changed(score)
 signal total_score_changed(score)
 signal state_changed(state)
-
+signal total_score_change(score)
 
 enum GameState {
 	PLAYING,
@@ -122,3 +122,6 @@ func apply_powerup(powerup: PowerUp):
 		score_multiplier += .25
 	
 		
+func spend_score(amount: int):
+	total_score -= amount
+	emit_signal("total_score_change", total_score)

@@ -1,13 +1,16 @@
 extends Panel
 signal purchased(powerup)
 
-var powerup: PowerUp
+@export var powerup: PowerUp
+@onready var buy_button := $Buy
 
 func setup(p: PowerUp):
 	powerup = p
-	$VBoxContainer/Name.text = p.display_name
-	$VBoxContainer/Description.text = p.description
-	$VBoxContainer/Cost.text = "Cost: %d" % p.cost
+	$Icon.texture = powerup.icon
+	$Name.text = p.display_name
+	$Description.text = p.description
+	$Cost.text = "Cost: %d" % p.cost
 
 func _on_Buy_pressed():
 	purchased.emit(powerup)
+	buy_button.disabled = true

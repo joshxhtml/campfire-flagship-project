@@ -5,7 +5,7 @@
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2t2al"]
 shading_mode = 2
 diffuse_mode = 1
-albedo_color = Color(0.49803922, 1, 0.46666667, 1)
+albedo_color = Color(0.49803922, 1, 0.9372549, 1)
 
 [node name="Target" instance=ExtResource("1_nd4wy")]
 
@@ -13,4 +13,4 @@ albedo_color = Color(0.49803922, 1, 0.46666667, 1)
 surface_material_override/0 = SubResource("StandardMaterial3D_2t2al")
 
 [node name="CollisionShape3D" parent="Node0/Node1/Node2/StaticBody3D" index="0"]
-debug_color = Color(0.55866927, 0.46078664, 0.8343757, 0.41960785)
+debug_color = Color(0.334655, 0.55481833, 0.768674, 0.41960785)

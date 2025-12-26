@@ -1,5 +1,6 @@
-[gd_resource type="Resource" script_class="PowerUp" load_steps=2 format=3 uid="uid://capqpvw5jhg4a"]
+[gd_resource type="Resource" script_class="PowerUp" load_steps=3 format=3 uid="uid://capqpvw5jhg4a"]
 
+[ext_resource type="Texture2D" uid="uid://ci2k2oinld8rl" path="res://images/black.png" id="1_gq2nd"]
 [ext_resource type="Script" uid="uid://bkiolfu13kwr" path="res://Scripts/PowerUp.gd" id="1_id032"]
 
 [resource]
@@ -9,4 +10,5 @@ display_name = "Score Booster"
 description = "Increase Score Gained by +0.25x"
 cost = 50
 rarity_weight = 60
+icon = ExtResource("1_gq2nd")
 metadata/_custom_type_script = "uid://bkiolfu13kwr"
