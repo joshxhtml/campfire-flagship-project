@@ -1,28 +1,83 @@
-extends CanvasLayer
+extends Control
 
-@export var powerup_pool : Array[PowerUp]
+@export var powerup_pool: Array[PowerUp]
+@export var reroll_cost := 50
+@export var card_scene: PackedScene
 
-var current_items : Array[PowerUp] = []
+@onready var owned_label: Label = $OwnedLabel
+@onready var reroll_button: Button = $RerollButton
+@onready var exit_button: Button = $ExitButton
 
-func _ready() -> void:
-	randomize()
-	current_items = pick_random_powerups(3)
-	show_items()
+@onready var card_slots := [
+	$Item1,
+	$Item2,
+	$Item3
+]
+
+var current_items: Array[PowerUp] = []
+var reroll_used := false
+
+func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
-func pick_random_powerups(count: int) -> Array[PowerUp]:
-	var result: Array[PowerUp] = []
-	for i in range(count):
-		result.append(weighted_random(powerup_pool))
-	return result
+	reroll_button.pressed.connect(_on_Reroll_pressed)
+	exit_button.pressed.connect(_on_Exit_pressed)
+	
+	generate_items()
+	update_owned_display()
 
-func show_items():
-	print("Shop items:")
-	for p in current_items:
-		print(p.id, "cost:", p.cost)
+func generate_items():
+	current_items.clear()
+	reroll_button.disabled = reroll_used
+	
+	for slot in card_slots:
+		for child in slot.get_children():
+			child.queue_free()
+	
+	for i in range(card_slots.size()):
+		var powerup = weighted_random(powerup_pool)
+		current_items.append(powerup)
+		
+		var card = card_scene.instantiate()
+		card.setup(powerup)
+		card.purchased.connect(on_item_purchased)
+		
+		card_slots[i].add_child(card)
 
-func weighted_random(items: Array[PowerUp]) -> PowerUp:
+func on_item_purchased(powerup: PowerUp):
+	if GameManager.total_score < powerup.cost:
+		return
+		
+	GameManager.total_score -= powerup.cost
+	GameManager.apply_powerup(powerup)
+	exit_shop()
+
+
+
+func _on_Reroll_pressed():
+	if reroll_used:
+		return
+	if GameManager.total_score < reroll_cost:
+		return
+
+	GameManager.total_score -= reroll_cost
+	reroll_used = true
+	generate_items()
+
+func _on_Exit_pressed():
+	exit_shop()
+
+func exit_shop():
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	GameManager.allow_play()
+	GameManager.start_round()
+	
+	get_tree().change_scene_to_file("res://main.tscn")
+
+func weighted_random(items: Array) -> PowerUp:
 	if items.is_empty():
-		push_error("Powerup pool is empty dumbass")
+		push_error("Shop pool empty dumbass")
 		return null
 
 	var total := 0
@@ -30,10 +85,10 @@ func weighted_random(items: Array[PowerUp]) -> PowerUp:
 		total += p.rarity_weight
 
 	if total <= 0:
-		push_error("All rarity weights are 0, that means your stupud fr fr")
+		push_error("All rarity weights are 0 so like, fix that fr fr")
 		return items[0]
 
-	var roll := randi() % total
+	var roll := randi_range(0, total - 1)
 	var acc := 0
 
 	for p in items:
@@ -43,15 +98,8 @@ func weighted_random(items: Array[PowerUp]) -> PowerUp:
 
 	return items[0]
 
-
-func buy_powerups(powerup: PowerUp):
-	if GameManager.total_score < powerup.cost:
-		return
-	
-	GameManager.total_score -= powerup.cost
-	GameManager.apply_powerup(powerup)
-	exit_shop()
-	
-func exit_shop():
-	get_tree().change_scene_to_file("res://main.tscn")
-	GameManager.return_from_shop()
+func update_owned_display():
+	var text := "Owned: "
+	for id in GameManager.owned_powerups.keys():
+		text += "%s x%d  " % [id, GameManager.owned_powerups[id]]
+	owned_label.text = text

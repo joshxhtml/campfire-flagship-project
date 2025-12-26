@@ -1,31 +1,66 @@
-[gd_scene load_steps=5 format=3 uid="uid://bd3kapf54ccpn"]
+[gd_scene load_steps=6 format=3 uid="uid://bd3kapf54ccpn"]
 
 [ext_resource type="Script" uid="uid://w3kii18fk4t6" path="res://Scripts/ShopManager.gd" id="1_7ccoy"]
 [ext_resource type="PackedScene" uid="uid://dyqh3kg1hbuiu" path="res://ShopItemCard.tscn" id="2_c7y6t"]
 [ext_resource type="Script" uid="uid://bkiolfu13kwr" path="res://Scripts/PowerUp.gd" id="2_r12bu"]
 [ext_resource type="Resource" uid="uid://capqpvw5jhg4a" path="res://PowerUps/score_multiplier.tres" id="3_kxf26"]
+[ext_resource type="Texture2D" uid="uid://br76cswsc0r1n" path="res://images/ShopBG.png" id="5_kxf26"]
 
-[node name="ShopScene" type="CanvasLayer"]
+[node name="ShopScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_7ccoy")
-powerup_pool = Array[ExtResource("2_r12bu")]([ExtResource("3_kxf26")])
+powerup_pool = Array[ExtResource("2_r12bu")]([ExtResource("3_kxf26"), ExtResource("3_kxf26"), ExtResource("3_kxf26"), ExtResource("3_kxf26")])
+card_scene = ExtResource("2_c7y6t")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 562.0
-offset_bottom = 322.0
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("5_kxf26")
 
-[node name="ItemsContainer" type="HBoxContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="ShopCard" parent="ItemsContainer" instance=ExtResource("2_c7y6t")]
-layout_mode = 2
-
-[node name="ShopCard2" parent="ItemsContainer" instance=ExtResource("2_c7y6t")]
-layout_mode = 2
-
-[node name="ShopCard3" parent="ItemsContainer" instance=ExtResource("2_c7y6t")]
-layout_mode = 2
+[node name="RerollButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 570.0
+offset_top = 516.0
+offset_right = 760.0
+offset_bottom = 617.0
 
 [node name="ExitButton" type="Button" parent="."]
-offset_right = 8.0
-offset_bottom = 8.0
+layout_mode = 0
+offset_left = 343.0
+offset_top = 529.0
+offset_right = 510.0
+offset_bottom = 623.0
+
+[node name="Item1" parent="." instance=ExtResource("2_c7y6t")]
+layout_mode = 0
+offset_left = 247.0
+offset_top = 218.0
+offset_right = 396.0
+offset_bottom = 422.0
+
+[node name="Item2" parent="." instance=ExtResource("2_c7y6t")]
+layout_mode = 0
+offset_left = 501.0
+offset_top = 220.0
+offset_right = 650.0
+offset_bottom = 424.0
+
+[node name="Item3" parent="." instance=ExtResource("2_c7y6t")]
+layout_mode = 0
+offset_left = 763.0
+offset_top = 220.0
+offset_right = 912.0
+offset_bottom = 424.0
+
+[node name="OwnedLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 754.0
+offset_top = 23.0
+offset_right = 931.0
+offset_bottom = 164.0

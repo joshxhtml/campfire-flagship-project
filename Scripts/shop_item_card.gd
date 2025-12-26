@@ -1,20 +1,13 @@
 extends Panel
+signal purchased(powerup)
 
-@onready var name_label = $Name
-@onready var cost_label = $Cost
-@onready var buy_label = $Buy
+var powerup: PowerUp
 
-var powerup : PowerUp
-var shop
-
-func setup(p: PowerUp, shop_ref):
+func setup(p: PowerUp):
 	powerup = p
-	shop = shop_ref
-	
-	name_label.text = p.display_name
-	cost_label.text = str(p.cost)
-	
-	buy_label.pressed.connect(_on_buy)
+	$VBoxContainer/Name.text = p.display_name
+	$VBoxContainer/Description.text = p.description
+	$VBoxContainer/Cost.text = "Cost: %d" % p.cost
 
-func _on_buy():
-	shop.buy(powerup)
+func _on_Buy_pressed():
+	purchased.emit(powerup)

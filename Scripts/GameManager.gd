@@ -36,7 +36,7 @@ func start_round():
 	roundnum += 1
 	balls_left = 3
 	round_score = 0
-	round_score_goal = 0 #10 * roundnum
+	round_score_goal = 10 * roundnum
 	
 	state = GameState.ROUND_TRANSITION
 	emit_signal("state_changed", state)
@@ -87,7 +87,7 @@ func evaluate_round():
 		if should_open_shop():
 			state = GameState.SHOP
 			emit_signal("state_changed", state)
-			get_tree().change_scene_to_file("res://ShopScene.tscn")
+			get_tree().call_deferred("change_scene_to_file", "res://ShopScene.tscn")
 		else:
 			emit_signal("round_completed", roundnum)
 	else:
@@ -102,7 +102,7 @@ func should_open_shop() -> bool:
 func open_shop():
 	state = GameState.SHOP
 	emit_signal("state_changed", state)
-	get_tree().change_scene_to_file("res://ShopScene.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://ShopScene.tscn")
 
 func return_from_shop():
 	state = GameState.ROUND_TRANSITION
