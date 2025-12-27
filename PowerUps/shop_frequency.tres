@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=3 format=3 uid="uid://bgv0yo1adnkla"]
+
+[ext_resource type="Script" uid="uid://bkiolfu13kwr" path="res://Scripts/PowerUp.gd" id="1_h017w"]
+[ext_resource type="Texture2D" uid="uid://dbf3lh0tn0p06" path="res://images/brown.png" id="1_xykyv"]
+
+[resource]
+script = ExtResource("1_h017w")
+id = "shop_frequency"
+display_name = "Frequent Shopper"
+description = "Shop now appears every 5 rounds"
+cost = 200
+rarity_weight = 20
+icon = ExtResource("1_xykyv")
+metadata/_custom_type_script = "uid://bkiolfu13kwr"

@@ -1,0 +1,25 @@
+[gd_scene load_steps=8 format=3 uid="uid://c3gddu7wttnt"]
+
+[ext_resource type="PackedScene" uid="uid://dhqkulquks06m" path="res://skee_ball_machine/Skee_Ball_Back_Wall.gltf" id="1_obath"]
+[ext_resource type="PackedScene" uid="uid://ba2ueaoxavlwu" path="res://skee_ball_machine/Skee_Ball_Holes.gltf" id="2_1pklr"]
+[ext_resource type="PackedScene" uid="uid://cxchw7goghog" path="res://skee_ball_machine/Skee_Ball_Hood.gltf" id="3_8i3kv"]
+[ext_resource type="PackedScene" uid="uid://q5s3mwtuiwin" path="res://skee_ball_machine/Skee_Ball_Left_Side.gltf" id="4_4ok57"]
+[ext_resource type="PackedScene" uid="uid://dcd4dc23s14md" path="res://skee_ball_machine/Skee_Ball_Ramp.gltf" id="5_ini1s"]
+[ext_resource type="PackedScene" uid="uid://y485cx31d7sm" path="res://skee_ball_machine/Skee_Ball_Return_Ramp.gltf" id="6_1e4vd"]
+[ext_resource type="PackedScene" uid="uid://bk281vib3ch32" path="res://skee_ball_machine/Skee_Ball_Right_Side.gltf" id="7_5j4l5"]
+
+[node name="Put Together Machine" type="Node3D"]
+
+[node name="Skee_Ball_Back_Wall" parent="." instance=ExtResource("1_obath")]
+
+[node name="Skee_Ball_Holes" parent="." instance=ExtResource("2_1pklr")]
+
+[node name="Skee_Ball_Hood" parent="." instance=ExtResource("3_8i3kv")]
+
+[node name="Skee_Ball_Left_Side" parent="." instance=ExtResource("4_4ok57")]
+
+[node name="Skee_Ball_Ramp" parent="." instance=ExtResource("5_ini1s")]
+
+[node name="Skee_Ball_Return_Ramp" parent="." instance=ExtResource("6_1e4vd")]
+
+[node name="Skee_Ball_Right_Side" parent="." instance=ExtResource("7_5j4l5")]

@@ -1,7 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://bhon2ea1xyul5"]
-
-[ext_resource type="FontFile" uid="uid://dc06fpy405fad" path="res://fonts/arcade-esc-font.tres" id="1_hd55j"]
-
-[resource]
-default_font = ExtResource("1_hd55j")
-Label/fonts/font = ExtResource("1_hd55j")

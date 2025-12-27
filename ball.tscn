@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ci2k2oinld8rl" path="res://images/black.png" id="1_x8fbi"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_x8fbi"]
-friction = 0.6
+friction = 0.2
 bounce = 0.2
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_41u45"]

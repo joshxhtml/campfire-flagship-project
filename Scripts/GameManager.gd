@@ -17,7 +17,7 @@ enum GameState {
 }
 
 var state = GameState.PLAYING
-
+var shop_interval := 1
 var roundnum := 0
 var balls_left := 3
 
@@ -97,7 +97,7 @@ func evaluate_round():
 #shop Stuff
 
 func should_open_shop() -> bool:
-	return roundnum % 1 == 0
+	return roundnum % shop_interval == 0
 
 func open_shop():
 	state = GameState.SHOP
@@ -118,8 +118,11 @@ func apply_powerup(powerup: PowerUp):
 	
 	owned_powerups[powerup.id] += 1
 	
-	if powerup.id == "score_multiplier":
-		score_multiplier += .25
+	match powerup.id:
+		"score_multiplier":
+			score_multiplier += .25
+		"shop_frequency":
+			shop_interval = 5
 	
 		
 func spend_score(amount: int):

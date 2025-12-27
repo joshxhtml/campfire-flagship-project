@@ -27,7 +27,7 @@ func _ready():
 	GameManager.total_score_changed.connect(update_total_score)
 	reroll_button.pressed.connect(_on_Reroll_pressed)
 	exit_button.pressed.connect(_on_Exit_pressed)
-	
+	update_total_score(GameManager.total_score)
 	generate_items()
 
 
@@ -53,10 +53,16 @@ func on_item_purchased(powerup: PowerUp):
 	if GameManager.total_score < powerup.cost:
 		show_cant_afford()
 		return
-		
-	GameManager.total_score -= powerup.cost
 	
+	GameManager.total_score -= powerup.cost
 	GameManager.apply_powerup(powerup)
+	
+	GameManager.emit_signal("total_score_changed", GameManager.total_score)
+	update_total_score(GameManager.total_score)
+	
+	# for child in item_container.get_children():
+	#	child.queue_free()
+	
 	exit_shop()
 
 
@@ -71,6 +77,7 @@ func _on_Reroll_pressed():
 	GameManager.total_score -= reroll_cost
 	
 	reroll_used = true
+	update_total_score(GameManager.total_score)
 	generate_items()
 
 func _on_Exit_pressed():
@@ -107,8 +114,8 @@ func weighted_random(items: Array) -> PowerUp:
 
 	return items[0]
 
-func update_total_score(value: int):
-	score_label.text = "Score: %d" % value
+func update_total_score(new_score: int):
+	score_label.text = "Score: %d" % new_score
 	
 
 func show_cant_afford():

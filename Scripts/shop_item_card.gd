@@ -4,6 +4,8 @@ signal purchased(powerup)
 @export var powerup: PowerUp
 @onready var buy_button := $Buy
 
+var bought := false
+
 func setup(p: PowerUp):
 	powerup = p
 	$Icon.texture = powerup.icon
@@ -12,5 +14,6 @@ func setup(p: PowerUp):
 	$Cost.text = "Cost: %d" % p.cost
 
 func _on_Buy_pressed():
+	if bought:
+		return
 	purchased.emit(powerup)
-	buy_button.disabled = true
