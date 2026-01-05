@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://corb1adxuf5fs"]
+[gd_scene load_steps=19 format=3 uid="uid://corb1adxuf5fs"]
 
 [ext_resource type="Texture2D" uid="uid://bu31k310ch42x" path="res://images/placeholder-wood.jpg" id="1_llj37"]
 [ext_resource type="Texture2D" uid="uid://dbf3lh0tn0p06" path="res://images/orange.png" id="2_6qesk"]
@@ -21,8 +21,9 @@ albedo_texture = ExtResource("2_ioi8x")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ajbd"]
 albedo_texture = ExtResource("2_6qesk")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qesk"]
-albedo_texture = ExtResource("2_ioi8x")
+[sub_resource type="BoxMesh" id="BoxMesh_0420x"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jx63e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuuq8"]
 albedo_texture = ExtResource("1_llj37")
@@ -64,7 +65,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.052404404, 0.053825855, 0.0
 material_override = SubResource("StandardMaterial3D_llj37")
 use_collision = true
 collision_layer = 3
-polygon = PackedVector2Array(-4.033229, -0.3476355, 0.14018953, -0.2789017, 0.6977681, 0.6849487, 0.69843423, 0.9584081, 0.4656037, 0.95897245, 0.14859366, 0.8199277, 0.02714169, 0.82507277, 0.02916658, 1.2033684, 0.8973049, 1.2094059, 0.8589324, -0.5470646, -4.119794, -0.53744423)
+polygon = PackedVector2Array(-4.033229, -0.3476355, 0.14018953, -0.2789017, 0.6977681, 0.6849487, 0.69843423, 0.9584081, 0.19852579, 0.9966936, -0.26955712, 0.8578601, -0.47701883, 0.8384545, -0.4289068, 1.1976085, 1.0900482, 1.2054045, 1.1002451, -1.6214824, -4.119794, -0.53744423)
 depth = 0.1
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="RightHeader"]
@@ -84,54 +85,48 @@ material_override = SubResource("StandardMaterial3D_2ajbd")
 mesh = SubResource("BoxMesh_jqdip")
 
 [node name="LeftHeader" type="StaticBody3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62, 1.4604857, -0.58435065)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.62, 1.46, -0.58)
 
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="LeftHeader"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.052404404, 0.053825855, 0.044577956)
-material_override = SubResource("StandardMaterial3D_6qesk")
+material_override = SubResource("StandardMaterial3D_llj37")
 use_collision = true
 collision_layer = 3
-polygon = PackedVector2Array(-4.033229, -0.3476355, 0.14018953, -0.2789017, 0.6977681, 0.6849487, 0.69843423, 0.9584081, 0.4656037, 0.95897245, 0.14859366, 0.8199277, 0.02714169, 0.82507277, 0.02916658, 1.2033684, 0.8973049, 1.2094059, 0.9076694, -0.657807, -4.119794, -0.53744423)
+polygon = PackedVector2Array(-4.033229, -0.3476355, 0.14018953, -0.2789017, 0.6977681, 0.6849487, 0.69843423, 0.9584081, 0.19852579, 0.9966936, -0.26955712, 0.8578601, -0.47701883, 0.8384545, -0.4289068, 1.1976085, 1.0900482, 1.2054045, 1.1002451, -1.6214824, -4.119794, -0.53744423)
 depth = 0.1
 
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="LeftHeader"]
 depth = 0.1
-polygon = PackedVector2Array(1.0210842, 1.2807524, 0.07140827, 1.2663004, 0.084481, 0.8768456, 0.75025547, 1.0022516, 0.14070868, -0.245978, -3.9197989, -0.32886624, -4.009969, -0.5333727, 1.0098435, -0.51539505)
+polygon = PackedVector2Array(0.08784723, 0.89836764, 0.74438465, 0.76428485, 0.19643366, -0.19713497, -3.9615145, -0.3002175, -4.049818, -0.45495486, 0.9845134, -0.4747231, 0.94293725, 1.2422864, 0.089677215, 1.2484214)
 
 [node name="ScoringHoles" type="Node3D" parent="."]
+transform = Transform3D(0.9945219, 0.104528464, 0, -0.104528464, 0.9945219, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="10Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 1.9449357, 1.2517887, 8.501584e-08)
-visible = false
 score_value = 10
 
 [node name="20Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.045878, 1.4118162, 8.942816e-08)
-visible = false
 score_value = 20
 
 [node name="30Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.1334436, 1.576302, -0.011043426)
-visible = false
 score_value = 30
 
 [node name="40Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.2365735, 1.7966136, -0.011043421)
-visible = false
 score_value = 40
 
 [node name="50Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.3562386, 2.014559, -0.011043415)
-visible = false
 
 [node name="100Points-Right" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.4393954, 2.1272626, 0.34885955)
-visible = false
 score_value = 100
 
 [node name="100Points-Left" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.4393954, 2.1272626, -0.38655347)
-visible = false
 score_value = 100
 
 [node name="Target" parent="ScoringHoles" instance=ExtResource("4_1hddr")]
@@ -139,25 +134,36 @@ transform = Transform3D(-3.9340245e-10, -0.0024822466, -0.008650921, -1.9081958e
 
 [node name="0Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(1.2, 0, 0, 0, -5.2453668e-08, -1.2, 0, 1.2, -5.2453668e-08, 2.3114882, 0.36751917, 1.0103835e-07)
+
+[node name="TheActualBoringRamp" type="StaticBody3D" parent="."]
+collision_layer = 3
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="TheActualBoringRamp"]
+transform = Transform3D(0.9455185, -0.3255681, 0, 0.3255681, 0.9455185, 0, 0, 0, 1, 0.38793132, 0.37535542, 1.6957017e-08)
 visible = false
+mesh = SubResource("BoxMesh_0420x")
 
-[node name="BetterRamp" type="StaticBody3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TheActualBoringRamp"]
+transform = Transform3D(0.94551855, -0.32556814, 0, 0.32556814, 0.94551855, 0, 0, 0, 1, 0.38, 0.37, 0)
+shape = SubResource("BoxShape3D_jx63e")
 
-[node name="CSGPolygon3D" type="CSGPolygon3D" parent="BetterRamp"]
+[node name="TheIllusionOfARamp" type="StaticBody3D" parent="."]
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="TheIllusionOfARamp"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.192297e-08, 0, 0.5015391)
 layers = 3
 material_override = SubResource("StandardMaterial3D_yuuq8")
 use_collision = true
 collision_layer = 3
-polygon = PackedVector2Array(1.7535578, 0.49930322, 2.5114028, 0.24973798, -2.5026011, 0.2541591, -2.4930894, 0.74229974, -0.15497082, 0.75178546, 0.09064932, 0.79246134, 0.3640746, 0.8775513, 0.59074795, 0.9831026, 0.7027346, 1.0422027, 0.73117155, 0.76294816)
+polygon = PackedVector2Array(1.7535578, 0.49930322, 2.5114028, 0.24973798, -2.5026011, 0.2541591, -2.4930894, 0.74229974, -0.07120149, 0.73768616, 0.7008807, 1.0031499, 0.74807703, 0.86782193, 0.8129572, 0.7210331, 1.2740624, 0.60814655, 1.5328842, 0.55521005)
 
-[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="BetterRamp"]
-polygon = PackedVector2Array(-2.5018709, 0.7430904, -0.15410334, 0.75117064, 0.085050374, 0.79094756, 0.36518565, 0.87671757, 0.59071034, 0.982142, 0.7023975, 1.0390642, 0.73188174, 0.7577468, 1.6606181, 0.4835695, 2.5133653, 0.25306958, -2.505133, 0.25799882)
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="TheIllusionOfARamp"]
+polygon = PackedVector2Array(-2.488504, 0.7398167, 0.011764565, 0.75237525, 0.73045456, 0.7653519, 2.5151796, 0.2521636, -2.506525, 0.2584653)
 
 [node name="Title" type="StaticBody3D" parent="."]
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Title"]
-transform = Transform3D(-8.742278e-09, -0.65, 0, 0.2, -2.8412401e-08, 0, 0, 0, 0.65, 1.6892041, 2.5302508, 0.005554929)
+transform = Transform3D(-8.742278e-09, -0.65, 0, 0.2, -2.8412401e-08, 0, 0, 0, 0.65, 1.193535, 2.5302508, 0.005554907)
 material_override = SubResource("StandardMaterial3D_1hddr")
 mesh = SubResource("PlaneMesh_0d1aa")
 
@@ -166,6 +172,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.781152, 2.5261335, 0.016784
 shape = SubResource("BoxShape3D_5f3ny")
 
 [node name="Back" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.543, 1.35, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7791758, 1.35, 1.0323575e-08)
 material_override = SubResource("StandardMaterial3D_42f15")
 mesh = SubResource("BoxMesh_u17ae")
