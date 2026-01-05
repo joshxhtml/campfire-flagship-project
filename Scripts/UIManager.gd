@@ -38,7 +38,7 @@ func on_round_started(_roundnum):
 	greg.set_emotion(greg.Emotion.NUETRAL)
 	hud.visible = false
 	round_image.visible = true
-	round_image.texture = preload("res://images/Round_Cleared.png")
+	round_image.texture = preload("res://images/roundclear.png")
 	
 	await get_tree().create_timer(1.5).timeout
 	round_image.visible = false
@@ -57,7 +57,7 @@ func update_total_score(score):
 func on_round_completed(_roundnum):
 	hud.visible = false
 	round_image.visible = true
-	round_image.texture = preload("res://images/Round_Cleared.png")
+	round_image.texture = preload("res://images/roundclear.png")
 	await get_tree().create_timer(2.0).timeout
 	round_image.visible = false
 	GameManager.start_round()
@@ -67,4 +67,4 @@ func on_round_failed(_roundnum):
 	greg.set_emotion(greg.Emotion.DISAPPOINTED)
 	hud.visible = false
 	round_image.visible = true
-	round_image.texture = preload("res://images/Round_Failed.png")
+	round_image.texture = preload("res://images/roundfail.png")

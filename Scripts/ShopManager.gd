@@ -2,6 +2,8 @@ extends Control
 
 @export var powerup_pool: Array[PowerUp]
 @export var reroll_cost := 50
+
+
 @export var card_scene: PackedScene
 @onready var score_label := $Balance/TotalScoreLabel
 @onready var cant_afford_popup := $Balance/CantAfford
@@ -10,6 +12,7 @@ extends Control
 @onready var exit_button: Button = $ExitButton
 
 @onready var card_slots := [
+
 	$Item1,
 	$Item2,
 	$Item3

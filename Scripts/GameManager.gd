@@ -19,7 +19,7 @@ enum GameState {
 var state = GameState.PLAYING
 var shop_interval := 1
 var roundnum := 0
-var balls_left := 3
+var balls_left := 300
 
 var round_score := 0
 var total_score := 0
@@ -40,7 +40,6 @@ func start_round():
 	
 	state = GameState.ROUND_TRANSITION
 	emit_signal("state_changed", state)
-	
 	
 	emit_signal("round_score_changed", round_score)
 	emit_signal("total_score_changed", total_score)
@@ -87,7 +86,7 @@ func evaluate_round():
 		if should_open_shop():
 			state = GameState.SHOP
 			emit_signal("state_changed", state)
-			get_tree().call_deferred("change_scene_to_file", "res://ShopScene.tscn")
+			get_tree().call_deferred("change_scene_to_file", "res://ShopScenes/ShopScene.tscn")
 		else:
 			emit_signal("round_completed", roundnum)
 	else:
@@ -102,7 +101,7 @@ func should_open_shop() -> bool:
 func open_shop():
 	state = GameState.SHOP
 	emit_signal("state_changed", state)
-	get_tree().call_deferred("change_scene_to_file", "res://ShopScene.tscn")
+	get_tree().call_deferred("change_scene_to_file", "res://ShopScenes/ShopScene.tscn")
 
 func return_from_shop():
 	state = GameState.ROUND_TRANSITION

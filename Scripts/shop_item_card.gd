@@ -16,4 +16,6 @@ func setup(p: PowerUp):
 func _on_Buy_pressed():
 	if bought:
 		return
-	purchased.emit(powerup)
+		
+	
+	purchased.emit(powerup)	
