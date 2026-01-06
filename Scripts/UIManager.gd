@@ -1,19 +1,25 @@
 extends CanvasLayer
 
 @onready var balls_countainer = $HUD/BallsCountainer
+@onready var extra_balls_label := $HUD/ExtraBallsLabel
 
 @onready var hud = $HUD
 @onready var round_overlay = $RoundOverlay
 @onready var round_image = $GameOverOverlay/TextureRect
 @onready var game_over_overlay = $GameOverOverlay
 @onready var final_score_label = $GameOverOverlay/TextureRect
-
 @onready var greg := $HUD/Greg
 
 func update_balls(count):
 	for i in balls_countainer.get_child_count():
 		balls_countainer.get_child(i).visible = i < count
 		
+	print("[UI] Balls: ", count, ", Extra: ", GameManager.extra_balls_remaining)
+	if GameManager.extra_balls_remaining > 0:
+		extra_balls_label.visible = true
+		extra_balls_label.text = "+%d" % GameManager.extra_balls_remaining
+	else:
+		extra_balls_label.visible = false
 
 func show_round_flash(roundnum):
 	$HUD/RoundFlash.text = "ROUND %s" % str(roundnum)

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="PowerUp" load_steps=3 format=3 uid="uid://capqpvw5jhg4a"]
 
-[ext_resource type="Texture2D" uid="uid://ci2k2oinld8rl" path="res://images/black.png" id="1_gq2nd"]
+[ext_resource type="Texture2D" uid="uid://d2lebwu1qduqk" path="res://PowerUps/PowerUpIcons/score_multiplier.jpg" id="1_gq2nd"]
 [ext_resource type="Script" uid="uid://bkiolfu13kwr" path="res://Scripts/PowerUp.gd" id="1_id032"]
 
 [resource]

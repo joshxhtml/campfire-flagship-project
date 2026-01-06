@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=3 format=3 uid="uid://yb5dypamknrg"]
+
+[ext_resource type="Texture2D" uid="uid://d4d601ikmgdrq" path="res://PowerUps/PowerUpIcons/extra_ball.jpg" id="1_5rux2"]
+[ext_resource type="Script" uid="uid://bkiolfu13kwr" path="res://Scripts/PowerUp.gd" id="1_iguxk"]
+
+[resource]
+script = ExtResource("1_iguxk")
+id = "extra_ball"
+display_name = "Extra Ball"
+description = "Gain +1 Ball every round"
+cost = 400
+rarity_weight = 15
+icon = ExtResource("1_5rux2")
+metadata/_custom_type_script = "uid://bkiolfu13kwr"

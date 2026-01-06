@@ -4,6 +4,7 @@
 [ext_resource type="FontFile" uid="uid://bf0d7rt3in5bc" path="res://fonts/CANDY.TTF" id="2_flw34"]
 
 [node name="Panel" type="Panel"]
+self_modulate = Color(1, 1, 1, 0)
 script = ExtResource("1_8wbsm")
 
 [node name="Name" type="Label" parent="."]
@@ -11,20 +12,28 @@ layout_mode = 0
 offset_top = 102.0
 offset_right = 148.0
 offset_bottom = 125.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.654902, 0.7294118, 0.6784314, 1)
 theme_override_fonts/font = ExtResource("2_flw34")
 
 [node name="Cost" type="Label" parent="."]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 182.0
-offset_right = 143.0
-offset_bottom = 205.0
+offset_left = 1.0
+offset_top = 181.0
+offset_right = 148.0
+offset_bottom = 204.0
+theme_override_font_sizes/font_size = 0
+clip_text = true
 
 [node name="Buy" type="Button" parent="."]
 layout_mode = 0
-offset_top = 180.0
+offset_top = 176.0
 offset_right = 150.0
 offset_bottom = 207.0
+theme_override_font_sizes/font_size = 0
+text = "Buy"
+flat = true
+alignment = 2
 
 [node name="Icon" type="TextureRect" parent="."]
 layout_mode = 0
@@ -40,6 +49,9 @@ offset_left = 2.0
 offset_top = 127.0
 offset_right = 147.0
 offset_bottom = 176.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.87058824, 0.4745098, 0.6392157, 0.81960785)
 autowrap_mode = 3
+clip_text = true
 
 [connection signal="pressed" from="Buy" to="." method="_on_buy_pressed"]

@@ -141,6 +141,15 @@ layout_mode = 1
 offset_right = 240.0
 offset_bottom = 313.0
 
+[node name="ExtraBallsLabel" type="Label" parent="HUD"]
+layout_mode = 0
+offset_left = 1080.0
+offset_top = 571.0
+offset_right = 1143.0
+offset_bottom = 642.0
+theme_override_font_sizes/font_size = 45
+text = "+0"
+
 [node name="RoundOverlay" type="Control" parent="."]
 z_index = 12
 layout_mode = 3

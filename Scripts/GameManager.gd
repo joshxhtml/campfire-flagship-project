@@ -28,7 +28,10 @@ var total_score := 0
 var round_score_goal := 0
 #ball managment
 var active_balls := 0
-var balls_left := 3
+var base_balls := 3
+var extra_balls_per_round := 1
+var extra_balls_remaining := 0
+var balls_left 
 #shop varibles
 var shop_interval := 1
 var score_multiplier := 1.0
@@ -38,13 +41,16 @@ var shop_rerolled := false
 
 func start_round():
 	roundnum += 1
-	balls_left = 3
+	active_balls = 0
+	balls_left = base_balls 
+	extra_balls_remaining = extra_balls_per_round
+	
 	round_score = 0
 	round_score_goal = 10 * roundnum
-	
+	print("[BALLS] Round start: ", "Base: ", balls_left, ", Extra this round: ", extra_balls_remaining, " (Permanent bonus: ", extra_balls_per_round, ")")
 	state = GameState.ROUND_TRANSITION
-	emit_signal("state_changed", state)
 	
+	emit_signal("state_changed", state)
 	emit_signal("round_score_changed", round_score)
 	emit_signal("total_score_changed", total_score)
 	emit_signal("balls_changed", balls_left)
@@ -55,7 +61,7 @@ func allow_play():
 	emit_signal("state_changed", state)
 
 func can_shoot() -> bool:
-	return state == GameState.PLAYING and balls_left > 0
+	return state == GameState.PLAYING and (balls_left > 0 or extra_balls_remaining > 0)
 
 
 # Break for scoring stuff
@@ -74,9 +80,13 @@ func use_ball():
 	if state != GameState.PLAYING:
 		return
 		
-	balls_left -= 1
+	if extra_balls_remaining > 0:
+		extra_balls_remaining -= 1
+		print("[BALL] Used EXTRA ball. Remaining extra:", extra_balls_remaining)
+	else:
+		balls_left -= 1
+		print("[BALL] Used NORMAL ball. Balls left:", balls_left)
 	active_balls += 1
-	
 	emit_signal("balls_changed", balls_left)
 
 func ball_resolved():
@@ -132,6 +142,9 @@ func apply_powerup(powerup: PowerUp):
 			score_multiplier += .25
 		"shop_frequency":
 			shop_interval = 5
+		"extra_ball":
+			extra_balls_per_round += 1
+			print("[POWERUP] Extra ball gained. Total extra: ", extra_balls_per_round)
 	
 		
 func spend_score(amount: int):

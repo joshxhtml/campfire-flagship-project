@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bd3kapf54ccpn"]
+[gd_scene load_steps=10 format=3 uid="uid://bd3kapf54ccpn"]
 
 [ext_resource type="Script" uid="uid://w3kii18fk4t6" path="res://Scripts/ShopManager.gd" id="1_7ccoy"]
 [ext_resource type="PackedScene" uid="uid://dyqh3kg1hbuiu" path="res://ShopScenes/ShopItemCard.tscn" id="2_c7y6t"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://capqpvw5jhg4a" path="res://PowerUps/score_multiplier.tres" id="3_kxf26"]
 [ext_resource type="Resource" uid="uid://bgv0yo1adnkla" path="res://PowerUps/shop_frequency.tres" id="4_5swfv"]
 [ext_resource type="Texture2D" uid="uid://br76cswsc0r1n" path="res://images/ShopBG.png" id="5_kxf26"]
+[ext_resource type="Resource" uid="uid://yb5dypamknrg" path="res://PowerUps/extra_ball.tres" id="5_qrwd0"]
 [ext_resource type="Texture2D" uid="uid://dl24wa0uwmp8a" path="res://images/nobalance.png" id="6_d028k"]
 [ext_resource type="FontFile" uid="uid://bf0d7rt3in5bc" path="res://fonts/CANDY.TTF" id="7_pxxbs"]
 
@@ -17,7 +18,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7ccoy")
-powerup_pool = Array[ExtResource("2_r12bu")]([ExtResource("3_kxf26"), ExtResource("4_5swfv")])
+powerup_pool = Array[ExtResource("2_r12bu")]([ExtResource("3_kxf26"), ExtResource("4_5swfv"), ExtResource("5_qrwd0")])
 card_scene = ExtResource("2_c7y6t")
 
 [node name="TextureRect" type="TextureRect" parent="."]
@@ -32,6 +33,7 @@ offset_left = 570.0
 offset_top = 516.0
 offset_right = 760.0
 offset_bottom = 617.0
+flat = true
 
 [node name="ExitButton" type="Button" parent="."]
 layout_mode = 0
@@ -39,6 +41,7 @@ offset_left = 343.0
 offset_top = 529.0
 offset_right = 510.0
 offset_bottom = 623.0
+flat = true
 
 [node name="Item1" parent="." instance=ExtResource("2_c7y6t")]
 layout_mode = 0
@@ -70,10 +73,10 @@ offset_bottom = 164.0
 
 [node name="Balance" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 731.0
-offset_top = 19.0
+offset_left = 721.0
+offset_top = 31.0
 offset_right = 953.0
-offset_bottom = 64.0
+offset_bottom = 125.0
 
 [node name="TotalScoreLabel" type="Label" parent="Balance"]
 layout_mode = 0
@@ -82,15 +85,15 @@ offset_right = 211.0
 offset_bottom = 23.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("7_pxxbs")
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 45
 
 [node name="CantAfford" type="TextureRect" parent="Balance"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.05
 anchor_right = 0.05
-offset_left = -1.1000004
-offset_top = 4.0
-offset_right = 198.9
-offset_bottom = 104.0
+offset_left = 2.8999996
+offset_top = -5.0
+offset_right = 202.9
+offset_bottom = 95.0
 texture = ExtResource("6_d028k")

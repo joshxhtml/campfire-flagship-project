@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="PowerUp" load_steps=3 format=3 uid="uid://bgv0yo1adnkla"]
 
 [ext_resource type="Script" uid="uid://bkiolfu13kwr" path="res://Scripts/PowerUp.gd" id="1_h017w"]
-[ext_resource type="Texture2D" uid="uid://dbf3lh0tn0p06" path="res://images/orange.png" id="1_xykyv"]
+[ext_resource type="Texture2D" uid="uid://celmy3o33om3w" path="res://PowerUps/PowerUpIcons/shop_frequency.jpg" id="1_xykyv"]
 
 [resource]
 script = ExtResource("1_h017w")
