@@ -15,9 +15,10 @@ func setup(p: PowerUp):
 	
 
 func _on_buy_pressed() -> void:
-	print("buy pressed:", powerup.id)
 	if bought:
 		return
 		
-	
+	bought = true
+	print("")
+	print_debug("Buy pressed -> ", powerup.id, " ")
 	purchased.emit(powerup)

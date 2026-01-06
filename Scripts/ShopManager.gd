@@ -1,5 +1,7 @@
 extends Control
 
+#building a debuging system, a) im bord and dont want to move onto content, and b) i need it cause this code is so ass 😭😭
+const DEBUG_SHOP := true
 #exports
 @export var powerup_pool: Array[PowerUp]
 @export var reroll_cost := 50
@@ -50,27 +52,77 @@ func generate_items():
 		card_slots[i].add_child(card)
 
 func on_item_purchased(powerup: PowerUp):
-	if GameManager.can_afford(powerup.cost):
+	#making a debug function for me
+	
+	if not GameManager.can_afford(powerup.cost):
+		debug( 
+			"PURCHASE " + powerup.id,
+			false,
+			{
+				"cost": powerup.cost,
+				"balance": GameManager.total_score,
+				"reason": "insufficient balance"
+			}
+		)
 		show_cant_afford()
 		return
 	
 	GameManager.spend_score(powerup.cost)
 	GameManager.apply_powerup(powerup)
-	
+	debug(
+		"PURCHASE " + powerup.id,
+		true,
+		{
+			"cost": powerup.cost,
+			"remianing_balance": GameManager.total_score
+		})
 	exit_shop()
 
-
+#did i see this in a video then completely steal the idea, yes, yes i did
+func debug(action: String, success: bool, info := {}):
+	if not DEBUG_SHOP:
+		return
+	
+	var status := "SUCCESS" if success else "FAIL"
+	print("")
+	print("[SHOP] ", action, " -> ", status)
+	
+	for k in info.keys():
+		print("  -", k, ": ", info[k])
 
 func _on_Reroll_pressed():
+	
 	if GameManager.shop_rerolled:
+		debug(
+			"REROLL",
+			false,
+			{
+				"reason": "already rerolled this shop session"
+			}
+		)
 		return
 	if GameManager.total_score < reroll_cost:
+		debug(
+			"REROLL",
+			false,
+			{
+				"cost": reroll_cost,
+				"balance": GameManager.total_score,
+				"reason": "insufficient balance"
+			})
 		show_cant_afford()
 		return
 
 	GameManager.spend_score(reroll_cost)
 	GameManager.shop_rerolled = true
 	generate_items()
+	debug(
+		"REROLL",
+		true,
+		{
+			"cost": reroll_cost,
+			"remaining_balance": GameManager.total_score
+		})
 
 func _on_Exit_pressed():
 	exit_shop()
