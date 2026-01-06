@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=3 format=3 uid="uid://dpnap85wypcw5"]
+
+[ext_resource type="Texture2D" uid="uid://cpidkbdrpaepu" path="res://PowerUps/PowerUpIcons/perfect_aim.jpg" id="1_jblg6"]
+[ext_resource type="Script" uid="uid://bkiolfu13kwr" path="res://Scripts/PowerUp.gd" id="1_vbes2"]
+
+[resource]
+script = ExtResource("1_vbes2")
+id = "perfect_aim"
+display_name = "Perfect Aim"
+description = "Balls landing in the same hole give +50%"
+cost = 100
+rarity_weight = 50
+icon = ExtResource("1_jblg6")
+metadata/_custom_type_script = "uid://bkiolfu13kwr"

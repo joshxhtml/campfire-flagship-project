@@ -29,7 +29,7 @@ var round_score_goal := 0
 #ball managment
 var active_balls := 0
 var base_balls := 3
-var extra_balls_per_round := 1
+var extra_balls_per_round := 0
 var extra_balls_remaining := 0
 var balls_left 
 #shop varibles
@@ -37,6 +37,11 @@ var shop_interval := 1
 var score_multiplier := 1.0
 var owned_powerups:= {}
 var shop_rerolled := false
+#new powerup varaibles
+var first_score_this_round := true
+var last_hole_id := ""
+var combo_count := 0
+
 # Break to how the rounds flow
 
 func start_round():
@@ -44,6 +49,10 @@ func start_round():
 	active_balls = 0
 	balls_left = base_balls 
 	extra_balls_remaining = extra_balls_per_round
+	
+	first_score_this_round = true
+	last_hole_id = ""
+	combo_count = 0
 	
 	round_score = 0
 	round_score_goal = 10 * roundnum
@@ -65,16 +74,52 @@ func can_shoot() -> bool:
 
 
 # Break for scoring stuff
-func add_score(points: int):
+func add_score(points: int, hole_id: String, is_top_row: bool):
+	var final_points = points
+	var multiplier := score_multiplier
 	
-	var final_points = int(points * score_multiplier)
+	#score surge powerup
+	if owned_powerups.has("score_surge") and first_score_this_round:
+		multiplier *= 2.0
+		first_score_this_round = false
+		print("[POWERUP] Score Surge activated")
 	
+	# perfect aim powerup
+	if  owned_powerups.has("perfect_aim") and hole_id == last_hole_id:
+		multiplier *= 1.5
+		print("[POWERUP] Perfect Aim activated")
+		
+	#combo counter powerup
+	if owned_powerups.has("combo_counter"):
+		multiplier *= (1.0 +(.02 * combo_count))
+		print("[POWERUP] Combo x", combo_count)
+		
+	#high roller powerup
+	if owned_powerups.has("high_roller") and is_top_row:
+		final_points += 10
+		print("[POWERUP] High Roller Bonus activated")
+	
+	#last ball bonus powerup
+	if owned_powerups.has("last_ball_bonus") and is_last_ball():
+		multiplier *= 2.0
+		print("[POWERUP] Last Ball Bonus")
+	
+	final_points = int(final_points * multiplier)
 	round_score += final_points
 	total_score += final_points
 	
 	emit_signal("round_score_changed", round_score)
 	emit_signal("total_score_changed", total_score)
-
+	
+	first_score_this_round = false
+	last_hole_id = hole_id
+	combo_count += 1
+	
+#new ball logic for combo coutning
+func register_miss():
+	combo_count = 0
+	last_hole_id = ""
+	print("[COMBO] Combo Reset due to miss")
 #Break for balls
 func use_ball():
 	if state != GameState.PLAYING:
@@ -94,7 +139,7 @@ func ball_resolved():
 	check_round_end()
 
 func check_round_end():
-	if balls_left <= 0 and active_balls <= 0:
+	if balls_left <= 0 and extra_balls_remaining <=0 and active_balls <= 0:
 		evaluate_round()
 
 #break for ending of round
@@ -129,6 +174,9 @@ func return_from_shop():
 	emit_signal("state_changed", state)
 	start_round()
 
+func is_last_ball() -> bool:
+	return balls_left == 0 and extra_balls_remaining == 0
+
 # powerups
 func apply_powerup(powerup: PowerUp):
 	
@@ -140,11 +188,24 @@ func apply_powerup(powerup: PowerUp):
 	match powerup.id:
 		"score_multiplier":
 			score_multiplier += .25
+			print("[POWERUP] Activated:", powerup.id)
 		"shop_frequency":
 			shop_interval = 5
+			print("[POWERUP] Activated:", powerup.id)
 		"extra_ball":
 			extra_balls_per_round += 1
+			print("[POWERUP] Activated:", powerup.id)
 			print("[POWERUP] Extra ball gained. Total extra: ", extra_balls_per_round)
+		"score_surge":
+			print("[POWERUP] Activated:", powerup.id)
+		"perfect_aim":
+			print("[POWERUP] Activated:", powerup.id)
+		"high_roller":
+			print("[POWERUP] Activated:", powerup.id)
+		"combo_counter":
+			print("[POWERUP] Activated:", powerup.id)
+		"last_ball_bonus":
+			print("[POWERUP] Activated:", powerup.id)
 	
 		
 func spend_score(amount: int):

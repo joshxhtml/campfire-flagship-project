@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=3 format=3 uid="uid://dap6bplvlwmmg"]
+
+[ext_resource type="Script" uid="uid://bkiolfu13kwr" path="res://Scripts/PowerUp.gd" id="1_r55gu"]
+[ext_resource type="Texture2D" uid="uid://b4vyepnyrw0lp" path="res://PowerUps/PowerUpIcons/score_surge.jpg" id="1_tb032"]
+
+[resource]
+script = ExtResource("1_r55gu")
+id = "score_surge"
+display_name = "Score Surge"
+description = "First Scoreing ball each round gives 2x"
+cost = 100
+rarity_weight = 50
+icon = ExtResource("1_tb032")
+metadata/_custom_type_script = "uid://bkiolfu13kwr"

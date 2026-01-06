@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bd3kapf54ccpn"]
+[gd_scene load_steps=15 format=3 uid="uid://bd3kapf54ccpn"]
 
 [ext_resource type="Script" uid="uid://w3kii18fk4t6" path="res://Scripts/ShopManager.gd" id="1_7ccoy"]
 [ext_resource type="PackedScene" uid="uid://dyqh3kg1hbuiu" path="res://ShopScenes/ShopItemCard.tscn" id="2_c7y6t"]
@@ -8,7 +8,12 @@
 [ext_resource type="Texture2D" uid="uid://br76cswsc0r1n" path="res://images/ShopBG.png" id="5_kxf26"]
 [ext_resource type="Resource" uid="uid://yb5dypamknrg" path="res://PowerUps/extra_ball.tres" id="5_qrwd0"]
 [ext_resource type="Texture2D" uid="uid://dl24wa0uwmp8a" path="res://images/nobalance.png" id="6_d028k"]
+[ext_resource type="Resource" uid="uid://8jlakptcr4u8" path="res://PowerUps/combo_counter.tres" id="6_kiepn"]
+[ext_resource type="Resource" uid="uid://bb5uy42dp8alj" path="res://PowerUps/high_roller.tres" id="7_564sm"]
 [ext_resource type="FontFile" uid="uid://bf0d7rt3in5bc" path="res://fonts/CANDY.TTF" id="7_pxxbs"]
+[ext_resource type="Resource" uid="uid://bs03i5v5fpvje" path="res://PowerUps/last_ball_bonus.tres" id="8_ixsvv"]
+[ext_resource type="Resource" uid="uid://dpnap85wypcw5" path="res://PowerUps/perfect_aim.tres" id="9_e5in7"]
+[ext_resource type="Resource" uid="uid://dap6bplvlwmmg" path="res://PowerUps/score_surge.tres" id="10_72vh6"]
 
 [node name="ShopScene" type="Control"]
 layout_mode = 3
@@ -18,7 +23,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_7ccoy")
-powerup_pool = Array[ExtResource("2_r12bu")]([ExtResource("3_kxf26"), ExtResource("4_5swfv"), ExtResource("5_qrwd0")])
+powerup_pool = Array[ExtResource("2_r12bu")]([ExtResource("3_kxf26"), ExtResource("4_5swfv"), ExtResource("5_qrwd0"), ExtResource("6_kiepn"), ExtResource("7_564sm"), ExtResource("8_ixsvv"), ExtResource("9_e5in7"), ExtResource("10_72vh6")])
 card_scene = ExtResource("2_c7y6t")
 
 [node name="TextureRect" type="TextureRect" parent="."]

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=3 format=3 uid="uid://8jlakptcr4u8"]
+
+[ext_resource type="Script" uid="uid://bkiolfu13kwr" path="res://Scripts/PowerUp.gd" id="1_r3da7"]
+[ext_resource type="Texture2D" uid="uid://ddmiodmw2t68n" path="res://PowerUps/PowerUpIcons/combo_counter.jpg" id="1_vgma5"]
+
+[resource]
+script = ExtResource("1_r3da7")
+id = "combo_counter"
+display_name = "Combo Counter"
+description = "Consectutive balls give combo multiplier"
+cost = 100
+rarity_weight = 50
+icon = ExtResource("1_vgma5")
+metadata/_custom_type_script = "uid://bkiolfu13kwr"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=3 format=3 uid="uid://bs03i5v5fpvje"]
+
+[ext_resource type="Script" uid="uid://bkiolfu13kwr" path="res://Scripts/PowerUp.gd" id="1_fjgwr"]
+[ext_resource type="Texture2D" uid="uid://b8ntw3eh01qwp" path="res://PowerUps/PowerUpIcons/last_ball_bonus.jpg" id="1_p0rjh"]
+
+[resource]
+script = ExtResource("1_fjgwr")
+id = "last_ball_bonus"
+display_name = "Last Ball Bonus"
+description = "Final Ball of the round is worth x@"
+cost = 100
+rarity_weight = 50
+icon = ExtResource("1_p0rjh")
+metadata/_custom_type_script = "uid://bkiolfu13kwr"

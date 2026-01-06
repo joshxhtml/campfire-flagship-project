@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=3 format=3 uid="uid://bb5uy42dp8alj"]
+
+[ext_resource type="Texture2D" uid="uid://po45bcbxhjy7" path="res://PowerUps/PowerUpIcons/high_roller.jpg" id="1_6jxu8"]
+[ext_resource type="Script" uid="uid://bkiolfu13kwr" path="res://Scripts/PowerUp.gd" id="1_prkb7"]
+
+[resource]
+script = ExtResource("1_prkb7")
+id = "high_roller"
+display_name = "High Roller"
+description = "Top-row holes give bonus +10 points"
+cost = 100
+rarity_weight = 50
+icon = ExtResource("1_6jxu8")
+metadata/_custom_type_script = "uid://bkiolfu13kwr"
