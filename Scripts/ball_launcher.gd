@@ -2,7 +2,7 @@ extends Node3D
 
 @export var left_right_range := .5
 @export var max_tilt := 40.0
-@export var max_power := 15.0
+@export var max_power := 10.0
 @export var power_charge_speed := 15.0
 @onready var power_bar = get_node("../UI/HUD/PowerBar")
 

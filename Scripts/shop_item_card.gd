@@ -1,5 +1,5 @@
 extends Panel
-signal purchased(powerup)
+signal purchased(powerup: PowerUp)
 
 @export var powerup: PowerUp
 @onready var buy_button := $Buy
@@ -12,10 +12,12 @@ func setup(p: PowerUp):
 	$Name.text = p.display_name
 	$Description.text = p.description
 	$Cost.text = "Cost: %d" % p.cost
+	
 
-func _on_Buy_pressed():
+func _on_buy_pressed() -> void:
+	print("buy pressed:", powerup.id)
 	if bought:
 		return
 		
 	
-	purchased.emit(powerup)	
+	purchased.emit(powerup)

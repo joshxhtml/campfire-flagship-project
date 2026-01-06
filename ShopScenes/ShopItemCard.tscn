@@ -41,3 +41,5 @@ offset_top = 127.0
 offset_right = 147.0
 offset_bottom = 176.0
 autowrap_mode = 3
+
+[connection signal="pressed" from="Buy" to="." method="_on_buy_pressed"]
