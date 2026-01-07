@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 #building a debuging system, a) im bord and dont want to move onto content, and b) i need it cause this code is so ass 😭😭
 const DEBUG_SHOP := true
@@ -129,9 +129,7 @@ func _on_Exit_pressed():
 
 func exit_shop():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	GameManager.allow_play()
-	GameManager.start_round()
-	get_tree().change_scene_to_file("res://main.tscn")
+	GameManager.return_from_shop()
 
 func update_total_score(new_score: int):
 	score_label.text = "Score: %d" % new_score
@@ -179,11 +177,11 @@ func shake_node(node: Control, strength:= 10, shakes:=6, speed:=0.05):
 	var original_pos := node.position
 	
 	for i in range(shakes):
-		var offset := strength if i %2 == 0 else -strength
+		var ui_offset := strength if i %2 == 0 else -strength
 		tween.tween_property(
 			node,
 			"position",
-			original_pos + Vector2(offset,0),
+			original_pos + Vector2(ui_offset,0),
 			speed
 		)
 		tween.tween_property(

@@ -1,7 +1,7 @@
 extends Node3D
 
 @export var left_right_range := .5
-@export var max_tilt := 40.0
+@export var max_tilt := 100.0
 @export var max_power := 10.0
 @export var power_charge_speed := 15.0
 @onready var power_bar = get_node("../UI/HUD/PowerBar")
@@ -31,9 +31,9 @@ func update_aim_line():
 	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
 	
 	if tilt_mode:
-		material.albedo_color = Color(0.2, 0.5, 1.0) 
+		material.albedo_color = Color(1.0, 1.0, 1.0, 1.0) 
 	else:
-		material.albedo_color = Color(1.0, 0.2, 0.2) 
+		material.albedo_color = Color(0.0, 0.0, 0.0, 1.0) 
 		
 	mesh.surface_begin(Mesh.PRIMITIVE_LINES, material)
 	

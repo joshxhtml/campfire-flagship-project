@@ -1,6 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://petr62ss25eu"]
+[gd_scene load_steps=21 format=3 uid="uid://petr62ss25eu"]
 
 [ext_resource type="PackedScene" uid="uid://corb1adxuf5fs" path="res://Machine/machine.tscn" id="1_vivmo"]
+[ext_resource type="Script" uid="uid://bcrkd0cm5nyxy" path="res://Scripts/main.gd" id="1_ycdy4"]
 [ext_resource type="Script" uid="uid://2wxo078s6m4g" path="res://Scripts/camera_rig.gd" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://b6fwo03syl0so" path="res://Scripts/ball_launcher.gd" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://2hksf06eh24j" path="res://ball.tscn" id="4_1bvp3"]
@@ -43,6 +44,7 @@ material = ExtResource("11_vivmo")
 material = ExtResource("11_vivmo")
 
 [node name="Main" type="Node3D"]
+script = ExtResource("1_ycdy4")
 
 [node name="Machine2" parent="." instance=ExtResource("1_vivmo")]
 
@@ -112,27 +114,27 @@ script = ExtResource("9_dg77c")
 [node name="Light1" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.592478, 3.7578697, 3.46215)
 layers = 2
-omni_range = 12.0
+omni_range = 9.0
 
 [node name="Light2" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13350916, 5.5659294, 3.46215)
 layers = 2
-omni_range = 12.0
+omni_range = 9.0
 
 [node name="Light3" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.350858, 3.7578697, 3.46215)
 layers = 2
-omni_range = 12.0
+omni_range = 9.0
 
 [node name="Light4" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.350858, 3.7578697, -3.210956)
 layers = 2
-omni_range = 12.0
+omni_range = 9.0
 
 [node name="Light5" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.592478, 3.7578697, -3.4181075)
 layers = 2
-omni_range = 12.0
+omni_range = 9.0
 
 [node name="UI" parent="." instance=ExtResource("10_4c57u")]
 

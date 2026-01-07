@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://buy4jrshrgg66"]
+[gd_scene load_steps=11 format=3 uid="uid://buy4jrshrgg66"]
 
 [ext_resource type="Script" uid="uid://6x21ppnkouyb" path="res://Scripts/UIManager.gd" id="1_m6e0p"]
 [ext_resource type="Texture2D" uid="uid://cd5cd7kx3hghp" path="res://images/ballsleft.png" id="2_27fn8"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://ce14asask8qqi" path="res://images/roundclear-nobg.png" id="4_ibotj"]
 [ext_resource type="PackedScene" uid="uid://b4aey3hhgnqvj" path="res://GregMentor.tscn" id="4_n5ude"]
 [ext_resource type="Texture2D" uid="uid://cxosgx6gxwi4h" path="res://images/roundfail-nobg.png" id="5_n5ude"]
+[ext_resource type="Texture2D" uid="uid://be61j040u688v" path="res://images/round_num_holder.png" id="5_ok7cu"]
 [ext_resource type="Shader" uid="uid://16rlsuwh2cp5" path="res://shaders/vhs-effect.gdshader" id="8_waa4j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ok7cu"]
@@ -55,21 +56,23 @@ theme_override_font_sizes/font_size = 32
 
 [node name="RoundScoreLabel" type="Label" parent="HUD"]
 layout_mode = 0
-offset_left = 921.0
+offset_left = 820.0
 offset_top = 10.0
-offset_right = 1140.0
+offset_right = 1248.0
 offset_bottom = 91.0
 theme_override_fonts/font = ExtResource("3_waa4j")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 40
+text = "RoundScoreLabel"
 
 [node name="TotalScoreLabel" type="Label" parent="HUD"]
 layout_mode = 0
-offset_left = 921.0
-offset_top = 90.0
-offset_right = 1137.0
-offset_bottom = 169.0
+offset_left = 823.0
+offset_top = 62.0
+offset_right = 1246.0
+offset_bottom = 112.0
 theme_override_fonts/font = ExtResource("3_waa4j")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 40
+text = "Total Score Label"
 
 [node name="BallsCountainer" type="HBoxContainer" parent="HUD"]
 layout_mode = 0
@@ -100,12 +103,28 @@ offset_top = 525.0
 offset_right = 1144.0
 offset_bottom = 552.0
 
+[node name="RoundFlashBG" type="TextureRect" parent="HUD"]
+layout_mode = 0
+offset_left = 300.0
+offset_top = 6.0
+offset_right = 856.0
+offset_bottom = 562.0
+texture = ExtResource("5_ok7cu")
+expand_mode = 3
+
 [node name="RoundFlash" type="Label" parent="HUD"]
 layout_mode = 0
-offset_left = 321.0
-offset_top = 204.0
-offset_right = 830.0
-offset_bottom = 443.0
+offset_left = 337.0
+offset_top = 208.0
+offset_right = 794.0
+offset_bottom = 374.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_waa4j")
+theme_override_font_sizes/font_size = 64
+text = "placeholder"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ColorRect2" type="ColorRect" parent="HUD"]
 layout_mode = 0

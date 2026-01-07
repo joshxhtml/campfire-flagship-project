@@ -41,13 +41,22 @@ func _ready():
 func on_round_started(roundnum):
 	greg.set_emotion(greg.Emotion.NUETRAL)
 	
-	$HUD/RoundFlash.text = "Round %d" % roundnum
-	$HUD/RoundFlash.visible = true
-	$HUD/RoundFlash.modulate.a = 1.0
+	var bg := $HUD/RoundFlashBG
+	var label := $HUD/RoundFlash
+	label.text = "Round %d" % roundnum
+	
+	bg.visible = true
+	label.visible = true
+	bg.modulate.a = 1.0
+	label.modulate.a = 1.0
 	
 	var tween3 = create_tween()
-	tween3.tween_property($HUD/RoundFlash, "modulate:a", 0.0, 1.2)
+	tween3.tween_property(bg, "modulate:a", 0.0, 1.2)
+	tween3.parallel().tween_property(label, "modulate:a", 0.0, 1.2)
 	await tween3.finished
+	
+	bg.visible = false
+	label.visible = false
 	
 	GameManager.allow_play()
 

@@ -16,25 +16,18 @@
 [ext_resource type="Resource" uid="uid://dap6bplvlwmmg" path="res://PowerUps/score_surge.tres" id="10_72vh6"]
 [ext_resource type="PackedScene" uid="uid://dy3iuogudygra" path="res://shaders/vhs_shader.tscn" id="15_564sm"]
 
-[node name="ShopScene" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="ShopScene" type="CanvasLayer"]
+layer = 10
 script = ExtResource("1_7ccoy")
 powerup_pool = Array[ExtResource("2_r12bu")]([ExtResource("3_kxf26"), ExtResource("4_5swfv"), ExtResource("5_qrwd0"), ExtResource("6_kiepn"), ExtResource("7_564sm"), ExtResource("8_ixsvv"), ExtResource("9_e5in7"), ExtResource("10_72vh6")])
 card_scene = ExtResource("2_c7y6t")
 
 [node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 texture = ExtResource("5_kxf26")
 
 [node name="RerollButton" type="Button" parent="."]
-layout_mode = 0
 offset_left = 570.0
 offset_top = 516.0
 offset_right = 760.0
@@ -42,7 +35,6 @@ offset_bottom = 617.0
 flat = true
 
 [node name="ExitButton" type="Button" parent="."]
-layout_mode = 0
 offset_left = 343.0
 offset_top = 529.0
 offset_right = 510.0
@@ -50,34 +42,31 @@ offset_bottom = 623.0
 flat = true
 
 [node name="Item1" parent="." instance=ExtResource("2_c7y6t")]
-layout_mode = 0
 offset_left = 247.0
 offset_top = 218.0
 offset_right = 396.0
 offset_bottom = 422.0
 
 [node name="Item2" parent="." instance=ExtResource("2_c7y6t")]
-layout_mode = 0
 offset_left = 501.0
 offset_top = 220.0
 offset_right = 650.0
 offset_bottom = 424.0
 
 [node name="Item3" parent="." instance=ExtResource("2_c7y6t")]
-layout_mode = 0
 offset_left = 763.0
 offset_top = 220.0
 offset_right = 912.0
 offset_bottom = 424.0
 
 [node name="OwnedLabel" type="Label" parent="."]
-layout_mode = 0
 offset_left = 754.0
 offset_top = 23.0
 offset_right = 931.0
 offset_bottom = 164.0
 
 [node name="Balance" type="Control" parent="."]
+layout_mode = 3
 anchors_preset = 0
 offset_left = 721.0
 offset_top = 31.0
@@ -105,4 +94,3 @@ offset_bottom = 95.0
 texture = ExtResource("6_d028k")
 
 [node name="VHS_Shader" parent="." instance=ExtResource("15_564sm")]
-layout_mode = 1

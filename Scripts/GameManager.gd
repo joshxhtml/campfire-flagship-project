@@ -33,7 +33,7 @@ var extra_balls_per_round := 0
 var extra_balls_remaining := 0
 var balls_left := 0
 #shop varibles
-var shop_interval := 10
+var shop_interval := 1
 var score_multiplier := 1.0
 var owned_powerups:= {}
 var shop_rerolled := false
@@ -43,10 +43,20 @@ var last_hole_id := ""
 var combo_count := 0
 
 var game_started := false
+#shop stuff cause i fucked it up soimehow
+const SHOP_SCENE := preload("res://ShopScenes/ShopScene.tscn")
+var active_shop: CanvasLayer = null
+
 # Break to how the rounds flow
 
 func _ready() -> void:
-	call_deferred("start_round")
+	print("GameManager READY | instance:", get_instance_id())
+
+func start_game():
+	if game_started:
+		return
+	game_started = true
+	start_round()
 
 func start_round():
 	if not game_started:
@@ -71,6 +81,9 @@ func start_round():
 	emit_signal("total_score_changed", total_score)
 	emit_signal("balls_changed", balls_left)
 	emit_signal("round_started", roundnum)
+
+func round_ready():
+	allow_play()
 
 func allow_play():
 	print("[GameManager] allow_play called")
@@ -163,10 +176,8 @@ func evaluate_round():
 	
 	if round_score >= round_score_goal:
 		if should_open_shop():
-			state = GameState.SHOP
-			shop_rerolled = false
-			emit_signal("state_changed", state)
-			get_tree().call_deferred("change_scene_to_file", "res://ShopScenes/ShopScene.tscn")
+			open_shop()
+			
 		else:
 			emit_signal("round_completed", roundnum)
 	else:
@@ -178,12 +189,22 @@ func should_open_shop() -> bool:
 	return roundnum % shop_interval == 0
 
 func open_shop():
+	if active_shop != null:
+		return
+	
 	state = GameState.SHOP
 	shop_rerolled = false
 	emit_signal("state_changed", state)
-	get_tree().call_deferred("change_scene_to_file", "res://ShopScenes/ShopScene.tscn")
+	
+	active_shop = SHOP_SCENE.instantiate()
+	get_tree().current_scene.add_child(active_shop)
+	
 
 func return_from_shop():
+	if active_shop:
+		active_shop.queue_free()
+		active_shop = null
+	
 	state = GameState.ROUND_TRANSITION
 	emit_signal("state_changed", state)
 	start_round()
