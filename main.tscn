@@ -1,10 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://petr62ss25eu"]
+[gd_scene load_steps=20 format=3 uid="uid://petr62ss25eu"]
 
 [ext_resource type="PackedScene" uid="uid://corb1adxuf5fs" path="res://Machine/machine.tscn" id="1_vivmo"]
 [ext_resource type="Script" uid="uid://2wxo078s6m4g" path="res://Scripts/camera_rig.gd" id="2_h2yge"]
 [ext_resource type="Script" uid="uid://b6fwo03syl0so" path="res://Scripts/ball_launcher.gd" id="3_h2yge"]
 [ext_resource type="PackedScene" uid="uid://2hksf06eh24j" path="res://ball.tscn" id="4_1bvp3"]
 [ext_resource type="Texture2D" uid="uid://bpscffq3x0syl" path="res://textures/floor_tiles_06_diff_4k.png" id="8_dg77c"]
+[ext_resource type="Script" uid="uid://dkk7cv4o8umue" path="res://Scripts/light_manager.gd" id="9_dg77c"]
 [ext_resource type="Texture2D" uid="uid://cdjfjync3bh53" path="res://textures/floor_tiles_06_nor_gl_4k.png" id="9_ycdy4"]
 [ext_resource type="PackedScene" uid="uid://buy4jrshrgg66" path="res://ui.tscn" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://bk0aukvageigw" path="res://textures/floor_tiles_06_rough_4k.png" id="10_w48qg"]
@@ -35,19 +36,15 @@ uv1_scale = Vector3(15, 9, 4)
 [sub_resource type="PlaneMesh" id="PlaneMesh_272bh"]
 material = SubResource("StandardMaterial3D_yaehf")
 
-[sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
+[sub_resource type="BoxMesh" id="BoxMesh_7mycd"]
 material = ExtResource("11_vivmo")
 
-[sub_resource type="BoxMesh" id="BoxMesh_7mycd"]
+[sub_resource type="BoxMesh" id="BoxMesh_lquwl"]
 material = ExtResource("11_vivmo")
 
 [node name="Main" type="Node3D"]
 
 [node name="Machine2" parent="." instance=ExtResource("1_vivmo")]
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(-0.8660254, -0.46059275, -0.19456202, 0, -0.38912398, 0.9211854, -0.50000006, 0.7977699, 0.33699125, 0.4423027, 3.278481, 0.4510001)
-shadow_enabled = true
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1bvp3")
@@ -73,33 +70,69 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05928111, 0.36513257)
 transform = Transform3D(7, 0, 0, 0, 1, 0, 0, 0, 4, 0.05898094, 6.222725e-05, 0.048279762)
 mesh = SubResource("PlaneMesh_272bh")
 
-[node name="BackWall" type="MeshInstance3D" parent="Room"]
-transform = Transform3D(14, 0, 0, 0, 3, 0, 0, 0, 0.5, 0, 1.5, -4.25)
-mesh = SubResource("BoxMesh_lquwl")
-
-[node name="LeftWall" type="MeshInstance3D" parent="Room"]
+[node name="LeftWall - Lower" type="MeshInstance3D" parent="Room"]
 transform = Transform3D(0.5, 0, 0, 0, 3, 0, 0, 0, 8, -7.25, 1.5, 0)
 mesh = SubResource("BoxMesh_7mycd")
 
-[node name="RightWall" type="MeshInstance3D" parent="Room"]
-transform = Transform3D(0.5, 0, 0, 0, 3, 0, 0, 0, 8, 7.25, 1.5, 0)
-mesh = SubResource("BoxMesh_7mycd")
-
-[node name="LeftWall2" type="MeshInstance3D" parent="Room"]
+[node name="LeftWall - Upper" type="MeshInstance3D" parent="Room"]
 transform = Transform3D(0.5, 0, 0, 0, 3, 0, 0, 0, 8, -7.25, 4.5, 0)
 mesh = SubResource("BoxMesh_7mycd")
 
-[node name="RightWall2" type="MeshInstance3D" parent="Room"]
+[node name="RightWall - Lower" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(0.5, 0, 0, 0, 3, 0, 0, 0, 8, 7.25, 1.5, 0)
+mesh = SubResource("BoxMesh_7mycd")
+
+[node name="RightWall - Upper" type="MeshInstance3D" parent="Room"]
 transform = Transform3D(0.5, 0, 0, 0, 3, 0, 0, 0, 8, 7.25, 4.5, 0)
 mesh = SubResource("BoxMesh_7mycd")
 
-[node name="BackWall2" type="MeshInstance3D" parent="Room"]
+[node name="BackWall - Lower" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(14, 0, 0, 0, 3, 0, 0, 0, 0.5, 0, 1.5, -4.25)
+mesh = SubResource("BoxMesh_lquwl")
+
+[node name="BackWall - Upper" type="MeshInstance3D" parent="Room"]
 transform = Transform3D(14, 0, 0, 0, 3, 0, 0, 0, 0.5, 0, 4.5, -4.25)
 mesh = SubResource("BoxMesh_lquwl")
 
 [node name="Ceiling" type="MeshInstance3D" parent="Room"]
 transform = Transform3D(7, 0, 0, 0, -1, 3.496911e-07, 0, -8.742278e-08, -4, 0, 6, 0)
 mesh = SubResource("PlaneMesh_272bh")
+
+[node name="BackWall - Lower2" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(14, 0, 0, 0, 3, 0, 0, 0, 0.5, 0, 1.5, 4.2)
+mesh = SubResource("BoxMesh_lquwl")
+
+[node name="BackWall - Upper2" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(14, 0, 0, 0, 3, 0, 0, 0, 0.5, 0, 4.5, 4.2)
+mesh = SubResource("BoxMesh_lquwl")
+
+[node name="Lights" type="Node3D" parent="."]
+script = ExtResource("9_dg77c")
+
+[node name="Light1" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.592478, 3.7578697, 3.46215)
+layers = 2
+omni_range = 12.0
+
+[node name="Light2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13350916, 5.5659294, 3.46215)
+layers = 2
+omni_range = 12.0
+
+[node name="Light3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.350858, 3.7578697, 3.46215)
+layers = 2
+omni_range = 12.0
+
+[node name="Light4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.350858, 3.7578697, -3.210956)
+layers = 2
+omni_range = 12.0
+
+[node name="Light5" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.592478, 3.7578697, -3.4181075)
+layers = 2
+omni_range = 12.0
 
 [node name="UI" parent="." instance=ExtResource("10_4c57u")]
 

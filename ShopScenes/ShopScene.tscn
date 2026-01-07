@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bd3kapf54ccpn"]
+[gd_scene load_steps=16 format=3 uid="uid://bd3kapf54ccpn"]
 
 [ext_resource type="Script" uid="uid://w3kii18fk4t6" path="res://Scripts/ShopManager.gd" id="1_7ccoy"]
 [ext_resource type="PackedScene" uid="uid://dyqh3kg1hbuiu" path="res://ShopScenes/ShopItemCard.tscn" id="2_c7y6t"]
@@ -14,6 +14,7 @@
 [ext_resource type="Resource" uid="uid://bs03i5v5fpvje" path="res://PowerUps/last_ball_bonus.tres" id="8_ixsvv"]
 [ext_resource type="Resource" uid="uid://dpnap85wypcw5" path="res://PowerUps/perfect_aim.tres" id="9_e5in7"]
 [ext_resource type="Resource" uid="uid://dap6bplvlwmmg" path="res://PowerUps/score_surge.tres" id="10_72vh6"]
+[ext_resource type="PackedScene" uid="uid://dy3iuogudygra" path="res://shaders/vhs_shader.tscn" id="15_564sm"]
 
 [node name="ShopScene" type="Control"]
 layout_mode = 3
@@ -102,3 +103,6 @@ offset_top = -5.0
 offset_right = 202.9
 offset_bottom = 95.0
 texture = ExtResource("6_d028k")
+
+[node name="VHS_Shader" parent="." instance=ExtResource("15_564sm")]
+layout_mode = 1

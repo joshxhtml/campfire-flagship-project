@@ -30,7 +30,6 @@ func show_round_flash(roundnum):
 	tween.tween_property($HUD/RoundFlash, "modulate:a", 0.0, 1.2)
 	
 func _ready():
-	
 	GameManager.round_started.connect(on_round_started)
 	GameManager.balls_changed.connect(update_balls)
 	GameManager.round_score_changed.connect(update_round_score)
@@ -38,18 +37,19 @@ func _ready():
 	GameManager.round_completed.connect(on_round_completed)
 	GameManager.round_failed.connect(on_round_failed)
 	
-	GameManager.start_round()
 
-func on_round_started(_roundnum):
+func on_round_started(roundnum):
 	greg.set_emotion(greg.Emotion.NUETRAL)
-	hud.visible = false
-	round_image.visible = true
-	round_image.texture = preload("res://images/roundclear.png")
 	
-	await get_tree().create_timer(1.5).timeout
-	round_image.visible = false
-	hud.visible = true
-	GameManager.state = GameManager.GameState.PLAYING
+	$HUD/RoundFlash.text = "Round %d" % roundnum
+	$HUD/RoundFlash.visible = true
+	$HUD/RoundFlash.modulate.a = 1.0
+	
+	var tween3 = create_tween()
+	tween3.tween_property($HUD/RoundFlash, "modulate:a", 0.0, 1.2)
+	await tween3.finished
+	
+	GameManager.allow_play()
 
 func update_round_score(score):
 	$HUD/RoundScoreLabel.text = "Round: %d / %d" % [score, GameManager.round_score_goal]
@@ -64,8 +64,12 @@ func on_round_completed(_roundnum):
 	hud.visible = false
 	round_image.visible = true
 	round_image.texture = preload("res://images/roundclear.png")
+	
 	await get_tree().create_timer(2.0).timeout
+	
 	round_image.visible = false
+	hud.visible = true
+	
 	GameManager.start_round()
 
 
@@ -74,3 +78,5 @@ func on_round_failed(_roundnum):
 	hud.visible = false
 	round_image.visible = true
 	round_image.texture = preload("res://images/roundfail.png")
+	
+	GameManager.state = GameManager.GameState.GAME_OVER

@@ -1,11 +1,21 @@
-[gd_scene load_steps=7 format=3 uid="uid://buy4jrshrgg66"]
+[gd_scene load_steps=10 format=3 uid="uid://buy4jrshrgg66"]
 
 [ext_resource type="Script" uid="uid://6x21ppnkouyb" path="res://Scripts/UIManager.gd" id="1_m6e0p"]
 [ext_resource type="Texture2D" uid="uid://cd5cd7kx3hghp" path="res://images/ballsleft.png" id="2_27fn8"]
 [ext_resource type="Texture2D" uid="uid://4ofbdpwe6qw5" path="res://images/UI-Image.png" id="2_nltto"]
+[ext_resource type="FontFile" uid="uid://bf0d7rt3in5bc" path="res://fonts/CANDY.TTF" id="3_waa4j"]
 [ext_resource type="Texture2D" uid="uid://ce14asask8qqi" path="res://images/roundclear-nobg.png" id="4_ibotj"]
 [ext_resource type="PackedScene" uid="uid://b4aey3hhgnqvj" path="res://GregMentor.tscn" id="4_n5ude"]
 [ext_resource type="Texture2D" uid="uid://cxosgx6gxwi4h" path="res://images/roundfail-nobg.png" id="5_n5ude"]
+[ext_resource type="Shader" uid="uid://16rlsuwh2cp5" path="res://shaders/vhs-effect.gdshader" id="8_waa4j"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ok7cu"]
+shader = ExtResource("8_waa4j")
+shader_parameter/wiggle = 0.03
+shader_parameter/wiggle_speed = 25.0
+shader_parameter/smear = 1.0
+shader_parameter/intensity = 0.065
+shader_parameter/blur_samples = 15
 
 [node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_m6e0p")
@@ -36,22 +46,30 @@ texture = ExtResource("2_nltto")
 
 [node name="RoundLabel" type="Label" parent="HUD"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 76.0
+offset_top = 494.0
+offset_right = 123.0
+offset_bottom = 528.0
+theme_override_fonts/font = ExtResource("3_waa4j")
+theme_override_font_sizes/font_size = 32
 
 [node name="RoundScoreLabel" type="Label" parent="HUD"]
 layout_mode = 0
 offset_left = 921.0
 offset_top = 10.0
-offset_right = 1034.0
-offset_bottom = 37.0
+offset_right = 1140.0
+offset_bottom = 91.0
+theme_override_fonts/font = ExtResource("3_waa4j")
+theme_override_font_sizes/font_size = 32
 
 [node name="TotalScoreLabel" type="Label" parent="HUD"]
 layout_mode = 0
-offset_left = 1052.0
-offset_top = 10.0
+offset_left = 921.0
+offset_top = 90.0
 offset_right = 1137.0
-offset_bottom = 33.0
+offset_bottom = 169.0
+theme_override_fonts/font = ExtResource("3_waa4j")
+theme_override_font_sizes/font_size = 32
 
 [node name="BallsCountainer" type="HBoxContainer" parent="HUD"]
 layout_mode = 0
@@ -84,8 +102,10 @@ offset_bottom = 552.0
 
 [node name="RoundFlash" type="Label" parent="HUD"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 321.0
+offset_top = 204.0
+offset_right = 830.0
+offset_bottom = 443.0
 
 [node name="ColorRect2" type="ColorRect" parent="HUD"]
 layout_mode = 0
@@ -151,7 +171,7 @@ theme_override_font_sizes/font_size = 45
 text = "+0"
 
 [node name="RoundOverlay" type="Control" parent="."]
-z_index = 12
+z_index = 4096
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
@@ -165,7 +185,7 @@ offset_bottom = 648.0
 texture = ExtResource("4_ibotj")
 
 [node name="GameOverOverlay" type="Control" parent="."]
-z_index = 12
+z_index = 4096
 layout_mode = 3
 anchors_preset = 0
 offset_right = 1152.0
@@ -177,3 +197,9 @@ layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 texture = ExtResource("5_n5ude")
+
+[node name="VHS" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_ok7cu")
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2

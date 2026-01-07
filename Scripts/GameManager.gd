@@ -31,9 +31,9 @@ var active_balls := 0
 var base_balls := 3
 var extra_balls_per_round := 0
 var extra_balls_remaining := 0
-var balls_left 
+var balls_left := 0
 #shop varibles
-var shop_interval := 1
+var shop_interval := 10
 var score_multiplier := 1.0
 var owned_powerups:= {}
 var shop_rerolled := false
@@ -42,9 +42,16 @@ var first_score_this_round := true
 var last_hole_id := ""
 var combo_count := 0
 
+var game_started := false
 # Break to how the rounds flow
 
+func _ready() -> void:
+	call_deferred("start_round")
+
 func start_round():
+	if not game_started:
+		game_started = true
+	
 	roundnum += 1
 	active_balls = 0
 	balls_left = base_balls 
@@ -66,10 +73,17 @@ func start_round():
 	emit_signal("round_started", roundnum)
 
 func allow_play():
+	print("[GameManager] allow_play called")
 	state = GameState.PLAYING
 	emit_signal("state_changed", state)
 
 func can_shoot() -> bool:
+	print(
+		"[can_shoot]",
+		"state:", state,
+		"balls_left:", balls_left,
+		"extra:", extra_balls_remaining
+	)
 	return state == GameState.PLAYING and (balls_left > 0 or extra_balls_remaining > 0)
 
 

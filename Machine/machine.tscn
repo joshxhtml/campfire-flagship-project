@@ -185,3 +185,7 @@ shape = SubResource("BoxShape3D_5f3ny")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7791758, 1.35, 1.0323575e-08)
 material_override = SubResource("StandardMaterial3D_42f15")
 mesh = SubResource("BoxMesh_u17ae")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(-4.371139e-08, -0.540769, -0.8411712, -8.881784e-16, 0.8411712, -0.540769, 1, -2.3637764e-08, -3.676876e-08, 0.88969517, 0.7572522, 3.8889812e-08)
+light_energy = 4.632

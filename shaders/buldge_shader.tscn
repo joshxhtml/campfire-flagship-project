@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bvqforl468ss6"]
+
+[ext_resource type="Shader" uid="uid://bdmcwmeck3q0s" path="res://shaders/vhs_shader-buldge.gdshader" id="1_5x1py"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iaol4"]
+shader = ExtResource("1_5x1py")
+shader_parameter/intensity = 0.065
+
+[node name="buldge-shader" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Buldge" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_iaol4")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
