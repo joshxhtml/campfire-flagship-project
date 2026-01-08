@@ -7,7 +7,7 @@
 script = ExtResource("1_vbes2")
 id = "perfect_aim"
 display_name = "Perfect Aim"
-description = "Balls landing in the same hole give +50%"
+description = "Landing in the same hole give +50%"
 cost = 100
 rarity_weight = 50
 icon = ExtResource("1_jblg6")

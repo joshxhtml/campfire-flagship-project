@@ -19,7 +19,6 @@ signal balls_changed(count)
 signal round_score_changed(score)
 signal total_score_changed(score)
 
-
 var state = GameState.PLAYING
 #round socring
 var roundnum := 0
@@ -33,7 +32,7 @@ var extra_balls_per_round := 0
 var extra_balls_remaining := 0
 var balls_left := 0
 #shop varibles
-var shop_interval := 1
+var shop_interval := 5
 var score_multiplier := 1.0
 var owned_powerups:= {}
 var shop_rerolled := false
@@ -41,15 +40,21 @@ var shop_rerolled := false
 var first_score_this_round := true
 var last_hole_id := ""
 var combo_count := 0
-
+#game thing
 var game_started := false
-#shop stuff cause i fucked it up soimehow
+var run_seed := randi()
+#shop stuff cause i fucked it up somehow
 const SHOP_SCENE := preload("res://ShopScenes/ShopScene.tscn")
 var active_shop: CanvasLayer = null
+
+#everyday this script file gets bigger and bigger
+var active_puase_menu: Node = null
+@onready var PAUSE_MENU := preload("res://UI/pause_menu.tscn")
 
 # Break to how the rounds flow
 
 func _ready() -> void:
+	print("[RUN] Seed:", run_seed)
 	print("GameManager READY | instance:", get_instance_id())
 
 func start_game():
@@ -99,7 +104,27 @@ func can_shoot() -> bool:
 	)
 	return state == GameState.PLAYING and (balls_left > 0 or extra_balls_remaining > 0)
 
+#pasuing
+func open_pause_menu():
+	if active_puase_menu:
+		return
+	get_tree().paused = true
+	active_puase_menu = PAUSE_MENU.instantiate()
+	get_tree().current_scene.add_child(active_puase_menu)
 
+func resume_game():
+	if active_puase_menu:
+		active_puase_menu.queue_free()
+		active_puase_menu = null
+	
+	get_tree().paused = false
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		if get_tree().paused:
+			resume_game()
+		else:
+			open_pause_menu()
 # Break for scoring stuff
 func add_score(points: int, hole_id: String, is_top_row: bool):
 	var final_points = points
@@ -141,7 +166,7 @@ func add_score(points: int, hole_id: String, is_top_row: bool):
 	first_score_this_round = false
 	last_hole_id = hole_id
 	combo_count += 1
-	
+
 #new ball logic for combo coutning
 func register_miss():
 	combo_count = 0
@@ -198,7 +223,6 @@ func open_shop():
 	
 	active_shop = SHOP_SCENE.instantiate()
 	get_tree().current_scene.add_child(active_shop)
-	
 
 func return_from_shop():
 	if active_shop:
@@ -225,7 +249,7 @@ func apply_powerup(powerup: PowerUp):
 			score_multiplier += .25
 			print("[POWERUP] Activated:", powerup.id)
 		"shop_frequency":
-			shop_interval = 5
+			shop_interval = 2
 			print("[POWERUP] Activated:", powerup.id)
 		"extra_ball":
 			extra_balls_per_round += 1
@@ -241,8 +265,7 @@ func apply_powerup(powerup: PowerUp):
 			print("[POWERUP] Activated:", powerup.id)
 		"last_ball_bonus":
 			print("[POWERUP] Activated:", powerup.id)
-	
-		
+
 func spend_score(amount: int):
 	if total_score < amount:
 		return false
@@ -253,3 +276,18 @@ func spend_score(amount: int):
 
 func can_afford(amount: int) -> bool:
 	return total_score >= amount
+
+# im gonna make a saveing feature ventually and i thought id put this out now before i fully impletement stuff
+func get_run_data() -> Dictionary:
+	return {
+		"roundnum": roundnum,
+		"total_score": total_score,
+		"owned_powerups": owned_powerups,
+		"base_balls": base_balls,
+		"extra_balls_per_round": extra_balls_per_round,
+		"score_multiplier": score_multiplier
+	}
+	
+func save_run():
+	var data = get_run_data()
+	print("[SAVE] Run data:", data)

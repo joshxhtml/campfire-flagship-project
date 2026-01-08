@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ffmk1crbm3lm"
-path="res://.godot/imported/shopBG.png-b6e8c1b78bef3907696afac3e3786f15.ctex"
+uid="uid://dxntbv5ytvkxk"
+path="res://.godot/imported/new_shop_frequency.jpg-801b78b2dd52d2adb5b1a42a83325806.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://images/shopBG.png"
-dest_files=["res://.godot/imported/shopBG.png-b6e8c1b78bef3907696afac3e3786f15.ctex"]
+source_file="res://PowerUps/PowerUpIcons/new_shop_frequency.jpg"
+dest_files=["res://.godot/imported/new_shop_frequency.jpg-801b78b2dd52d2adb5b1a42a83325806.ctex"]
 
 [params]
 

@@ -7,7 +7,7 @@
 script = ExtResource("1_fjgwr")
 id = "last_ball_bonus"
 display_name = "Last Ball Bonus"
-description = "Final Ball of the round is worth x@"
+description = "Final Ball of the round is worth x2"
 cost = 100
 rarity_weight = 50
 icon = ExtResource("1_p0rjh")

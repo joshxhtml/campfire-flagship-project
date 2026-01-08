@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://bpscffq3x0syl" path="res://textures/floor_tiles_06_diff_4k.png" id="8_dg77c"]
 [ext_resource type="Script" uid="uid://dkk7cv4o8umue" path="res://Scripts/light_manager.gd" id="9_dg77c"]
 [ext_resource type="Texture2D" uid="uid://cdjfjync3bh53" path="res://textures/floor_tiles_06_nor_gl_4k.png" id="9_ycdy4"]
-[ext_resource type="PackedScene" uid="uid://buy4jrshrgg66" path="res://ui.tscn" id="10_4c57u"]
+[ext_resource type="PackedScene" uid="uid://buy4jrshrgg66" path="res://UI/ui.tscn" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://bk0aukvageigw" path="res://textures/floor_tiles_06_rough_4k.png" id="10_w48qg"]
 [ext_resource type="Material" uid="uid://qxhnkrqdookj" path="res://textures/brickwall.tres" id="11_vivmo"]
 [ext_resource type="Script" uid="uid://pbloiejk2kbl" path="res://Scripts/hole_camera.gd" id="12_w48qg"]
@@ -46,7 +46,7 @@ material = ExtResource("11_vivmo")
 [node name="Main" type="Node3D"]
 script = ExtResource("1_ycdy4")
 
-[node name="Machine2" parent="." instance=ExtResource("1_vivmo")]
+[node name="TheSkeeBallMachine" parent="." instance=ExtResource("1_vivmo")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1bvp3")
@@ -137,6 +137,7 @@ layers = 2
 omni_range = 9.0
 
 [node name="UI" parent="." instance=ExtResource("10_4c57u")]
+layer = 0
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="UI"]
 offset_right = 512.0

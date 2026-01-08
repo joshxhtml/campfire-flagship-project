@@ -7,7 +7,7 @@
 script = ExtResource("1_prkb7")
 id = "high_roller"
 display_name = "High Roller"
-description = "Top-row holes give bonus +10 points"
+description = "Top-row holes give bonus +10"
 cost = 100
 rarity_weight = 50
 icon = ExtResource("1_6jxu8")

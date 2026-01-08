@@ -4,10 +4,8 @@ extends CanvasLayer
 @onready var extra_balls_label := $HUD/ExtraBallsLabel
 
 @onready var hud = $HUD
-@onready var round_overlay = $RoundOverlay
-@onready var round_image = $GameOverOverlay/TextureRect
-@onready var game_over_overlay = $GameOverOverlay
-@onready var final_score_label = $GameOverOverlay/TextureRect
+@onready var round_image = $RoundStatusOverlay/RoundStatusTexture
+@onready var game_over_overlay = $RoundStatusOverlay
 @onready var greg := $HUD/Greg
 
 func update_balls(count):
