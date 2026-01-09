@@ -108,6 +108,9 @@ func can_shoot() -> bool:
 func open_pause_menu():
 	if active_puase_menu:
 		return
+	if not can_pause():
+		return
+	
 	get_tree().paused = true
 	active_puase_menu = PAUSE_MENU.instantiate()
 	get_tree().current_scene.add_child(active_puase_menu)
@@ -119,12 +122,9 @@ func resume_game():
 	
 	get_tree().paused = false
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
-		if get_tree().paused:
-			resume_game()
-		else:
-			open_pause_menu()
+func can_pause() -> bool:
+	return state != GameState.SHOP and state != GameState.GAME_OVER
+
 # Break for scoring stuff
 func add_score(points: int, hole_id: String, is_top_row: bool):
 	var final_points = points
