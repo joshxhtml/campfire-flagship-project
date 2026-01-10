@@ -1,0 +1,32 @@
+[gd_resource type="SpriteFrames" load_steps=5 format=3 uid="uid://dtcdf5s8diy6l"]
+
+[ext_resource type="Texture2D" uid="uid://ce2v8uldhkvma" path="res://tv-gifs/normal_5.png" id="1_oi4gx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a12ud"]
+atlas = ExtResource("1_oi4gx")
+region = Rect2(0, 0, 500, 375)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oasw4"]
+atlas = ExtResource("1_oi4gx")
+region = Rect2(500, 0, 500, 375)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u8jo0"]
+atlas = ExtResource("1_oi4gx")
+region = Rect2(1000, 0, 500, 375)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a12ud")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oasw4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u8jo0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]

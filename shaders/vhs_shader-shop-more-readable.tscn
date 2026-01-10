@@ -10,7 +10,7 @@ shader_parameter/smear = 1.0
 shader_parameter/intensity = 0.065
 shader_parameter/blur_samples = 15
 
-[node name="VHS_Shader" type="Control"]
+[node name="VHS_Shader_Shop_Ver" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

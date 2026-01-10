@@ -117,6 +117,7 @@ grow_vertical = 2
 flat = true
 
 [node name="VHS_Shader" parent="." instance=ExtResource("3_0b5ob")]
+visible = false
 
 [connection signal="pressed" from="Control/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Control/Save Run" to="." method="_on_save_run_pressed"]

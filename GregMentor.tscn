@@ -12,7 +12,6 @@ grow_vertical = 2
 script = ExtResource("1_a868i")
 
 [node name="GregSprite" type="TextureRect" parent="."]
-visible = false
 layout_mode = 0
 offset_left = -48.0
 offset_top = 368.0
