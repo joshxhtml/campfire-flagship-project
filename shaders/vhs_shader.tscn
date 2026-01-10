@@ -7,6 +7,7 @@ shader = ExtResource("1_mvnwi")
 shader_parameter/wiggle = 0.03
 shader_parameter/wiggle_speed = 25.0
 shader_parameter/smear = 1.0
+shader_parameter/intensity = 0.065
 shader_parameter/blur_samples = 15
 
 [node name="VHS_Shader" type="Control"]

@@ -32,7 +32,7 @@ var extra_balls_per_round := 0
 var extra_balls_remaining := 0
 var balls_left := 0
 #shop varibles
-var shop_interval := 5
+var shop_interval := 1
 var score_multiplier := 1.0
 var owned_powerups:= {}
 var shop_rerolled := false

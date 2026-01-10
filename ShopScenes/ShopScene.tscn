@@ -14,7 +14,7 @@
 [ext_resource type="Resource" uid="uid://dpnap85wypcw5" path="res://PowerUps/perfect_aim.tres" id="9_e5in7"]
 [ext_resource type="Resource" uid="uid://dap6bplvlwmmg" path="res://PowerUps/score_surge.tres" id="10_72vh6"]
 [ext_resource type="Texture2D" uid="uid://ffmk1crbm3lm" path="res://images/shopBG.png" id="12_564sm"]
-[ext_resource type="PackedScene" uid="uid://dy3iuogudygra" path="res://shaders/vhs_shader.tscn" id="15_564sm"]
+[ext_resource type="PackedScene" uid="uid://dwfocgmq5htfx" path="res://shaders/vhs_shader-shop-more-readable.tscn" id="15_564sm"]
 
 [node name="ShopScene" type="CanvasLayer"]
 layer = 10

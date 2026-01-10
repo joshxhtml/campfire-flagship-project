@@ -1,0 +1,27 @@
+[gd_scene load_steps=3 format=3 uid="uid://dwfocgmq5htfx"]
+
+[ext_resource type="Shader" uid="uid://ds0ir274425n5" path="res://shaders/vhs-effect-shop-more-readable.gdshader" id="1_33qtk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nurrk"]
+shader = ExtResource("1_33qtk")
+shader_parameter/wiggle = 0.03
+shader_parameter/wiggle_speed = 25.0
+shader_parameter/smear = 1.0
+shader_parameter/intensity = 0.065
+shader_parameter/blur_samples = 15
+
+[node name="VHS_Shader" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VHS" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_nurrk")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+mouse_filter = 2

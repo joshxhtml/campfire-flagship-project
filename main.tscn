@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://petr62ss25eu"]
+[gd_scene load_steps=29 format=3 uid="uid://petr62ss25eu"]
 
 [ext_resource type="PackedScene" uid="uid://corb1adxuf5fs" path="res://Machine/machine.tscn" id="1_vivmo"]
 [ext_resource type="Script" uid="uid://bcrkd0cm5nyxy" path="res://Scripts/main.gd" id="1_ycdy4"]
@@ -11,8 +11,16 @@
 [ext_resource type="PackedScene" uid="uid://buy4jrshrgg66" path="res://UI/ui.tscn" id="10_4c57u"]
 [ext_resource type="Texture2D" uid="uid://bk0aukvageigw" path="res://textures/floor_tiles_06_rough_4k.png" id="10_w48qg"]
 [ext_resource type="Material" uid="uid://qxhnkrqdookj" path="res://textures/brickwall.tres" id="11_vivmo"]
+[ext_resource type="PackedScene" uid="uid://btn14m2fpnnw5" path="res://ArcadeMachineDecor/GameMachine.fbx" id="11_w48qg"]
+[ext_resource type="PackedScene" uid="uid://ed6juqy858u8" path="res://ArcadeMachineDecor/GameMachineBlack.fbx" id="12_2cqfq"]
 [ext_resource type="Script" uid="uid://pbloiejk2kbl" path="res://Scripts/hole_camera.gd" id="12_w48qg"]
+[ext_resource type="PackedScene" uid="uid://bpchv66pt5udm" path="res://ArcadeMachineDecor/GameMachineGreen.fbx" id="13_yaehf"]
 [ext_resource type="Texture2D" uid="uid://bdw24vii2ctii" path="res://images/corner-nobg.png" id="14_w48qg"]
+[ext_resource type="PackedScene" uid="uid://ck20xwpwrles" path="res://BarDecor/BarCounter.fbx" id="16_82xsv"]
+[ext_resource type="PackedScene" uid="uid://nlrnk3ug1yo3" path="res://SignDecor/game_room_neon_sign.glb" id="17_074og"]
+[ext_resource type="PackedScene" uid="uid://dgo22rek7s2t5" path="res://BarDecor/BarStool.fbx" id="17_getpj"]
+[ext_resource type="PackedScene" uid="uid://cbct5pkehl0q5" path="res://SignDecor/BarSign.fbx" id="18_cegan"]
+[ext_resource type="PackedScene" uid="uid://bql7y2rmljb13" path="res://BarDecor/psx_low_poly_beer.glb" id="18_getpj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -135,6 +143,56 @@ omni_range = 9.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.592478, 3.7578697, -3.4181075)
 layers = 2
 omni_range = 9.0
+
+[node name="Decor" type="Node3D" parent="."]
+
+[node name="ArcadeMachines" type="Node3D" parent="Decor"]
+
+[node name="GreenWhiteMachine" parent="Decor/ArcadeMachines" instance=ExtResource("13_yaehf")]
+transform = Transform3D(16, 0, 0, 0, -6.993822e-07, 16, 0, -16, -6.993822e-07, -6.570086, 0, 0.2494297)
+
+[node name="RedBlueMachineOtherWall" parent="Decor/ArcadeMachines" instance=ExtResource("11_w48qg")]
+transform = Transform3D(-6.993822e-07, 16, 6.993822e-07, 0, -6.993822e-07, 16, 16, 6.993822e-07, 3.0570967e-14, -3.8977218, 0, -3.809698)
+
+[node name="YellowWhiteMachine" parent="Decor/ArcadeMachines" instance=ExtResource("12_2cqfq")]
+transform = Transform3D(11.313708, 11.313708, 4.945379e-07, 0, -6.993822e-07, 16, 11.313708, -11.313708, -4.945379e-07, -5.7216687, 0, -3.0143163)
+
+[node name="RedBlueMachine" parent="Decor/ArcadeMachines" instance=ExtResource("11_w48qg")]
+transform = Transform3D(16, 0, 0, 0, -6.993822e-07, 16, 0, -16, -6.993822e-07, -6.613, 0, -1.182487)
+
+[node name="Signs" type="Node3D" parent="Decor"]
+
+[node name="BarSign" parent="Decor/Signs" instance=ExtResource("18_cegan")]
+transform = Transform3D(0.8, 0, 0, 0, -3.4969112e-08, -0.8, 0, 0.8, -3.4969112e-08, 4.4821124, 3.7725534, -3.8700595)
+
+[node name="GameSign" parent="Decor/Signs" instance=ExtResource("17_074og")]
+transform = Transform3D(0.002, 0, 0, 0, 0.002, 0, 0, 0, 0.002, -5.055404, 2.456508, -3.9136195)
+
+[node name="BarDecor" type="Node3D" parent="Decor"]
+
+[node name="BarCounter" parent="Decor/BarDecor" instance=ExtResource("16_82xsv")]
+transform = Transform3D(-2.4041265e-06, -55, -2.4041265e-06, 0, -2.4041265e-06, 55, -55, 2.4041265e-06, 1.050877e-13, 7.071459, -0.028319463, 0.38296652)
+
+[node name="BarStool" parent="Decor/BarDecor" instance=ExtResource("17_getpj")]
+transform = Transform3D(14.047748, 11.254368, 4.9194404e-07, 0, -7.86805e-07, 18, 11.254368, -14.047748, -6.1404654e-07, 3.0987186, -0.023054004, -2.1415586)
+
+[node name="BarStool2" parent="Decor/BarDecor" instance=ExtResource("17_getpj")]
+transform = Transform3D(14.047748, -11.254368, -4.9194404e-07, 0, -7.86805e-07, 18, -11.254368, -14.047748, -6.1404654e-07, 3.137024, -0.023054004, -0.7079508)
+
+[node name="BarStool3" parent="Decor/BarDecor" instance=ExtResource("17_getpj")]
+transform = Transform3D(8.478212, 15.8782835, 6.9406184e-07, 0, -7.86805e-07, 18, 15.8782835, -8.478212, -3.7059442e-07, 3.1677158, -0.023054004, 0.6476271)
+
+[node name="Beer" parent="Decor/BarDecor" instance=ExtResource("18_getpj")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 4.187747, 1.3658161, -2.6416025)
+
+[node name="Beer2" parent="Decor/BarDecor" instance=ExtResource("18_getpj")]
+transform = Transform3D(-0.3997801, 0, -0.013262095, 0, 0.4, 0, 0.013262095, 0, -0.3997801, 4.3056064, 1.3658161, -2.1859188)
+
+[node name="Beer3" parent="Decor/BarDecor" instance=ExtResource("18_getpj")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 4.070835, 1.3658161, -0.5600921)
+
+[node name="Beer4" parent="Decor/BarDecor" instance=ExtResource("18_getpj")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 4.187747, 1.3658161, 1.1442028)
 
 [node name="UI" parent="." instance=ExtResource("10_4c57u")]
 layer = 0
