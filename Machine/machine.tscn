@@ -112,37 +112,30 @@ transform = Transform3D(0.9945219, 0.104528464, 0, -0.104528464, 0.9945219, 0, 0
 
 [node name="10Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 1.9449357, 1.2517887, 8.501584e-08)
-visible = false
 points = 10
 
 [node name="20Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.045878, 1.4118162, 8.942816e-08)
-visible = false
 points = 20
 
 [node name="30Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.1334436, 1.576302, -0.011043426)
-visible = false
 points = 30
 
 [node name="40Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.2365735, 1.7966136, -0.011043421)
-visible = false
 points = 40
 
 [node name="50Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.3562386, 2.014559, -0.011043415)
-visible = false
 
 [node name="100Points-Right" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.4393954, 2.1272626, 0.34885955)
-visible = false
 points = 100
 is_top_row = true
 
 [node name="100Points-Left" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
 transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.4393954, 2.1272626, -0.38655347)
-visible = false
 points = 100
 is_top_row = true
 

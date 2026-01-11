@@ -53,6 +53,13 @@ var active_puase_menu: Node = null
 @onready var PAUSE_MENU := preload("res://UI/pause_menu.tscn")
 
 var total_balls_shot:= 0
+
+# hole locking
+@export var hole_lock_start_round := 2
+@export var hole_lock_interval := 1 #maybe 10
+@export var total_holes := 7
+
+var locked_holes: Array[String] = []
 # Break to how the rounds flow
 
 func _ready() -> void:
@@ -70,6 +77,9 @@ func start_round():
 		game_started = true
 	
 	roundnum += 1
+	
+	update_locked_holes()
+	
 	active_balls = 0
 	balls_left = base_balls 
 	extra_balls_remaining = extra_balls_per_round
@@ -339,3 +349,42 @@ func restart_run():
 	
 	get_tree().paused = false
 	
+func update_locked_holes():
+	locked_holes.clear()
+	
+	if roundnum < hole_lock_start_round:
+		return
+	
+	var locks_should_have := 1 + int((roundnum - hole_lock_start_round) / hole_lock_interval)
+	var scoring_holes := get_tree().get_nodes_in_group("scoring_hole")
+	var all_ids := []
+	
+	for hole in scoring_holes:
+		all_ids.append(hole.hole_id)
+	
+	var max_locks := all_ids.size() - 1
+	locks_should_have = min(locks_should_have, max_locks)
+	
+	while locked_holes.size() < locks_should_have:
+		var available := []
+		for id in all_ids:
+			if not locked_holes.has(id):
+				available.append(id)
+		if available.is_empty():
+			break
+		
+		locked_holes.append(available.pick_random())
+	
+	print(
+	"[HOLES DEBUG]",
+	"Round:", roundnum,
+	"Locks:", locked_holes.size(),
+	"Total holes:", all_ids.size()
+	)
+	
+	
+	for hole in get_tree().get_nodes_in_group("scoring_hole"):
+		hole.update_visuals()
+	
+func is_hole_locked(hole_id: String) -> bool:
+	return locked_holes.has(hole_id)
