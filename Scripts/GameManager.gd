@@ -56,7 +56,7 @@ var total_balls_shot:= 0
 
 # hole locking
 @export var hole_lock_start_round := 2
-@export var hole_lock_interval := 1 #maybe 10
+@export var hole_lock_interval := 2 #maybe 10
 @export var total_holes := 7
 
 var locked_holes: Array[String] = []
@@ -350,31 +350,47 @@ func restart_run():
 	get_tree().paused = false
 	
 func update_locked_holes():
-	locked_holes.clear()
-	
-	if roundnum < hole_lock_start_round:
-		return
-	
-	var locks_should_have := 1 + int((roundnum - hole_lock_start_round) / hole_lock_interval)
+	#locked_holes.clear()
+	#for hole in get_tree().get_nodes_in_group("scoring_hole"):
+	#	hole.set_locked(false)
 	var scoring_holes := get_tree().get_nodes_in_group("scoring_hole")
-	var all_ids := []
+	var all_ids: Array[String] = []
 	
 	for hole in scoring_holes:
 		all_ids.append(hole.hole_id)
 	
+	if roundnum < hole_lock_start_round:
+		locked_holes.clear()
+		for hole in scoring_holes:
+			hole.set_locked(false)
+		update_map()
+		return
+	
 	var max_locks := all_ids.size() - 1
+	#if locked_holes.size() >= max_locks:
+	#	return
+	
+	var locks_should_have := int(floor((roundnum - hole_lock_start_round) / hole_lock_interval) + 1)
 	locks_should_have = min(locks_should_have, max_locks)
 	
-	while locked_holes.size() < locks_should_have:
-		var available := []
-		for id in all_ids:
-			if not locked_holes.has(id):
-				available.append(id)
-		if available.is_empty():
-			break
-		
-		locked_holes.append(available.pick_random())
+	locked_holes.clear()
+	var shuffle_ids := all_ids.duplicate()
+	shuffle_ids.shuffle()
 	
+	for i in range(locks_should_have):
+		locked_holes.append(shuffle_ids[i])
+	
+	#while locked_holes.size() < locks_should_have:
+	#	var available := []
+	#	for id in all_ids:
+	#		if not locked_holes.has(id):
+	#			available.append(id)
+	#	
+	#	if available.is_empty():
+	#		break
+	#		
+	#	locked_holes.append(available.pick_random())
+		
 	print(
 	"[HOLES DEBUG]",
 	"Round:", roundnum,
@@ -382,9 +398,16 @@ func update_locked_holes():
 	"Total holes:", all_ids.size()
 	)
 	
-	
 	for hole in get_tree().get_nodes_in_group("scoring_hole"):
-		hole.update_visuals()
+		hole.set_locked(locked_holes.has(hole.hole_id))
+	
+	update_map()
 	
 func is_hole_locked(hole_id: String) -> bool:
 	return locked_holes.has(hole_id)
+
+func update_map():
+	var indicators := get_tree().get_nodes_in_group("map")
+	
+	for indicator in indicators:
+		indicator.visible = locked_holes.has(indicator.hole_id)

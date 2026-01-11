@@ -1,36 +1,35 @@
-[gd_scene load_steps=23 format=3 uid="uid://corb1adxuf5fs"]
+[gd_scene load_steps=22 format=3 uid="uid://b36u0e752dlnc"]
 
-[ext_resource type="Texture2D" uid="uid://bu31k310ch42x" path="res://images/placeholder-wood.jpg" id="1_llj37"]
-[ext_resource type="Texture2D" uid="uid://dbf3lh0tn0p06" path="res://images/orange.png" id="2_6qesk"]
-[ext_resource type="Texture2D" uid="uid://bq373q2tqe0xm" path="res://images/machine-color.png" id="2_ioi8x"]
-[ext_resource type="PackedScene" uid="uid://d1yj6t7bmkf36" path="res://Target/score_hole.tscn" id="3_yuuq8"]
-[ext_resource type="PackedScene" uid="uid://surya05s0tah" path="res://Target/Target.gltf" id="4_1hddr"]
-[ext_resource type="Texture2D" uid="uid://ivmb5atkgvp0" path="res://images/sticker-front.jpg" id="6_jx63e"]
+[ext_resource type="Texture2D" uid="uid://dbf3lh0tn0p06" path="res://images/orange.png" id="1_2ob03"]
+[ext_resource type="Texture2D" uid="uid://bq373q2tqe0xm" path="res://images/machine-color.png" id="2_650ui"]
+[ext_resource type="PackedScene" uid="uid://surya05s0tah" path="res://Target/Target.gltf" id="3_mgl4q"]
+[ext_resource type="Texture2D" uid="uid://bu31k310ch42x" path="res://images/placeholder-wood.jpg" id="4_x80gx"]
+[ext_resource type="Texture2D" uid="uid://ivmb5atkgvp0" path="res://images/sticker-front.jpg" id="5_b2r3q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8sjwk"]
 size = Vector3(1.3684082, 1, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_218et"]
-albedo_texture = ExtResource("2_6qesk")
+albedo_texture = ExtResource("1_2ob03")
 
 [sub_resource type="BoxMesh" id="BoxMesh_jqdip"]
 size = Vector3(5, 1, 0.2)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_llj37"]
-albedo_texture = ExtResource("2_ioi8x")
+albedo_texture = ExtResource("2_650ui")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ajbd"]
-albedo_texture = ExtResource("2_6qesk")
+albedo_texture = ExtResource("1_2ob03")
 
 [sub_resource type="BoxMesh" id="BoxMesh_0420x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jx63e"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yuuq8"]
-albedo_texture = ExtResource("1_llj37")
+albedo_texture = ExtResource("4_x80gx")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1hddr"]
-albedo_texture = ExtResource("2_ioi8x")
+albedo_texture = ExtResource("2_650ui")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_0d1aa"]
 
@@ -38,19 +37,19 @@ albedo_texture = ExtResource("2_ioi8x")
 size = Vector3(0.001, 0.4293213, 1.4017334)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_42f15"]
-albedo_texture = ExtResource("2_6qesk")
+albedo_texture = ExtResource("1_2ob03")
 
 [sub_resource type="BoxMesh" id="BoxMesh_u17ae"]
 size = Vector3(0.1, 2.7, 1.4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0420x"]
-albedo_texture = ExtResource("2_ioi8x")
+albedo_texture = ExtResource("2_650ui")
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_jx63e"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_c47t0"]
 
-[node name="Machine" type="Node3D"]
+[node name="NonFunctionalMachine" type="Node3D"]
 transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
 
 [node name="Right Wall" type="StaticBody3D" parent="."]
@@ -107,52 +106,8 @@ depth = 0.1
 depth = 0.1
 polygon = PackedVector2Array(-0.4001404, 0.67110014, 0.74438465, 0.76428485, 0.19643366, -0.19713497, -3.9615145, -0.3002175, -4.049818, -0.45495486, 0.9845134, -0.4747231, 0.94293725, 1.2422864, -0.38109505, 1.3073139)
 
-[node name="ScoringHoles" type="Node3D" parent="."]
-transform = Transform3D(0.9945219, 0.104528464, 0, -0.104528464, 0.9945219, 0, 0, 0, 1, 0, 0, 0)
-
-[node name="10Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
-transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 1.9449357, 1.2517887, 8.501584e-08)
-points = 10
-hole_id = "hole_1"
-
-[node name="20Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
-transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.045878, 1.4118162, 8.942816e-08)
-points = 20
-hole_id = "hole_2"
-
-[node name="30Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
-transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.1334436, 1.576302, -0.011043426)
-points = 30
-hole_id = "hole_3"
-
-[node name="40Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
-transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.2365735, 1.7966136, -0.011043421)
-points = 40
-hole_id = "hole_4"
-
-[node name="50Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
-transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.3562386, 2.014559, -0.011043415)
-hole_id = "hole_5"
-
-[node name="100Points-Right" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
-transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.4393954, 2.1272626, 0.34885955)
-points = 100
-hole_id = "hole_6"
-is_top_row = true
-
-[node name="100Points-Left" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
-transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.4393954, 2.1272626, -0.38655347)
-points = 100
-hole_id = "hole_7"
-is_top_row = true
-
-[node name="Target" parent="ScoringHoles" instance=ExtResource("4_1hddr")]
-transform = Transform3D(-3.9340245e-10, -0.0024822466, -0.008650921, -1.9081958e-17, 0.008650921, -0.0024822466, 0.008999999, -1.0850244e-10, -3.7814385e-10, -1.2892113, -0.618189, -0.5500001)
-
-[node name="0Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
-transform = Transform3D(9.000001, -1.4210855e-13, -5.9604645e-08, -5.9604645e-08, -3.934025e-07, -9.000001, 1.1368684e-13, 9, -3.934025e-07, 1.864524, -2.5317376, 6.8361004e-08)
-visible = false
-points = 0
+[node name="Target" parent="." instance=ExtResource("3_mgl4q")]
+transform = Transform3D(-3.912474e-10, -0.0015643811, -0.0088629965, 4.112174e-11, 0.0088629965, -0.0015643811, 0.008999999, -1.08502436e-10, -3.7814388e-10, -1.3467672, -0.4800432, -0.5500001)
 
 [node name="TheActualBoringRamp" type="StaticBody3D" parent="."]
 collision_layer = 3
@@ -201,7 +156,7 @@ modulate = Color(0.51718444, 0.5171845, 0.51718444, 1)
 pixel_size = 0.012
 transparent = false
 double_sided = false
-texture = ExtResource("6_jx63e")
+texture = ExtResource("5_b2r3q")
 
 [node name="Back" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7791758, 1.35, 1.0323575e-08)

@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cdjfjync3bh53" path="res://textures/floor_tiles_06_nor_gl_4k.png" id="2_fy7qq"]
 [ext_resource type="Texture2D" uid="uid://bk0aukvageigw" path="res://textures/floor_tiles_06_rough_4k.png" id="3_0m8h5"]
 [ext_resource type="Material" uid="uid://qxhnkrqdookj" path="res://textures/brickwall.tres" id="4_cp6d1"]
-[ext_resource type="PackedScene" uid="uid://corb1adxuf5fs" path="res://Machine/machine.tscn" id="6_5wsev"]
+[ext_resource type="PackedScene" uid="uid://b36u0e752dlnc" path="res://Machine/non_functional_machine.tscn" id="5_bpgl0"]
 [ext_resource type="Script" uid="uid://b0i1tvf5jwao7" path="res://Scripts/spin.gd" id="7_ghlx5"]
 [ext_resource type="PackedScene" uid="uid://dy3iuogudygra" path="res://shaders/vhs_shader.tscn" id="8_534q3"]
 [ext_resource type="PackedScene" uid="uid://bwlxmb7rbaott" path="res://UI/game_over_ui.tscn" id="8_fy7qq"]
@@ -97,12 +97,12 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.592478, 3.7578697, -3.4181
 layers = 2
 omni_range = 9.0
 
+[node name="NonFunctionalMachine" parent="." instance=ExtResource("5_bpgl0")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.82, 0)
+script = ExtResource("7_ghlx5")
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.7071068, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071068, -4.2793007, 2.6017666, 2.8050675)
-
-[node name="TheSkeeBallMachine" parent="." instance=ExtResource("6_5wsev")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.82722545, 0)
-script = ExtResource("7_ghlx5")
 
 [node name="GameOverUI" parent="." instance=ExtResource("8_fy7qq")]
 

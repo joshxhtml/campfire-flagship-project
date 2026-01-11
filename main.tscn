@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://petr62ss25eu"]
+[gd_scene load_steps=32 format=3 uid="uid://petr62ss25eu"]
 
 [ext_resource type="PackedScene" uid="uid://corb1adxuf5fs" path="res://Machine/machine.tscn" id="1_vivmo"]
 [ext_resource type="Script" uid="uid://bcrkd0cm5nyxy" path="res://Scripts/main.gd" id="1_ycdy4"]
@@ -21,7 +21,9 @@
 [ext_resource type="PackedScene" uid="uid://dgo22rek7s2t5" path="res://BarDecor/BarStool.fbx" id="17_getpj"]
 [ext_resource type="PackedScene" uid="uid://cbct5pkehl0q5" path="res://SignDecor/BarSign.fbx" id="18_cegan"]
 [ext_resource type="PackedScene" uid="uid://bql7y2rmljb13" path="res://BarDecor/psx_low_poly_beer.glb" id="18_getpj"]
+[ext_resource type="Texture2D" uid="uid://cujmlxs15or3v" path="res://images/x.png" id="22_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://b4aey3hhgnqvj" path="res://GregMentor.tscn" id="22_ryguw"]
+[ext_resource type="Script" uid="uid://ddk8kq4vi4trb" path="res://Scripts/holemap.gd" id="23_0odxb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -220,5 +222,60 @@ offset_right = 1152.0
 offset_bottom = 648.0
 texture = ExtResource("14_w48qg")
 expand_mode = 1
+
+[node name="lockedholemarker" type="Control" parent="UI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 209.0
+offset_bottom = 206.0
+
+[node name="100points-left" type="Sprite2D" parent="UI/lockedholemarker"]
+position = Vector2(56.999996, 41.999996)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("22_1u8w0")
+script = ExtResource("23_0odxb")
+hole_id = "hole_7"
+
+[node name="100points-right" type="Sprite2D" parent="UI/lockedholemarker"]
+position = Vector2(146.99998, 43.000004)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("22_1u8w0")
+script = ExtResource("23_0odxb")
+hole_id = "hole_6"
+
+[node name="50points" type="Sprite2D" parent="UI/lockedholemarker"]
+position = Vector2(104.000015, 60)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("22_1u8w0")
+script = ExtResource("23_0odxb")
+hole_id = "hole_5"
+
+[node name="40points" type="Sprite2D" parent="UI/lockedholemarker"]
+position = Vector2(103, 89)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("22_1u8w0")
+script = ExtResource("23_0odxb")
+hole_id = "hole_4"
+
+[node name="30points" type="Sprite2D" parent="UI/lockedholemarker"]
+position = Vector2(103, 115)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("22_1u8w0")
+script = ExtResource("23_0odxb")
+hole_id = "hole_3"
+
+[node name="20points" type="Sprite2D" parent="UI/lockedholemarker"]
+position = Vector2(104, 134)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("22_1u8w0")
+script = ExtResource("23_0odxb")
+hole_id = "hole_2"
+
+[node name="10points" type="Sprite2D" parent="UI/lockedholemarker"]
+position = Vector2(103, 156)
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("22_1u8w0")
+script = ExtResource("23_0odxb")
+hole_id = "hole_1"
 
 [node name="Greg" parent="." instance=ExtResource("22_ryguw")]

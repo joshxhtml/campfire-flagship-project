@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dkk7cv4o8umue" path="res://Scripts/light_manager.gd" id="5_dy7ct"]
 [ext_resource type="PackedScene" uid="uid://d05uw4a3kum4d" path="res://UI/main_menu_ui.tscn" id="6_nlkkf"]
 [ext_resource type="PackedScene" uid="uid://dy3iuogudygra" path="res://shaders/vhs_shader.tscn" id="7_qe12f"]
-[ext_resource type="PackedScene" uid="uid://corb1adxuf5fs" path="res://Machine/machine.tscn" id="8_dy7ct"]
+[ext_resource type="PackedScene" uid="uid://b36u0e752dlnc" path="res://Machine/non_functional_machine.tscn" id="8_dy7ct"]
 [ext_resource type="Script" uid="uid://b0i1tvf5jwao7" path="res://Scripts/spin.gd" id="9_0o4t1"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yaehf"]
@@ -104,8 +104,8 @@ transform = Transform3D(0.7071068, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.70710
 
 [node name="MainMenuUI" parent="." instance=ExtResource("6_nlkkf")]
 
-[node name="TheSkeeBallMachine" parent="." instance=ExtResource("8_dy7ct")]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.82722545, 0)
-script = ExtResource("9_0o4t1")
-
 [node name="VHS_Shader" parent="." instance=ExtResource("7_qe12f")]
+
+[node name="NonFunctionalMachine" parent="." instance=ExtResource("8_dy7ct")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.82, 0)
+script = ExtResource("9_0o4t1")

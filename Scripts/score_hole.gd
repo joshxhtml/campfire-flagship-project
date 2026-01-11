@@ -10,22 +10,24 @@ var locked := false
 
 func _ready() -> void:
 	add_to_group("scoring_hole")
-	if mesh == null:
-		push_error("Hole %s id missing its meshInstance 3d" % hole_id)
-		return 
-	mesh.visible = false
+	
+	print("[HOLE READY]", hole_id, "instance:", get_instance_id())
 	update_visuals()
-	
-func update_visuals():
-	locked = GameManager.is_hole_locked(hole_id)
+
+func set_locked(value: bool):
+	locked = value
+	print("[HOLE SET] ", hole_id, ", locked =", value)
+	update_visuals()
+
+func update_visuals() -> void:
 	mesh.visible = locked
-	
-		
+
+
 func _on_body_entered(body: Node3D) -> void:
 	if not body.is_in_group("ball"):
 		return
 	
-	if GameManager.is_hole_locked(hole_id):
+	if locked:
 		print("[HOLE] Locked hole hit:", hole_id)
 		body.resolve()
 		return
