@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const GAMEOVERSCENE := preload("res://UI/game_over.tscn")
+
 @onready var balls_countainer = $HUD/BallsCountainer
 @onready var extra_balls_label := $HUD/ExtraBallsLabel
 
@@ -83,7 +85,14 @@ func on_round_completed(_roundnum):
 func on_round_failed(_roundnum):
 	greg.set_emotion(greg.Emotion.DISAPPOINTED)
 	hud.visible = false
+	
 	round_image.visible = true
 	round_image.texture = preload("res://images/roundfail.png")
 	
 	GameManager.state = GameManager.GameState.GAME_OVER
+	
+	await get_tree().create_timer(2.5).timeout
+	
+	round_image.visible = false
+	
+	get_tree().change_scene_to_file("res://UI/game_over.tscn")

@@ -1,0 +1,136 @@
+[gd_scene load_steps=5 format=3 uid="uid://bwlxmb7rbaott"]
+
+[ext_resource type="Script" uid="uid://c0lk1et146esu" path="res://Scripts/game_over_ui.gd" id="1_6kyr2"]
+[ext_resource type="Texture2D" uid="uid://ctk7efkilv7m4" path="res://images/gameover-UI.png" id="1_44ht4"]
+[ext_resource type="PackedScene" uid="uid://dy3iuogudygra" path="res://shaders/vhs_shader.tscn" id="2_6kyr2"]
+[ext_resource type="FontFile" uid="uid://bf0d7rt3in5bc" path="res://fonts/CANDY.TTF" id="3_1vycr"]
+
+[node name="GameOverUI" type="CanvasLayer"]
+script = ExtResource("1_6kyr2")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="FixingMyMistakes" type="Control" parent="Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" type="ColorRect" parent="Panel/FixingMyMistakes"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 61.0
+offset_bottom = 635.0
+
+[node name="Right" type="ColorRect" parent="Panel/FixingMyMistakes"]
+layout_mode = 0
+offset_left = 1095.0
+offset_top = 2.0
+offset_right = 1153.0
+offset_bottom = 635.0
+
+[node name="Bottom" type="ColorRect" parent="Panel/FixingMyMistakes"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 581.0
+offset_right = 1153.0
+offset_bottom = 640.0
+
+[node name="Top" type="ColorRect" parent="Panel/FixingMyMistakes"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 1153.0
+offset_bottom = 57.0
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(1, 1, 1, 0.039215688)
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_44ht4")
+
+[node name="Quit" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 892.0
+offset_top = 434.0
+offset_right = 1047.0
+offset_bottom = 539.0
+flat = true
+
+[node name="PlayAgain" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 655.0
+offset_top = 458.0
+offset_right = 845.0
+offset_bottom = 554.0
+flat = true
+
+[node name="Control" type="Control" parent="Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RoundReached" type="Label" parent="Panel/Control"]
+layout_mode = 0
+offset_left = 218.0
+offset_top = 219.0
+offset_right = 501.0
+offset_bottom = 261.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("3_1vycr")
+theme_override_font_sizes/font_size = 32
+text = "RoundReached"
+
+[node name="TotalScore" type="Label" parent="Panel/Control"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 271.0
+offset_right = 502.0
+offset_bottom = 320.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("3_1vycr")
+theme_override_font_sizes/font_size = 32
+text = "TotalScore"
+
+[node name="BallsShot" type="Label" parent="Panel/Control"]
+layout_mode = 0
+offset_left = 221.0
+offset_top = 385.0
+offset_right = 498.0
+offset_bottom = 424.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("3_1vycr")
+theme_override_font_sizes/font_size = 32
+text = "BallsShot"
+
+[node name="PowerupsBought" type="Label" parent="Panel/Control"]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 323.0
+offset_right = 499.0
+offset_bottom = 365.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("3_1vycr")
+theme_override_font_sizes/font_size = 32
+text = "PowerupsBought"
+
+[node name="VHS_Shader" parent="." instance=ExtResource("2_6kyr2")]
+
+[connection signal="pressed" from="Panel/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="Panel/PlayAgain" to="." method="_on_play_again_pressed"]

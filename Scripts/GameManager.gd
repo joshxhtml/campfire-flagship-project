@@ -32,7 +32,7 @@ var extra_balls_per_round := 0
 var extra_balls_remaining := 0
 var balls_left := 0
 #shop varibles
-var shop_interval := 1
+var shop_interval := 5
 var score_multiplier := 1.0
 var owned_powerups:= {}
 var shop_rerolled := false
@@ -51,6 +51,7 @@ var active_shop: CanvasLayer = null
 var active_puase_menu: Node = null
 @onready var PAUSE_MENU := preload("res://UI/pause_menu.tscn")
 
+var total_balls_shot:= 0
 # Break to how the rounds flow
 
 func _ready() -> void:
@@ -176,7 +177,7 @@ func register_miss():
 func use_ball():
 	if state != GameState.PLAYING:
 		return
-		
+	total_balls_shot += 1
 	if extra_balls_remaining > 0:
 		extra_balls_remaining -= 1
 		print("[BALL] Used EXTRA ball. Remaining extra:", extra_balls_remaining)
@@ -291,3 +292,50 @@ func get_run_data() -> Dictionary:
 func save_run():
 	var data = get_run_data()
 	print("[SAVE] Run data:", data)
+
+func get_total_powerups_owned():
+	var count:= 0
+	for k in owned_powerups.keys():
+		count += owned_powerups[k]
+	return count
+	
+func restart_run():
+	print("[RUN] Reseting Everything")
+	
+	# game states
+	state = GameState.PLAYING
+	game_started = false
+	
+	#progression
+	roundnum = 0
+	round_score = 0
+	total_score = 0
+	round_score_goal = 0
+	
+	# balls
+	active_balls = 0
+	balls_left = 0
+	extra_balls_per_round = 0
+	extra_balls_remaining = 0
+	base_balls = 3
+	total_balls_shot = 0
+	
+	# powerups
+	owned_powerups.clear()
+	score_multiplier = 1.0
+	shop_interval = 5
+	shop_rerolled = false
+	
+	# combo
+	first_score_this_round = true
+	last_hole_id = ""
+	combo_count = 0
+	
+	# just in case stuff, idk how this would work but you enver knwo
+	if active_shop:
+		active_shop.queue_free()
+		active_shop = null
+	
+	get_tree().paused = false
+	
+	start_game()
