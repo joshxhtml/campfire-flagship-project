@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtgu3jaxud8b6"]
+[gd_scene load_steps=5 format=3 uid="uid://dtgu3jaxud8b6"]
 
 [ext_resource type="Script" uid="uid://mrsqn05cyfdy" path="res://Scripts/pause_menu.gd" id="1_ltd3m"]
 [ext_resource type="Texture2D" uid="uid://do8s6e2wagw66" path="res://images/pause_menu_bg.png" id="2_03fe5"]
 [ext_resource type="PackedScene" uid="uid://dy3iuogudygra" path="res://shaders/vhs_shader.tscn" id="3_0b5ob"]
+[ext_resource type="FontFile" uid="uid://bf0d7rt3in5bc" path="res://fonts/CANDY.TTF" id="3_pqlge"]
 
 [node name="PauseMenu" type="CanvasLayer"]
 process_mode = 3
@@ -65,6 +66,63 @@ offset_right = 1152.0
 offset_bottom = 648.0
 texture = ExtResource("2_03fe5")
 
+[node name="Control" type="Control" parent="Control/Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="RoundReached" type="Label" parent="Control/Panel/Control"]
+layout_mode = 0
+offset_left = 218.0
+offset_top = 219.0
+offset_right = 501.0
+offset_bottom = 261.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("3_pqlge")
+theme_override_font_sizes/font_size = 32
+text = "RoundReached"
+
+[node name="TotalScore" type="Label" parent="Control/Panel/Control"]
+layout_mode = 0
+offset_left = 219.0
+offset_top = 271.0
+offset_right = 502.0
+offset_bottom = 320.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("3_pqlge")
+theme_override_font_sizes/font_size = 32
+text = "TotalScore"
+
+[node name="BallsShot" type="Label" parent="Control/Panel/Control"]
+layout_mode = 0
+offset_left = 221.0
+offset_top = 385.0
+offset_right = 498.0
+offset_bottom = 424.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("3_pqlge")
+theme_override_font_sizes/font_size = 32
+text = "BallsShot"
+
+[node name="PowerupsBought" type="Label" parent="Control/Panel/Control"]
+layout_mode = 0
+offset_left = 216.0
+offset_top = 323.0
+offset_right = 499.0
+offset_bottom = 365.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("3_pqlge")
+theme_override_font_sizes/font_size = 32
+text = "PowerupsBought"
+
 [node name="Resume" type="Button" parent="Control"]
 process_mode = 3
 layout_mode = 1
@@ -117,7 +175,6 @@ grow_vertical = 2
 flat = true
 
 [node name="VHS_Shader" parent="." instance=ExtResource("3_0b5ob")]
-visible = false
 
 [connection signal="pressed" from="Control/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="Control/Save Run" to="." method="_on_save_run_pressed"]

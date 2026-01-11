@@ -1,10 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://brdj5uoj6ucre"]
+[gd_scene load_steps=13 format=3 uid="uid://brdj5uoj6ucre"]
 
 [ext_resource type="Texture2D" uid="uid://bpscffq3x0syl" path="res://textures/floor_tiles_06_diff_4k.png" id="1_bpgl0"]
 [ext_resource type="Texture2D" uid="uid://cdjfjync3bh53" path="res://textures/floor_tiles_06_nor_gl_4k.png" id="2_fy7qq"]
 [ext_resource type="Texture2D" uid="uid://bk0aukvageigw" path="res://textures/floor_tiles_06_rough_4k.png" id="3_0m8h5"]
 [ext_resource type="Material" uid="uid://qxhnkrqdookj" path="res://textures/brickwall.tres" id="4_cp6d1"]
-[ext_resource type="Script" uid="uid://dkk7cv4o8umue" path="res://Scripts/light_manager.gd" id="5_fasss"]
 [ext_resource type="PackedScene" uid="uid://corb1adxuf5fs" path="res://Machine/machine.tscn" id="6_5wsev"]
 [ext_resource type="Script" uid="uid://b0i1tvf5jwao7" path="res://Scripts/spin.gd" id="7_ghlx5"]
 [ext_resource type="PackedScene" uid="uid://dy3iuogudygra" path="res://shaders/vhs_shader.tscn" id="8_534q3"]
@@ -72,7 +71,6 @@ transform = Transform3D(14, 0, 0, 0, 3, 0, 0, 0, 0.5, 0, 4.5, 4.2)
 mesh = SubResource("BoxMesh_j5v2v")
 
 [node name="Lights" type="Node3D" parent="Room"]
-script = ExtResource("5_fasss")
 
 [node name="Light1" type="OmniLight3D" parent="Room/Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.592478, 3.7578697, 3.46215)

@@ -18,8 +18,6 @@ func show_stats():
 	
 
 func _on_play_again_pressed() -> void:
-	queue_free()
-	
 	GameManager.restart_run()
 	get_tree().change_scene_to_file("res://main.tscn")
 	
@@ -27,7 +25,5 @@ func _on_play_again_pressed() -> void:
 
 
 func _on_quit_pressed() -> void:
-	queue_free()
-	
 	GameManager.restart_run()
 	get_tree().change_scene_to_file("res://main_menu.tscn")

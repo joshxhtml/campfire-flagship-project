@@ -13,9 +13,12 @@ enum Emotion {
 	CONFUSED
 }
 func _ready():
+	GameManager.state = GameManager.GameState.MENU
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 	for e in Emotion.values():
 		emotions.append(e)
-
+		
 	randomize()
 	_cycle_emotion()
 
@@ -27,6 +30,7 @@ func _cycle_emotion():
 
 
 func _on_play_pressed() -> void:
+	GameManager.restart_run()
 	get_tree().change_scene_to_file("res://main.tscn")
 
 

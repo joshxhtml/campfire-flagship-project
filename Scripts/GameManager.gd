@@ -7,6 +7,7 @@ signal round_failed(roundnum)
 signal state_changed(state)
 
 enum GameState {
+	MENU,
 	PLAYING,
 	ROUND_TRANSITION,
 	SHOP,
@@ -124,7 +125,7 @@ func resume_game():
 	get_tree().paused = false
 
 func can_pause() -> bool:
-	return state != GameState.SHOP and state != GameState.GAME_OVER
+	return state == GameState.PLAYING
 
 # Break for scoring stuff
 func add_score(points: int, hole_id: String, is_top_row: bool):
@@ -338,4 +339,3 @@ func restart_run():
 	
 	get_tree().paused = false
 	
-	start_game()
