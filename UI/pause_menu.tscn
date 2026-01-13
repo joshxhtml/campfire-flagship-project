@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dtgu3jaxud8b6"]
 
 [ext_resource type="Script" uid="uid://mrsqn05cyfdy" path="res://Scripts/pause_menu.gd" id="1_ltd3m"]
-[ext_resource type="Texture2D" uid="uid://do8s6e2wagw66" path="res://images/pause_menu_bg.png" id="2_03fe5"]
+[ext_resource type="Texture2D" uid="uid://j45o2nks8rit" path="res://images/menu-without-save.png" id="2_0b5ob"]
 [ext_resource type="PackedScene" uid="uid://dy3iuogudygra" path="res://shaders/vhs_shader.tscn" id="3_0b5ob"]
 [ext_resource type="FontFile" uid="uid://bf0d7rt3in5bc" path="res://fonts/CANDY.TTF" id="3_pqlge"]
 
@@ -64,7 +64,7 @@ color = Color(1, 1, 1, 0.039215688)
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
-texture = ExtResource("2_03fe5")
+texture = ExtResource("2_0b5ob")
 
 [node name="Control" type="Control" parent="Control/Panel"]
 anchors_preset = 0
@@ -142,7 +142,7 @@ text = "
 "
 flat = true
 
-[node name="Save Run" type="Button" parent="Control"]
+[node name="Settings" type="Button" parent="Control"]
 process_mode = 3
 layout_mode = 1
 anchors_preset = 8
@@ -204,5 +204,5 @@ text = "If you see this: Please set your page zoom to either 100% or 80%, Thanks
 [node name="VHS_Shader" parent="." instance=ExtResource("3_0b5ob")]
 
 [connection signal="pressed" from="Control/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="Control/Save Run" to="." method="_on_save_run_pressed"]
+[connection signal="pressed" from="Control/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="Control/Quit" to="." method="_on_quit_pressed"]

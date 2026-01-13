@@ -51,8 +51,8 @@ func on_round_started(roundnum):
 	label.modulate.a = 1.0
 	
 	var tween3 = create_tween()
-	tween3.tween_property(bg, "modulate:a", 0.0, 1.2)
-	tween3.parallel().tween_property(label, "modulate:a", 0.0, 1.2)
+	tween3.tween_property(bg, "modulate:a", 0.0, 2)
+	tween3.parallel().tween_property(label, "modulate:a", 0.0, 2)
 	await tween3.finished
 	
 	bg.visible = false

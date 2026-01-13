@@ -294,20 +294,6 @@ func spend_score(amount: int):
 func can_afford(amount: int) -> bool:
 	return total_score >= amount
 
-# im gonna make a saveing feature ventually and i thought id put this out now before i fully impletement stuff
-func get_run_data() -> Dictionary:
-	return {
-		"roundnum": roundnum,
-		"total_score": total_score,
-		"owned_powerups": owned_powerups,
-		"base_balls": base_balls,
-		"extra_balls_per_round": extra_balls_per_round,
-		"score_multiplier": score_multiplier
-	}
-	
-func save_run():
-	var data = get_run_data()
-	print("[SAVE] Run data:", data)
 
 func get_total_powerups_owned():
 	var count:= 0

@@ -209,7 +209,6 @@ offset_right = 1152.0
 offset_bottom = 648.0
 
 [node name="VHS" type="ColorRect" parent="."]
-visible = false
 z_index = 2
 material = SubResource("ShaderMaterial_ok7cu")
 offset_right = 1152.0

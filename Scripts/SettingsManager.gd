@@ -1,6 +1,7 @@
 extends Node
 
 signal settings_changed
+signal vhs_toggled(on)
 
 const WIDTH := 1152
 const HEIGHT := 648
@@ -37,8 +38,10 @@ func set_volume(value: float):
 	apply_volume()
 	
 func set_vhs(value: bool):
+	if vhs_mode == value:
+		return
 	vhs_mode = value
-	apply_vhs()
+	emit_signal("vhs_toggled", vhs_mode)
 
 func set_fullscreen(value: bool):
 	fullscreen = value
