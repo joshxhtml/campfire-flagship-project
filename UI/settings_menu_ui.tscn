@@ -1,0 +1,150 @@
+[gd_scene load_steps=11 format=3 uid="uid://btcavus3bxxwd"]
+
+[ext_resource type="Script" uid="uid://cc2kug0e8hst2" path="res://Scripts/settings_menu.gd" id="1_21gfq"]
+[ext_resource type="Texture2D" uid="uid://d3wbu4rwi5ivb" path="res://images/settings.png" id="2_ngtxp"]
+[ext_resource type="Texture2D" uid="uid://ck2ywk28v8ubn" path="res://Greg/greg_zesty.png" id="3_b5hvb"]
+[ext_resource type="Script" uid="uid://mg56xfwdq8e6" path="res://Scripts/greg_sprite.gd" id="4_234fy"]
+[ext_resource type="Texture2D" uid="uid://v51fngb860iq" path="res://Greg/greg_happy.png" id="5_lft7v"]
+[ext_resource type="Texture2D" uid="uid://dpv5qe3x6g66h" path="res://Greg/greg_neutral.png" id="6_yp2cs"]
+[ext_resource type="Texture2D" uid="uid://biu13wdff8wgt" path="res://Greg/greg_cocky.png" id="7_kjaq5"]
+[ext_resource type="Texture2D" uid="uid://dxmxfwe7ebjb" path="res://Greg/greg_disappointed.png" id="8_fkefi"]
+[ext_resource type="Texture2D" uid="uid://dtd147gms12b" path="res://Greg/greg_w_h_a_t.png" id="9_fdjcc"]
+[ext_resource type="PackedScene" uid="uid://dy3iuogudygra" path="res://shaders/vhs_shader.tscn" id="10_jf71s"]
+
+[node name="PauseMenuUI" type="CanvasLayer"]
+script = ExtResource("1_21gfq")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="FixingMyMistakes" type="Control" parent="Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Left" type="ColorRect" parent="Panel/FixingMyMistakes"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 9.0
+offset_right = 61.0
+offset_bottom = 635.0
+
+[node name="Right" type="ColorRect" parent="Panel/FixingMyMistakes"]
+layout_mode = 0
+offset_left = 1095.0
+offset_top = 2.0
+offset_right = 1153.0
+offset_bottom = 635.0
+
+[node name="Bottom" type="ColorRect" parent="Panel/FixingMyMistakes"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 581.0
+offset_right = 1153.0
+offset_bottom = 640.0
+
+[node name="Top" type="ColorRect" parent="Panel/FixingMyMistakes"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 6.0
+offset_right = 1153.0
+offset_bottom = 57.0
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(1, 1, 1, 0.039215688)
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("2_ngtxp")
+
+[node name="Buttons" type="Control" parent="Panel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="VolumeSlider" type="HSlider" parent="Panel/Buttons"]
+layout_mode = 0
+offset_left = 824.0
+offset_top = 140.0
+offset_right = 926.0
+offset_bottom = 246.0
+
+[node name="VHSToggler" type="CheckBox" parent="Panel/Buttons"]
+layout_mode = 0
+offset_left = 903.0
+offset_top = 221.0
+offset_right = 931.0
+offset_bottom = 283.0
+
+[node name="FullScreenToggler" type="CheckBox" parent="Panel/Buttons"]
+layout_mode = 0
+offset_left = 903.0
+offset_top = 285.0
+offset_right = 931.0
+offset_bottom = 339.0
+
+[node name="Exit" type="Button" parent="Panel/Buttons"]
+layout_mode = 0
+offset_left = 726.0
+offset_top = 425.0
+offset_right = 934.0
+offset_bottom = 531.0
+flat = true
+
+[node name="GregSprite" type="TextureRect" parent="."]
+offset_left = -73.0
+offset_top = 378.99997
+offset_right = 164.0
+offset_bottom = 691.99994
+rotation = -0.05235988
+texture = ExtResource("3_b5hvb")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("4_234fy")
+happy_texture = ExtResource("5_lft7v")
+neutral_texture = ExtResource("6_yp2cs")
+angry_texture = ExtResource("7_kjaq5")
+sad_texture = ExtResource("8_fkefi")
+confused_texture = ExtResource("9_fdjcc")
+
+[node name="VHS_Shader" parent="." instance=ExtResource("10_jf71s")]
+visible = false
+
+[node name="fixyourzoom" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="fixyourzoom"]
+layout_mode = 0
+offset_left = 1152.0
+offset_right = 1590.0
+offset_bottom = 648.0
+
+[node name="ColorRect2" type="ColorRect" parent="fixyourzoom"]
+layout_mode = 0
+offset_top = 648.0
+offset_right = 1590.0
+offset_bottom = 1049.0
+
+[node name="Label" type="Label" parent="fixyourzoom"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 655.0
+offset_right = 1157.0
+offset_bottom = 843.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "If you see this: Please set your page zoom to either 100% or 80%, Thanks!"
+
+[connection signal="value_changed" from="Panel/Buttons/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="toggled" from="Panel/Buttons/VHSToggler" to="." method="_on_vhs_toggler_toggled"]
+[connection signal="toggled" from="Panel/Buttons/FullScreenToggler" to="." method="_on_full_screen_toggler_toggled"]
+[connection signal="pressed" from="Panel/Buttons/Exit" to="." method="_on_exit_pressed"]

@@ -106,6 +106,7 @@ offset_left = 912.0
 offset_top = 525.0
 offset_right = 1144.0
 offset_bottom = 552.0
+allow_greater = true
 
 [node name="RoundFlashBG" type="TextureRect" parent="HUD"]
 layout_mode = 0
@@ -208,8 +209,37 @@ offset_right = 1152.0
 offset_bottom = 648.0
 
 [node name="VHS" type="ColorRect" parent="."]
+visible = false
 z_index = 2
 material = SubResource("ShaderMaterial_ok7cu")
 offset_right = 1152.0
 offset_bottom = 648.0
 mouse_filter = 2
+
+[node name="fixyourzoom" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="fixyourzoom"]
+layout_mode = 0
+offset_left = 1152.0
+offset_right = 1590.0
+offset_bottom = 648.0
+
+[node name="ColorRect2" type="ColorRect" parent="fixyourzoom"]
+layout_mode = 0
+offset_top = 648.0
+offset_right = 1590.0
+offset_bottom = 1049.0
+
+[node name="Label" type="Label" parent="fixyourzoom"]
+layout_mode = 0
+offset_left = 15.0
+offset_top = 655.0
+offset_right = 1157.0
+offset_bottom = 843.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "If you see this: Please set your page zoom to either 100% or 80%, Thanks!"

@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+const SETTINGS := preload("res://UI/settings_menu_ui.tscn")
+
 @export var change_interval := 2.0
 @onready var greg := $GregSprite
 
@@ -35,4 +37,5 @@ func _on_play_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	pass # Replace with function body.
+	var settings = SETTINGS.instantiate()
+	add_child(settings)

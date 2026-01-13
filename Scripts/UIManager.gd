@@ -14,7 +14,7 @@ func update_balls(count):
 	for i in balls_countainer.get_child_count():
 		balls_countainer.get_child(i).visible = i < count
 		
-	print("[UI] Balls: ", count, ", Extra: ", GameManager.extra_balls_remaining)
+	#print("[UI] Balls: ", count, ", Extra: ", GameManager.extra_balls_remaining)
 	if GameManager.extra_balls_remaining > 0:
 		extra_balls_label.visible = true
 		extra_balls_label.text = "+%d" % GameManager.extra_balls_remaining

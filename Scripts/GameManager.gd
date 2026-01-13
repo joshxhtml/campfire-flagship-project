@@ -55,8 +55,8 @@ var active_puase_menu: Node = null
 var total_balls_shot:= 0
 
 # hole locking
-@export var hole_lock_start_round := 2
-@export var hole_lock_interval := 2 #maybe 10
+@export var hole_lock_start_round := 10
+@export var hole_lock_interval := 5 #maybe 10
 @export var total_holes := 7
 
 var locked_holes: Array[String] = []
@@ -64,7 +64,7 @@ var locked_holes: Array[String] = []
 
 func _ready() -> void:
 	print("[RUN] Seed:", run_seed)
-	print("GameManager READY | instance:", get_instance_id())
+	#print("GameManager READY | instance:", get_instance_id())
 
 func start_game():
 	if game_started:
@@ -90,7 +90,7 @@ func start_round():
 	
 	round_score = 0
 	round_score_goal = 10 * roundnum
-	print("[BALLS] Round start: ", "Base: ", balls_left, ", Extra this round: ", extra_balls_remaining, " (Permanent bonus: ", extra_balls_per_round, ")")
+	#print("[BALLS] Round start: ", "Base: ", balls_left, ", Extra this round: ", extra_balls_remaining, " (Permanent bonus: ", extra_balls_per_round, ")")
 	state = GameState.ROUND_TRANSITION
 	
 	emit_signal("state_changed", state)
@@ -103,17 +103,17 @@ func round_ready():
 	allow_play()
 
 func allow_play():
-	print("[GameManager] allow_play called")
+	#print("[GameManager] allow_play called")
 	state = GameState.PLAYING
 	emit_signal("state_changed", state)
 
 func can_shoot() -> bool:
-	print(
-		"[can_shoot]",
-		"state:", state,
-		"balls_left:", balls_left,
-		"extra:", extra_balls_remaining
-	)
+	#print(
+	#	"[can_shoot]",
+	#	"state:", state,
+	#	"balls_left:", balls_left,
+	#	"extra:", extra_balls_remaining
+	#)
 	return state == GameState.PLAYING and (balls_left > 0 or extra_balls_remaining > 0)
 
 #pasuing
@@ -146,27 +146,27 @@ func add_score(points: int, hole_id: String, is_top_row: bool):
 	if owned_powerups.has("score_surge") and first_score_this_round:
 		multiplier *= 2.0
 		first_score_this_round = false
-		print("[POWERUP] Score Surge activated")
+		#print("[POWERUP] Score Surge activated")
 	
 	# perfect aim powerup
 	if  owned_powerups.has("perfect_aim") and hole_id == last_hole_id:
 		multiplier *= 1.5
-		print("[POWERUP] Perfect Aim activated")
+		#print("[POWERUP] Perfect Aim activated")
 		
 	#combo counter powerup
 	if owned_powerups.has("combo_counter"):
 		multiplier *= (1.0 +(.02 * combo_count))
-		print("[POWERUP] Combo x", combo_count)
+		#print("[POWERUP] Combo x", combo_count)
 		
 	#high roller powerup
 	if owned_powerups.has("high_roller") and is_top_row:
 		final_points += 10
-		print("[POWERUP] High Roller Bonus activated")
+		#print("[POWERUP] High Roller Bonus activated")
 	
 	#last ball bonus powerup
 	if owned_powerups.has("last_ball_bonus") and is_last_ball():
 		multiplier *= 2.0
-		print("[POWERUP] Last Ball Bonus")
+		#print("[POWERUP] Last Ball Bonus")
 	
 	final_points = int(final_points * multiplier)
 	round_score += final_points
@@ -183,7 +183,7 @@ func add_score(points: int, hole_id: String, is_top_row: bool):
 func register_miss():
 	combo_count = 0
 	last_hole_id = ""
-	print("[COMBO] Combo Reset due to miss")
+	#print("[COMBO] Combo Reset due to miss")
 #Break for balls
 func use_ball():
 	if state != GameState.PLAYING:
@@ -191,10 +191,10 @@ func use_ball():
 	total_balls_shot += 1
 	if extra_balls_remaining > 0:
 		extra_balls_remaining -= 1
-		print("[BALL] Used EXTRA ball. Remaining extra:", extra_balls_remaining)
+		#print("[BALL] Used EXTRA ball. Remaining extra:", extra_balls_remaining)
 	else:
 		balls_left -= 1
-		print("[BALL] Used NORMAL ball. Balls left:", balls_left)
+		#print("[BALL] Used NORMAL ball. Balls left:", balls_left)
 	active_balls += 1
 	emit_signal("balls_changed", balls_left)
 
@@ -259,24 +259,29 @@ func apply_powerup(powerup: PowerUp):
 	match powerup.id:
 		"score_multiplier":
 			score_multiplier += .25
-			print("[POWERUP] Activated:", powerup.id)
+			#print("[POWERUP] Activated:", powerup.id)
 		"shop_frequency":
 			shop_interval = 2
-			print("[POWERUP] Activated:", powerup.id)
+			#print("[POWERUP] Activated:", powerup.id)
 		"extra_ball":
 			extra_balls_per_round += 1
-			print("[POWERUP] Activated:", powerup.id)
-			print("[POWERUP] Extra ball gained. Total extra: ", extra_balls_per_round)
+			#print("[POWERUP] Activated:", powerup.id)
+			#print("[POWERUP] Extra ball gained. Total extra: ", extra_balls_per_round)
 		"score_surge":
-			print("[POWERUP] Activated:", powerup.id)
+			pass
+			#print("[POWERUP] Activated:", powerup.id)
 		"perfect_aim":
-			print("[POWERUP] Activated:", powerup.id)
+			pass
+			#print("[POWERUP] Activated:", powerup.id)
 		"high_roller":
-			print("[POWERUP] Activated:", powerup.id)
+			pass
+			#print("[POWERUP] Activated:", powerup.id)
 		"combo_counter":
-			print("[POWERUP] Activated:", powerup.id)
+			pass
+			#print("[POWERUP] Activated:", powerup.id)
 		"last_ball_bonus":
-			print("[POWERUP] Activated:", powerup.id)
+			pass
+			#print("[POWERUP] Activated:", powerup.id)
 
 func spend_score(amount: int):
 	if total_score < amount:
@@ -311,7 +316,7 @@ func get_total_powerups_owned():
 	return count
 	
 func restart_run():
-	print("[RUN] Reseting Everything")
+	#print("[RUN] Reseting Everything")
 	
 	# game states
 	state = GameState.PLAYING
@@ -391,12 +396,12 @@ func update_locked_holes():
 	#		
 	#	locked_holes.append(available.pick_random())
 		
-	print(
-	"[HOLES DEBUG]",
-	"Round:", roundnum,
-	"Locks:", locked_holes.size(),
-	"Total holes:", all_ids.size()
-	)
+	#print(
+	#"[HOLES DEBUG]",
+	#"Round:", roundnum,
+	#"Locks:", locked_holes.size(),
+	#"Total holes:", all_ids.size()
+	#)
 	
 	for hole in get_tree().get_nodes_in_group("scoring_hole"):
 		hole.set_locked(locked_holes.has(hole.hole_id))

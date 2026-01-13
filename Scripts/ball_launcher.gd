@@ -107,7 +107,7 @@ func shoot_ball():
 	)
 	
 	ball.apply_impulse(lauch_dir * final_force)
-	print("Launch force:", final_force)
+	#print("Launch force:", final_force)
 	
 	#old logic, saving just in case
 	#ball.global_position = global_position

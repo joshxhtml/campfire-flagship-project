@@ -11,12 +11,12 @@ var locked := false
 func _ready() -> void:
 	add_to_group("scoring_hole")
 	
-	print("[HOLE READY]", hole_id, "instance:", get_instance_id())
+	#print("[HOLE READY]", hole_id, "instance:", get_instance_id())
 	update_visuals()
 
 func set_locked(value: bool):
 	locked = value
-	print("[HOLE SET] ", hole_id, ", locked =", value)
+	#print("[HOLE SET] ", hole_id, ", locked =", value)
 	update_visuals()
 
 func update_visuals() -> void:
@@ -28,7 +28,7 @@ func _on_body_entered(body: Node3D) -> void:
 		return
 	
 	if locked:
-		print("[HOLE] Locked hole hit:", hole_id)
+		#print("[HOLE] Locked hole hit:", hole_id)
 		body.resolve()
 		return
 	
