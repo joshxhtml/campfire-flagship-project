@@ -111,12 +111,12 @@ polygon = PackedVector2Array(-0.4001404, 0.67110014, 0.74438465, 0.76428485, 0.1
 transform = Transform3D(0.9945219, 0.104528464, 0, -0.104528464, 0.9945219, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="10Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
-transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 1.9449357, 1.2517887, 8.501584e-08)
+transform = Transform3D(0.2, 0, -3.7252903e-09, -3.7252903e-09, -8.742278e-09, -0.2, 0, 0.2, -8.742279e-09, 1.9161096, 1.2487589, -0.009790992)
 points = 10
 hole_id = "hole_1"
 
 [node name="20Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
-transform = Transform3D(0.2, 0, 0, 0, -8.742278e-09, -0.2, 0, 0.2, -8.742278e-09, 2.045878, 1.4118162, 8.942816e-08)
+transform = Transform3D(0.2, 0, -5.5879354e-09, -5.5879354e-09, -8.742278e-09, -0.2, 0, 0.2, -8.742279e-09, 2.0065575, 1.4660403, -0.0131264785)
 points = 20
 hole_id = "hole_2"
 

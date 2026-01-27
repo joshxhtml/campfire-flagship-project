@@ -1,52 +1,35 @@
 extends Node3D
 
+#exports
 @export var left_right_range := .5
 @export var max_tilt := 100.0
 @export var max_power := 10.0
 @export var power_charge_speed := 15.0
-@onready var power_bar = get_node("../UI/HUD/PowerBar")
+@export var ball_scene: PackedScene
+@export var aim_line_lenght := 6.0
 
+#force exports
 @export var min_launch_force := 8.0
 @export var max_launch_force := 28.0
 
+#random affected exports
 @export var max_angle_random := .04 #something something radians are 2.3 degrees, this is imporant and will help us later in tuning it to be right, remember this josh, thats why theres a big ass comment here so you remember to come back 👌
 @export var power_random := 0.03 #3 percent
 @export var spin_strenght := 8
 @export var position_changer := 0.01
 
+#onreadys
+@onready var power_bar = get_node("../UI/HUD/PowerBar")
+@onready var aim_line := $AimLine
+
+#vars
 var position_input := 0.0
 var tilt_input := 0.0
 var power := 0.0 
 var tilt_mode := false
 var charging := false
 
-@export var ball_scene: PackedScene
-@export var aim_line_lenght := 6.0
-@onready var aim_line := $AimLine
-
-func update_aim_line():
-	var mesh := ImmediateMesh.new()
-	
-	var material := StandardMaterial3D.new()
-	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
-	
-	if tilt_mode:
-		material.albedo_color = Color(1.0, 1.0, 1.0, 1.0) 
-	else:
-		material.albedo_color = Color(0.0, 0.0, 0.0, 1.0) 
-		
-	mesh.surface_begin(Mesh.PRIMITIVE_LINES, material)
-	
-	var start := Vector3.ZERO
-	var direction := -transform.basis.z.normalized()
-	var end := direction * aim_line_lenght
-	
-	mesh.surface_add_vertex(start)
-	mesh.surface_add_vertex(end)
-	mesh.surface_end()
-	
-	$AimLine.mesh = mesh
-
+#intialization
 func _process(delta):
 	
 	if Input.is_action_just_pressed("change_mode"):
@@ -75,6 +58,29 @@ func _process(delta):
 	
 	update_aim_line()
 
+#core funcs
+func update_aim_line():
+	var mesh := ImmediateMesh.new()
+	
+	var material := StandardMaterial3D.new()
+	material.shading_mode = BaseMaterial3D.SHADING_MODE_UNSHADED
+	
+	if tilt_mode:
+		material.albedo_color = Color(1.0, 1.0, 1.0, 1.0) 
+	else:
+		material.albedo_color = Color(0.0, 0.0, 0.0, 1.0) 
+		
+	mesh.surface_begin(Mesh.PRIMITIVE_LINES, material)
+	
+	var start := Vector3.ZERO
+	var direction := -transform.basis.z.normalized()
+	var end := direction * aim_line_lenght
+	
+	mesh.surface_add_vertex(start)
+	mesh.surface_add_vertex(end)
+	mesh.surface_end()
+	
+	$AimLine.mesh = mesh
 func shoot_ball():
 	if GameManager.state != GameManager.GameState.PLAYING:
 		return

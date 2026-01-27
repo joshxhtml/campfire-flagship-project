@@ -1,17 +1,21 @@
 extends RigidBody3D
 
-var resolved := false
+#exports
 @export var lifetime := 6.0 
 
+#vars
+var resolved := false
+
+#intialization
 func _ready():
 	sleeping = false
 	start_new_timeout()
 
+#core ball funcs
 func start_new_timeout():
 	await get_tree().create_timer(lifetime).timeout
 	if not resolved:
 		resolve()
-
 func resolve():
 	if resolved:
 		return

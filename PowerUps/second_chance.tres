@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="PowerUp" load_steps=3 format=3 uid="uid://6x0n73pbxx34"]
+
+[ext_resource type="Script" uid="uid://bkiolfu13kwr" path="res://Scripts/PowerUp.gd" id="1_4e7yt"]
+[ext_resource type="Texture2D" uid="uid://dbf3lh0tn0p06" path="res://images/orange.png" id="1_a54st"]
+
+[resource]
+script = ExtResource("1_4e7yt")
+id = "second_chance"
+display_name = "Second Chance"
+description = "Second Chance at a Locked Hole"
+cost = 100
+rarity_weight = 50
+icon = ExtResource("1_a54st")
+metadata/_custom_type_script = "uid://bkiolfu13kwr"

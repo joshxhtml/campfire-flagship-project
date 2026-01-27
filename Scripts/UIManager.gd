@@ -1,15 +1,26 @@
 extends CanvasLayer
 
+#const
 const GAMEOVERSCENE := preload("res://UI/game_over.tscn")
 
+#onreadys
 @onready var balls_countainer = $HUD/BallsCountainer
 @onready var extra_balls_label := $HUD/ExtraBallsLabel
-
 @onready var hud = $HUD
 @onready var round_image = $RoundStatusOverlay/RoundStatusTexture
 @onready var game_over_overlay = $RoundStatusOverlay
 @onready var greg := $HUD/Greg
 
+#intailzation
+func _ready():
+	GameManager.round_started.connect(on_round_started)
+	GameManager.balls_changed.connect(update_balls)
+	GameManager.round_score_changed.connect(update_round_score)
+	GameManager.total_score_changed.connect(update_total_score)
+	GameManager.round_completed.connect(on_round_completed)
+	GameManager.round_failed.connect(on_round_failed)
+
+#update
 func update_balls(count):
 	for i in balls_countainer.get_child_count():
 		balls_countainer.get_child(i).visible = i < count
@@ -20,24 +31,26 @@ func update_balls(count):
 		extra_balls_label.text = "+%d" % GameManager.extra_balls_remaining
 	else:
 		extra_balls_label.visible = false
+func update_round_score(score):
+	$HUD/RoundScoreLabel.text = "Round: %d / %d" % [score, GameManager.round_score_goal]
+	
+	if score >= GameManager.round_score_goal:
+		greg.set_emotion(greg.Emotion.HAPPY)
+func update_total_score(score):
+	$HUD/TotalScoreLabel.text = "Total: %d" % score
 
-func show_round_flash(roundnum):
-	$HUD/RoundFlash.text = "ROUND %s" % str(roundnum)
-	$HUD/RoundFlash.visible = true
-	$HUD/RoundFlash.modulate.a = 1.0
+#on round blank
+func on_round_completed(_roundnum):
+	hud.visible = false
+	round_image.visible = true
+	round_image.texture = preload("res://images/roundclear.png")
 	
-	var tween = create_tween()
-	tween.tween_property($HUD/RoundFlash, "modulate:a", 0.0, 1.2)
+	await get_tree().create_timer(2.0).timeout
 	
-func _ready():
-	GameManager.round_started.connect(on_round_started)
-	GameManager.balls_changed.connect(update_balls)
-	GameManager.round_score_changed.connect(update_round_score)
-	GameManager.total_score_changed.connect(update_total_score)
-	GameManager.round_completed.connect(on_round_completed)
-	GameManager.round_failed.connect(on_round_failed)
+	round_image.visible = false
+	hud.visible = true
 	
-
+	GameManager.start_round()
 func on_round_started(roundnum):
 	greg.set_emotion(greg.Emotion.NUETRAL)
 	
@@ -59,29 +72,6 @@ func on_round_started(roundnum):
 	label.visible = false
 	
 	GameManager.allow_play()
-
-func update_round_score(score):
-	$HUD/RoundScoreLabel.text = "Round: %d / %d" % [score, GameManager.round_score_goal]
-	
-	if score >= GameManager.round_score_goal:
-		greg.set_emotion(greg.Emotion.HAPPY)
-	
-func update_total_score(score):
-	$HUD/TotalScoreLabel.text = "Total: %d" % score
-	
-func on_round_completed(_roundnum):
-	hud.visible = false
-	round_image.visible = true
-	round_image.texture = preload("res://images/roundclear.png")
-	
-	await get_tree().create_timer(2.0).timeout
-	
-	round_image.visible = false
-	hud.visible = true
-	
-	GameManager.start_round()
-
-
 func on_round_failed(_roundnum):
 	greg.set_emotion(greg.Emotion.DISAPPOINTED)
 	hud.visible = false
@@ -96,3 +86,12 @@ func on_round_failed(_roundnum):
 	round_image.visible = false
 	
 	get_tree().change_scene_to_file("res://UI/game_over.tscn")
+
+#the other function in here that doesnt fit in
+func show_round_flash(roundnum):
+	$HUD/RoundFlash.text = "ROUND %s" % str(roundnum)
+	$HUD/RoundFlash.visible = true
+	$HUD/RoundFlash.modulate.a = 1.0
+	
+	var tween = create_tween()
+	tween.tween_property($HUD/RoundFlash, "modulate:a", 0.0, 1.2)

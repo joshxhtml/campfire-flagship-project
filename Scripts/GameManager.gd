@@ -1,11 +1,30 @@
 extends Node
 
-#round statuses
+#shop const
+const SHOP_SCENE := preload("res://ShopScenes/ShopScene.tscn")
+
+# exports
+@export var hole_lock_start_round := 5
+@export var hole_lock_interval := 5 #maybe 10
+@export var total_holes := 7
+
+#onreadys
+@onready var PAUSE_MENU := preload("res://UI/pause_menu.tscn")
+
+#signals (for round status)
 signal round_started(roundnum)
 signal round_completed(roundnum)
 signal round_failed(roundnum)
 signal state_changed(state)
 
+#signals for ball status
+signal balls_changed(count)
+
+#signals form score status
+signal round_score_changed(score)
+signal total_score_changed(score)
+
+#enum
 enum GameState {
 	MENU,
 	PLAYING,
@@ -14,68 +33,57 @@ enum GameState {
 	GAME_OVER
 }
 
-#ball stauts
-signal balls_changed(count)
-#scores, new rule for easy managment on my part -> GameManager is the oinly script allowed to change the score
-signal round_score_changed(score)
-signal total_score_changed(score)
-
+#vars
 var state = GameState.PLAYING
-#round socring
+var game_started := false
+
+#vars - round socring
 var roundnum := 0
 var round_score := 0
 var total_score := 0
 var round_score_goal := 0
-#ball managment
+
+#vars - ball managment
 var active_balls := 0
 var base_balls := 3
 var extra_balls_per_round := 0
 var extra_balls_remaining := 0
 var balls_left := 0
-#shop varibles
-var shop_interval := 5
+
+#vars - shop management
+var shop_interval := 1
 var score_multiplier := 1.0
 var owned_powerups:= {}
 var shop_rerolled := false
-#new powerup varaibles
+var active_shop: CanvasLayer = null
+
+#vars - powerups
 var first_score_this_round := true
 var last_hole_id := ""
 var combo_count := 0
-#game thing
-var game_started := false
-var run_seed := randi()
-#shop stuff cause i fucked it up somehow
-const SHOP_SCENE := preload("res://ShopScenes/ShopScene.tscn")
-var active_shop: CanvasLayer = null
-
-#everyday this script file gets bigger and bigger
-var active_puase_menu: Node = null
-@onready var PAUSE_MENU := preload("res://UI/pause_menu.tscn")
-
 var total_balls_shot:= 0
+var free_shots_remaining := 0
+var used_second_chance := false
+var miss_count := 0
+#var golden_hole_id := ""
+#var lock_jammer_hole_id := ""
+var chaos_triggered := false
 
-# hole locking
-@export var hole_lock_start_round := 10
-@export var hole_lock_interval := 5 #maybe 10
-@export var total_holes := 7
-
+#vars - misc
+var active_puase_menu: Node = null
 var locked_holes: Array[String] = []
-# Break to how the rounds flow
 
-func _ready() -> void:
-	print("[RUN] Seed:", run_seed)
-	#print("GameManager READY | instance:", get_instance_id())
 
+
+#starting logic
 func start_game():
 	if game_started:
 		return
 	game_started = true
 	start_round()
-
 func start_round():
 	if not game_started:
 		game_started = true
-	
 	roundnum += 1
 	
 	update_locked_holes()
@@ -83,6 +91,9 @@ func start_round():
 	active_balls = 0
 	balls_left = base_balls 
 	extra_balls_remaining = extra_balls_per_round
+	
+	if owned_powerups.has("warm_up"):
+		free_shots_remaining = 2
 	
 	first_score_this_round = true
 	last_hole_id = ""
@@ -99,24 +110,33 @@ func start_round():
 	emit_signal("balls_changed", balls_left)
 	emit_signal("round_started", roundnum)
 
+#round logic
 func round_ready():
 	allow_play()
-
 func allow_play():
-	#print("[GameManager] allow_play called")
 	state = GameState.PLAYING
 	emit_signal("state_changed", state)
-
 func can_shoot() -> bool:
-	#print(
-	#	"[can_shoot]",
-	#	"state:", state,
-	#	"balls_left:", balls_left,
-	#	"extra:", extra_balls_remaining
-	#)
+	
 	return state == GameState.PLAYING and (balls_left > 0 or extra_balls_remaining > 0)
+func check_round_end():
+	if balls_left <= 0 and extra_balls_remaining <=0 and active_balls <= 0:
+		evaluate_round()
+func evaluate_round():
+	state = GameState.ROUND_TRANSITION
+	emit_signal("state_changed", state)
+	
+	if round_score >= round_score_goal:
+		if should_open_shop():
+			open_shop()
+			
+		else:
+			emit_signal("round_completed", roundnum)
+	else:
+		state = GameState.GAME_OVER
+		emit_signal("round_failed", roundnum)
 
-#pasuing
+#pause logic
 func open_pause_menu():
 	if active_puase_menu:
 		return
@@ -126,18 +146,16 @@ func open_pause_menu():
 	get_tree().paused = true
 	active_puase_menu = PAUSE_MENU.instantiate()
 	get_tree().current_scene.add_child(active_puase_menu)
-
 func resume_game():
 	if active_puase_menu:
 		active_puase_menu.queue_free()
 		active_puase_menu = null
 	
 	get_tree().paused = false
-
 func can_pause() -> bool:
 	return state == GameState.PLAYING
 
-# Break for scoring stuff
+#score logic
 func add_score(points: int, hole_id: String, is_top_row: bool):
 	var final_points = points
 	var multiplier := score_multiplier
@@ -178,53 +196,37 @@ func add_score(points: int, hole_id: String, is_top_row: bool):
 	first_score_this_round = false
 	last_hole_id = hole_id
 	combo_count += 1
-
-#new ball logic for combo coutning
 func register_miss():
 	combo_count = 0
 	last_hole_id = ""
-	#print("[COMBO] Combo Reset due to miss")
-#Break for balls
+	
+#ball logic
 func use_ball():
 	if state != GameState.PLAYING:
 		return
 	total_balls_shot += 1
+	
+	if free_shots_remaining > 0:
+		free_shots_remaining -= 1
+		active_balls += 1
+		emit_signal("balls_changed", balls_left)
+		return
+	
 	if extra_balls_remaining > 0:
 		extra_balls_remaining -= 1
-		#print("[BALL] Used EXTRA ball. Remaining extra:", extra_balls_remaining)
 	else:
 		balls_left -= 1
-		#print("[BALL] Used NORMAL ball. Balls left:", balls_left)
 	active_balls += 1
 	emit_signal("balls_changed", balls_left)
-
 func ball_resolved():
 	active_balls -= 1
 	check_round_end()
+func is_last_ball() -> bool:
+	return balls_left == 0 and extra_balls_remaining == 0
 
-func check_round_end():
-	if balls_left <= 0 and extra_balls_remaining <=0 and active_balls <= 0:
-		evaluate_round()
-
-#break for ending of round
-func evaluate_round():
-	state = GameState.ROUND_TRANSITION
-	emit_signal("state_changed", state)
-	
-	if round_score >= round_score_goal:
-		if should_open_shop():
-			open_shop()
-			
-		else:
-			emit_signal("round_completed", roundnum)
-	else:
-		state = GameState.GAME_OVER
-		emit_signal("round_failed", roundnum)
-
-#shop Stuff
+#shop logic
 func should_open_shop() -> bool:
 	return roundnum % shop_interval == 0
-
 func open_shop():
 	if active_shop != null:
 		return
@@ -235,7 +237,6 @@ func open_shop():
 	
 	active_shop = SHOP_SCENE.instantiate()
 	get_tree().current_scene.add_child(active_shop)
-
 func return_from_shop():
 	if active_shop:
 		active_shop.queue_free()
@@ -244,11 +245,17 @@ func return_from_shop():
 	state = GameState.ROUND_TRANSITION
 	emit_signal("state_changed", state)
 	start_round()
+func spend_score(amount: int):
+	if total_score < amount:
+		return false
+	
+	total_score -= amount
+	emit_signal("total_score_changed", total_score)
+	return true
+func can_afford(amount: int) -> bool:
+	return total_score >= amount
 
-func is_last_ball() -> bool:
-	return balls_left == 0 and extra_balls_remaining == 0
-
-# powerups
+#powerup logic
 func apply_powerup(powerup: PowerUp):
 	
 	if not owned_powerups.has(powerup.id):
@@ -259,50 +266,28 @@ func apply_powerup(powerup: PowerUp):
 	match powerup.id:
 		"score_multiplier":
 			score_multiplier += .25
-			#print("[POWERUP] Activated:", powerup.id)
 		"shop_frequency":
 			shop_interval = 2
-			#print("[POWERUP] Activated:", powerup.id)
 		"extra_ball":
 			extra_balls_per_round += 1
-			#print("[POWERUP] Activated:", powerup.id)
-			#print("[POWERUP] Extra ball gained. Total extra: ", extra_balls_per_round)
 		"score_surge":
 			pass
-			#print("[POWERUP] Activated:", powerup.id)
 		"perfect_aim":
 			pass
-			#print("[POWERUP] Activated:", powerup.id)
 		"high_roller":
 			pass
-			#print("[POWERUP] Activated:", powerup.id)
 		"combo_counter":
 			pass
-			#print("[POWERUP] Activated:", powerup.id)
 		"last_ball_bonus":
 			pass
-			#print("[POWERUP] Activated:", powerup.id)
-
-func spend_score(amount: int):
-	if total_score < amount:
-		return false
-	
-	total_score -= amount
-	emit_signal("total_score_changed", total_score)
-	return true
-
-func can_afford(amount: int) -> bool:
-	return total_score >= amount
-
-
 func get_total_powerups_owned():
 	var count:= 0
 	for k in owned_powerups.keys():
 		count += owned_powerups[k]
 	return count
-	
+
+#restating logic
 func restart_run():
-	#print("[RUN] Reseting Everything")
 	
 	# game states
 	state = GameState.PLAYING
@@ -325,7 +310,7 @@ func restart_run():
 	# powerups
 	owned_powerups.clear()
 	score_multiplier = 1.0
-	shop_interval = 5
+	shop_interval = 1
 	shop_rerolled = false
 	
 	# combo
@@ -339,11 +324,9 @@ func restart_run():
 		active_shop = null
 	
 	get_tree().paused = false
-	
+
+#hole locking logic
 func update_locked_holes():
-	#locked_holes.clear()
-	#for hole in get_tree().get_nodes_in_group("scoring_hole"):
-	#	hole.set_locked(false)
 	var scoring_holes := get_tree().get_nodes_in_group("scoring_hole")
 	var all_ids: Array[String] = []
 	
@@ -358,9 +341,9 @@ func update_locked_holes():
 		return
 	
 	var max_locks := all_ids.size() - 1
-	#if locked_holes.size() >= max_locks:
-	#	return
 	
+	
+	@warning_ignore("integer_division")
 	var locks_should_have := int(floor((roundnum - hole_lock_start_round) / hole_lock_interval) + 1)
 	locks_should_have = min(locks_should_have, max_locks)
 	
@@ -371,32 +354,13 @@ func update_locked_holes():
 	for i in range(locks_should_have):
 		locked_holes.append(shuffle_ids[i])
 	
-	#while locked_holes.size() < locks_should_have:
-	#	var available := []
-	#	for id in all_ids:
-	#		if not locked_holes.has(id):
-	#			available.append(id)
-	#	
-	#	if available.is_empty():
-	#		break
-	#		
-	#	locked_holes.append(available.pick_random())
-		
-	#print(
-	#"[HOLES DEBUG]",
-	#"Round:", roundnum,
-	#"Locks:", locked_holes.size(),
-	#"Total holes:", all_ids.size()
-	#)
 	
 	for hole in get_tree().get_nodes_in_group("scoring_hole"):
 		hole.set_locked(locked_holes.has(hole.hole_id))
 	
 	update_map()
-	
 func is_hole_locked(hole_id: String) -> bool:
 	return locked_holes.has(hole_id)
-
 func update_map():
 	var indicators := get_tree().get_nodes_in_group("map")
 	

@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4aey3hhgnqvj"]
+[gd_scene load_steps=4 format=3 uid="uid://b4aey3hhgnqvj"]
 
 [ext_resource type="Script" uid="uid://dpsxx60pfs33k" path="res://Scripts/greg_mentor.gd" id="1_a868i"]
+[ext_resource type="Texture2D" uid="uid://biu13wdff8wgt" path="res://Greg/greg_cocky.png" id="2_i620f"]
+[ext_resource type="FontFile" uid="uid://bf0d7rt3in5bc" path="res://fonts/CANDY.TTF" id="3_csa7l"]
 
 [node name="Greg" type="Control"]
 layout_mode = 3
@@ -17,5 +19,21 @@ offset_left = -48.0
 offset_top = 368.0
 offset_right = 189.0
 offset_bottom = 681.0
+texture = ExtResource("2_i620f")
 expand_mode = 1
 stretch_mode = 5
+
+[node name="GregText" type="Label" parent="."]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 334.0
+offset_right = 397.0
+offset_bottom = 483.0
+theme_override_fonts/font = ExtResource("3_csa7l")
+theme_override_font_sizes/font_size = 32
+text = "placeholder line 1
+placeholder line 2
+placeholder line 3
+placeholder line 4"
+horizontal_alignment = 1
+autowrap_mode = 2

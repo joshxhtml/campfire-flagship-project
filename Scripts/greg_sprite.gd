@@ -1,5 +1,13 @@
 extends TextureRect
 
+#exports
+@export var happy_texture: Texture2D
+@export var neutral_texture: Texture2D
+@export var angry_texture: Texture2D
+@export var sad_texture: Texture2D
+@export var confused_texture: Texture2D
+
+#enum emotions
 enum Emotion {
 	HAPPY,
 	NEUTRAL,
@@ -8,12 +16,7 @@ enum Emotion {
 	CONFUSED
 }
 
-@export var happy_texture: Texture2D
-@export var neutral_texture: Texture2D
-@export var angry_texture: Texture2D
-@export var sad_texture: Texture2D
-@export var confused_texture: Texture2D
-
+#one and onlu core func
 func set_emotion(emotion: int) -> void:
 	match emotion:
 		Emotion.HAPPY:

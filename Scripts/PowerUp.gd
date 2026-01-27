@@ -2,6 +2,7 @@ extends Resource
 
 class_name PowerUp
 
+#exports
 @export var id : String
 @export var display_name : String
 @export var description : String

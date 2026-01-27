@@ -103,9 +103,14 @@ expand_mode = 2
 [node name="PowerBar" type="ProgressBar" parent="HUD"]
 layout_mode = 0
 offset_left = 912.0
-offset_top = 525.0
+offset_top = 506.0
 offset_right = 1144.0
-offset_bottom = 552.0
+offset_bottom = 564.0
+theme_override_colors/font_color = Color(0, 0.24705882, 0.43137255, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("3_waa4j")
+theme_override_font_sizes/font_size = 50
 allow_greater = true
 
 [node name="RoundFlashBG" type="TextureRect" parent="HUD"]
