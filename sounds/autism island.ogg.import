@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://bpq78xx0a1ejh"
+path="res://.godot/imported/autism island.ogg-b9405c65e9cc1d44dd99e35197346819.oggvorbisstr"
+
+[deps]
+
+source_file="res://sounds/autism island.ogg"
+dest_files=["res://.godot/imported/autism island.ogg-b9405c65e9cc1d44dd99e35197346819.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

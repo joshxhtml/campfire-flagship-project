@@ -1,0 +1,37 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1h1bewtq2cxp"]
+
+[ext_resource type="Texture2D" uid="uid://brn63udtojhot" path="res://images/tutorialbg.png" id="1_50hb1"]
+
+[node name="tutorial" type="CanvasLayer"]
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(1, 1, 1, 0.039215688)
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+texture = ExtResource("1_50hb1")
+
+[node name="next" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 930.0
+offset_top = 494.0
+offset_right = 1064.0
+offset_bottom = 560.0
+flat = true
+
+[node name="skip" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 802.0
+offset_top = 486.0
+offset_right = 902.0
+offset_bottom = 549.0
+flat = true
