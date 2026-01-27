@@ -20,9 +20,17 @@ signal state_changed(state)
 #signals for ball status
 signal balls_changed(count)
 
-#signals form score status
+#signals for score status
 signal round_score_changed(score)
 signal total_score_changed(score)
+
+#signals for greg
+signal greg_shot_made
+signal greg_shot_missed
+signal greg_hit_100
+signal greg_random
+signal greg_round_start()
+signal greg_game_over
 
 #enum
 enum GameState {
@@ -101,7 +109,6 @@ func start_round():
 	
 	round_score = 0
 	round_score_goal = 10 * roundnum
-	#print("[BALLS] Round start: ", "Base: ", balls_left, ", Extra this round: ", extra_balls_remaining, " (Permanent bonus: ", extra_balls_per_round, ")")
 	state = GameState.ROUND_TRANSITION
 	
 	emit_signal("state_changed", state)
@@ -109,6 +116,7 @@ func start_round():
 	emit_signal("total_score_changed", total_score)
 	emit_signal("balls_changed", balls_left)
 	emit_signal("round_started", roundnum)
+	emit_signal("greg_round_start")
 
 #round logic
 func round_ready():
@@ -135,6 +143,7 @@ func evaluate_round():
 	else:
 		state = GameState.GAME_OVER
 		emit_signal("round_failed", roundnum)
+		emit_signal("greg_game_over")
 
 #pause logic
 func open_pause_menu():
@@ -164,29 +173,30 @@ func add_score(points: int, hole_id: String, is_top_row: bool):
 	if owned_powerups.has("score_surge") and first_score_this_round:
 		multiplier *= 2.0
 		first_score_this_round = false
-		#print("[POWERUP] Score Surge activated")
 	
 	# perfect aim powerup
 	if  owned_powerups.has("perfect_aim") and hole_id == last_hole_id:
 		multiplier *= 1.5
-		#print("[POWERUP] Perfect Aim activated")
 		
 	#combo counter powerup
 	if owned_powerups.has("combo_counter"):
 		multiplier *= (1.0 +(.02 * combo_count))
-		#print("[POWERUP] Combo x", combo_count)
 		
 	#high roller powerup
 	if owned_powerups.has("high_roller") and is_top_row:
 		final_points += 10
-		#print("[POWERUP] High Roller Bonus activated")
 	
 	#last ball bonus powerup
 	if owned_powerups.has("last_ball_bonus") and is_last_ball():
 		multiplier *= 2.0
-		#print("[POWERUP] Last Ball Bonus")
 	
 	final_points = int(final_points * multiplier)
+	
+	if final_points >= 100:
+		emit_signal("greg_hit_100")
+	else:
+		emit_signal("greg_shot_made")
+	
 	round_score += final_points
 	total_score += final_points
 	
@@ -199,6 +209,8 @@ func add_score(points: int, hole_id: String, is_top_row: bool):
 func register_miss():
 	combo_count = 0
 	last_hole_id = ""
+	miss_count += 1
+	emit_signal("greg_shot_missed")
 	
 #ball logic
 func use_ball():
@@ -220,6 +232,8 @@ func use_ball():
 	emit_signal("balls_changed", balls_left)
 func ball_resolved():
 	active_balls -= 1
+	if randf() < .25:
+		emit_signal("greg_random")
 	check_round_end()
 func is_last_ball() -> bool:
 	return balls_left == 0 and extra_balls_remaining == 0
