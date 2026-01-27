@@ -41,6 +41,7 @@ func update_total_score(score):
 
 #on round blank
 func on_round_completed(_roundnum):
+	await get_tree().create_timer(1.5).timeout
 	hud.visible = false
 	round_image.visible = true
 	round_image.texture = preload("res://images/roundclear.png")
@@ -73,6 +74,7 @@ func on_round_started(roundnum):
 	
 	GameManager.allow_play()
 func on_round_failed(_roundnum):
+	await get_tree().create_timer(1.5).timeout
 	greg.set_emotion(greg.Emotion.DISAPPOINTED)
 	hud.visible = false
 	

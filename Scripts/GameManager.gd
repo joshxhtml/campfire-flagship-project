@@ -211,7 +211,9 @@ func register_miss():
 	last_hole_id = ""
 	miss_count += 1
 	emit_signal("greg_shot_missed")
-	
+
+func other_kind_of_miss():
+	emit_signal("greg_shot_missed")
 #ball logic
 func use_ball():
 	if state != GameState.PLAYING:
@@ -324,7 +326,7 @@ func restart_run():
 	# powerups
 	owned_powerups.clear()
 	score_multiplier = 1.0
-	shop_interval = 1
+	shop_interval = 5
 	shop_rerolled = false
 	
 	# combo

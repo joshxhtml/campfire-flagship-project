@@ -149,11 +149,6 @@ is_top_row = true
 [node name="Target" parent="ScoringHoles" instance=ExtResource("4_1hddr")]
 transform = Transform3D(-3.9340245e-10, -0.0024822466, -0.008650921, -1.9081958e-17, 0.008650921, -0.0024822466, 0.008999999, -1.0850244e-10, -3.7814385e-10, -1.2892113, -0.618189, -0.5500001)
 
-[node name="0Points" parent="ScoringHoles" instance=ExtResource("3_yuuq8")]
-transform = Transform3D(9.000001, -1.4210855e-13, -5.9604645e-08, -5.9604645e-08, -3.934025e-07, -9.000001, 1.1368684e-13, 9, -3.934025e-07, 1.864524, -2.5317376, 6.8361004e-08)
-visible = false
-points = 0
-
 [node name="TheActualBoringRamp" type="StaticBody3D" parent="."]
 collision_layer = 3
 

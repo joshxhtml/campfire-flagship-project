@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://petr62ss25eu"]
+[gd_scene load_steps=31 format=3 uid="uid://petr62ss25eu"]
 
 [ext_resource type="PackedScene" uid="uid://corb1adxuf5fs" path="res://Machine/machine.tscn" id="1_vivmo"]
 [ext_resource type="Script" uid="uid://bcrkd0cm5nyxy" path="res://Scripts/main.gd" id="1_ycdy4"]
@@ -22,7 +22,6 @@
 [ext_resource type="PackedScene" uid="uid://cbct5pkehl0q5" path="res://SignDecor/BarSign.fbx" id="18_cegan"]
 [ext_resource type="PackedScene" uid="uid://bql7y2rmljb13" path="res://BarDecor/psx_low_poly_beer.glb" id="18_getpj"]
 [ext_resource type="Texture2D" uid="uid://cujmlxs15or3v" path="res://images/x.png" id="22_1u8w0"]
-[ext_resource type="PackedScene" uid="uid://b4aey3hhgnqvj" path="res://GregMentor.tscn" id="22_ryguw"]
 [ext_resource type="Script" uid="uid://ddk8kq4vi4trb" path="res://Scripts/holemap.gd" id="23_0odxb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0xm2m"]
@@ -277,5 +276,3 @@ scale = Vector2(0.03, 0.03)
 texture = ExtResource("22_1u8w0")
 script = ExtResource("23_0odxb")
 hole_id = "hole_1"
-
-[node name="Greg" parent="." instance=ExtResource("22_ryguw")]

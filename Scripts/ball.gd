@@ -15,6 +15,7 @@ func _ready():
 func start_new_timeout():
 	await get_tree().create_timer(lifetime).timeout
 	if not resolved:
+		GameManager.other_kind_of_miss()
 		resolve()
 func resolve():
 	if resolved:

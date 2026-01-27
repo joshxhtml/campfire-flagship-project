@@ -31,20 +31,32 @@ var emotions := {
 	Emotion.CONFUSED: preload("res://Greg/greg_w_h_a_t.png")}
 var greg_phrases := {
 	GregEvent.SHOT_MADE: [
-		{"text": "nice Shot!", "emotion": Emotion.HAPPY },
+		{"text": "nice shot!", "emotion": Emotion.HAPPY },
 		{"text": "that'll do!", "emotion": Emotion.HAPPY },
 		{"text": "YIPPEE!", "emotion": Emotion.HAPPY },
 		{"text": "you hit that!", "emotion": Emotion.HAPPY },
 		{"text": "world's 2nd best player fr fr \n (behind me obviously)", "emotion": Emotion.HAPPY },
 		{"text": "catchphrase", "emotion": Emotion.ZESTY },
+		{"text": "you did it", "emotion": Emotion.HAPPY },
+		{"text": "maybe i was wrong about you", "emotion": Emotion.HAPPY },
+		{"text": "maybe you can be good at this", "emotion": Emotion.HAPPY },
+		{"text": "your like a son to me", "emotion": Emotion.HAPPY },
+		{"text": "gonna go pro in no time", "emotion": Emotion.HAPPY },
+		{"text": "catchphrase2", "emotion": Emotion.ZESTY },
 	],
 	GregEvent.SHOT_MISSED: [
-		{"text": "nice Shot /s", "emotion": Emotion.DISAPPOINTED },
-		{"text": "Let's just pretend you made that", "emotion": Emotion.CONFUSED },
+		{"text": "nice shot /s", "emotion": Emotion.DISAPPOINTED },
+		{"text": "let's just pretend you made that", "emotion": Emotion.CONFUSED },
 		{"text": "aw", "emotion": Emotion.DISAPPOINTED},
 		{"text": "better luck next time lmao", "emotion": Emotion.DISAPPOINTED },
 		{"text": "you're worse than my 4 year old cousin", "emotion": Emotion.CONFUSED },
 		{"text": "catchphrase (bad connotation)", "emotion": Emotion.ZESTY },
+		{"text": "L", "emotion": Emotion.DISAPPOINTED },
+		{"text": "remember when i said you where like a son to me, disregaurd that now", "emotion": Emotion.CONFUSED },
+		{"text": ":(", "emotion": Emotion.DISAPPOINTED},
+		{"text": "i couldve made that", "emotion": Emotion.DISAPPOINTED },
+		{"text": "tsk tsk tsk", "emotion": Emotion.CONFUSED },
+		{"text": "what are we even doing", "emotion": Emotion.ZESTY },
 	],
 	GregEvent.HIT_100: [
 		{"text": "damn ok", "emotion": Emotion.ZESTY },
@@ -56,12 +68,15 @@ var greg_phrases := {
 		{"text": "i believe in you, mostly", "emotion": Emotion.NUETRAL },
 		{"text": "they live beyond the walls of this bar", "emotion": Emotion.CONFUSED },
 		{"text": "the machine fears you", "emotion": Emotion.CONFUSED},
-		{"text": "thank god the dev took physics", "emotion": Emotion.CONFUSED },
+		{"text": "hi mom", "emotion": Emotion.NUETRAL },
+		{"text": "sometimes i feel like the world is going too fast for me", "emotion": Emotion.CONFUSED },
+		{"text": "hack.club/jay", "emotion": Emotion.CONFUSED},
+		{"text": ":3", "emotion": Emotion.CONFUSED },
 	],
 	GregEvent.ROUND_START: [
 		{"text": "here we go again", "emotion": Emotion.NUETRAL },
 		{"text": "well well well", "emotion": Emotion.CONFUSED },
-		{"text": "time for round %s " % GameManager.roundnum, "emotion": Emotion.CONFUSED},
+		{"text": "this will surely be a round ", "emotion": Emotion.CONFUSED},
 		{"text": "congrats on making it this far, or not, idk how far you are", "emotion": Emotion.CONFUSED },
 	],
 	GregEvent.GAMEOVER: [
@@ -74,6 +89,7 @@ var greg_phrases := {
 
 #vars
 var can_talk := true
+var tween : Tween = null
 
 #intialization
 func _ready() -> void:
@@ -101,15 +117,23 @@ func say(event: GregEvent):
 	set_emotion(line.emotion)
 	show_text(line.text)
 	start_cooldown()
+func better_say(event: GregEvent):
+	can_talk = true
+	say(event)
 func set_emotion(e: Emotion):
 	greg.texture = emotions[e]
 func show_text(t: String):
+	
+	if tween and tween.is_running():
+		tween.kill()
+		
 	greg_text.text = t
 	greg_text.modulate.a = 1
 	
-	var tween := create_tween()
+	tween = create_tween()
 	tween.tween_interval(2.0)
 	tween.tween_property(greg_text, "modulate:a", 0.0, 0.3)
+	tween.finished.connect(func(): greg_text.text = "")
 func start_cooldown():
 	can_talk = false
 	var timer := get_tree().create_timer(cooldown)
@@ -125,7 +149,7 @@ func _on_hit_100():
 func _on_random():
 	say(GregEvent.RANDOM)
 func _on_round_start():
-	say(GregEvent.ROUND_START)
+	better_say(GregEvent.ROUND_START)
 func _on_game_over():
 	set_emotion(Emotion.DISAPPOINTED)
 	say(GregEvent.GAMEOVER)
