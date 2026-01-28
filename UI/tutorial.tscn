@@ -1,37 +1,138 @@
-[gd_scene load_steps=2 format=3 uid="uid://b1h1bewtq2cxp"]
+[gd_scene load_steps=21 format=3 uid="uid://cor6q4weeux38"]
 
-[ext_resource type="Texture2D" uid="uid://brn63udtojhot" path="res://images/tutorialbg.png" id="1_50hb1"]
+[ext_resource type="Texture2D" uid="uid://bpscffq3x0syl" path="res://textures/floor_tiles_06_diff_4k.png" id="1_yfxfi"]
+[ext_resource type="Texture2D" uid="uid://cdjfjync3bh53" path="res://textures/floor_tiles_06_nor_gl_4k.png" id="2_oe8iu"]
+[ext_resource type="Texture2D" uid="uid://bk0aukvageigw" path="res://textures/floor_tiles_06_rough_4k.png" id="3_84do4"]
+[ext_resource type="Material" uid="uid://qxhnkrqdookj" path="res://textures/brickwall.tres" id="4_x5oks"]
+[ext_resource type="Script" uid="uid://dkk7cv4o8umue" path="res://Scripts/light_manager.gd" id="5_5vyj0"]
+[ext_resource type="PackedScene" uid="uid://dy3iuogudygra" path="res://shaders/vhs_shader.tscn" id="6_4wu57"]
+[ext_resource type="PackedScene" uid="uid://b1h1bewtq2cxp" path="res://UI/tutorial_ui.tscn" id="6_oe8iu"]
+[ext_resource type="Texture2D" uid="uid://ck2ywk28v8ubn" path="res://Greg/greg_zesty.png" id="7_nbux4"]
+[ext_resource type="PackedScene" uid="uid://b36u0e752dlnc" path="res://Machine/non_functional_machine.tscn" id="7_ymi0t"]
+[ext_resource type="Script" uid="uid://b0i1tvf5jwao7" path="res://Scripts/spin.gd" id="8_kh2rn"]
+[ext_resource type="Script" uid="uid://mg56xfwdq8e6" path="res://Scripts/greg_sprite.gd" id="8_q3qyw"]
+[ext_resource type="Texture2D" uid="uid://v51fngb860iq" path="res://Greg/greg_happy.png" id="9_ngp70"]
+[ext_resource type="Texture2D" uid="uid://dpv5qe3x6g66h" path="res://Greg/greg_neutral.png" id="10_o8v4v"]
+[ext_resource type="Texture2D" uid="uid://biu13wdff8wgt" path="res://Greg/greg_cocky.png" id="11_vfquh"]
+[ext_resource type="Texture2D" uid="uid://dxmxfwe7ebjb" path="res://Greg/greg_disappointed.png" id="12_4bah7"]
+[ext_resource type="Texture2D" uid="uid://dtd147gms12b" path="res://Greg/greg_w_h_a_t.png" id="13_je4sg"]
 
-[node name="tutorial" type="CanvasLayer"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yaehf"]
+disable_fog = true
+albedo_texture = ExtResource("1_yfxfi")
+roughness_texture = ExtResource("3_84do4")
+normal_enabled = true
+normal_texture = ExtResource("2_oe8iu")
+uv1_scale = Vector3(15, 9, 4)
 
-[node name="Panel" type="Panel" parent="."]
-offset_right = 1152.0
-offset_bottom = 648.0
+[sub_resource type="PlaneMesh" id="PlaneMesh_0o4t1"]
+material = SubResource("StandardMaterial3D_yaehf")
 
-[node name="ColorRect" type="ColorRect" parent="Panel"]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
-color = Color(1, 1, 1, 0.039215688)
+[sub_resource type="BoxMesh" id="BoxMesh_0k4wn"]
+material = ExtResource("4_x5oks")
 
-[node name="TextureRect" type="TextureRect" parent="Panel"]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 648.0
-texture = ExtResource("1_50hb1")
+[sub_resource type="BoxMesh" id="BoxMesh_j5v2v"]
+material = ExtResource("4_x5oks")
 
-[node name="next" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 930.0
-offset_top = 494.0
-offset_right = 1064.0
-offset_bottom = 560.0
-flat = true
+[node name="tutorial" type="Node3D"]
 
-[node name="skip" type="Button" parent="Panel"]
-layout_mode = 0
-offset_left = 802.0
-offset_top = 486.0
-offset_right = 902.0
-offset_bottom = 549.0
-flat = true
+[node name="Room" type="Node3D" parent="."]
+
+[node name="Floor" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(7, 0, 0, 0, 1, 0, 0, 0, 4, 0.05898094, 6.222725e-05, 0.048279762)
+mesh = SubResource("PlaneMesh_0o4t1")
+
+[node name="LeftWall - Lower" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(0.5, 0, 0, 0, 3, 0, 0, 0, 8, -7.25, 1.5, 0)
+mesh = SubResource("BoxMesh_0k4wn")
+
+[node name="LeftWall - Upper" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(0.5, 0, 0, 0, 3, 0, 0, 0, 8, -7.25, 4.5, 0)
+mesh = SubResource("BoxMesh_0k4wn")
+
+[node name="RightWall - Lower" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(0.5, 0, 0, 0, 3, 0, 0, 0, 8, 7.25, 1.5, 0)
+mesh = SubResource("BoxMesh_0k4wn")
+
+[node name="RightWall - Upper" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(0.5, 0, 0, 0, 3, 0, 0, 0, 8, 7.25, 4.5, 0)
+mesh = SubResource("BoxMesh_0k4wn")
+
+[node name="BackWall - Lower" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(14, 0, 0, 0, 3, 0, 0, 0, 0.5, 0, 1.5, -4.25)
+mesh = SubResource("BoxMesh_j5v2v")
+
+[node name="BackWall - Upper" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(14, 0, 0, 0, 3, 0, 0, 0, 0.5, 0, 4.5, -4.25)
+mesh = SubResource("BoxMesh_j5v2v")
+
+[node name="Ceiling" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(7, 0, 0, 0, -1, 3.496911e-07, 0, -8.742278e-08, -4, 0, 6, 0)
+mesh = SubResource("PlaneMesh_0o4t1")
+
+[node name="BackWall - Lower2" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(14, 0, 0, 0, 3, 0, 0, 0, 0.5, 0, 1.5, 4.2)
+mesh = SubResource("BoxMesh_j5v2v")
+
+[node name="BackWall - Upper2" type="MeshInstance3D" parent="Room"]
+transform = Transform3D(14, 0, 0, 0, 3, 0, 0, 0, 0.5, 0, 4.5, 4.2)
+mesh = SubResource("BoxMesh_j5v2v")
+
+[node name="Lights" type="Node3D" parent="Room"]
+script = ExtResource("5_5vyj0")
+
+[node name="Light1" type="OmniLight3D" parent="Room/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.592478, 3.7578697, 3.46215)
+layers = 2
+omni_range = 9.0
+
+[node name="Light2" type="OmniLight3D" parent="Room/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13350916, 5.5659294, 3.46215)
+layers = 2
+omni_range = 9.0
+
+[node name="Light3" type="OmniLight3D" parent="Room/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.350858, 3.7578697, 3.46215)
+layers = 2
+omni_range = 9.0
+
+[node name="Light4" type="OmniLight3D" parent="Room/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.350858, 3.7578697, -3.210956)
+layers = 2
+omni_range = 9.0
+
+[node name="Light5" type="OmniLight3D" parent="Room/Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.592478, 3.7578697, -3.4181075)
+layers = 2
+omni_range = 9.0
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.7071068, 0, -0.7071068, 0, 1, 0, 0.7071068, 0, 0.7071068, -4.2793007, 2.6017666, 2.8050675)
+
+[node name="tutorialUI" parent="." instance=ExtResource("6_oe8iu")]
+
+[node name="greglayer" type="CanvasLayer" parent="."]
+
+[node name="GregSprite" type="TextureRect" parent="greglayer"]
+offset_left = -122.0
+offset_top = 153.0
+offset_right = 286.78766
+offset_bottom = 666.65063
+rotation = -0.05235988
+texture = ExtResource("7_nbux4")
+expand_mode = 1
+stretch_mode = 5
+script = ExtResource("8_q3qyw")
+happy_texture = ExtResource("9_ngp70")
+neutral_texture = ExtResource("10_o8v4v")
+angry_texture = ExtResource("11_vfquh")
+sad_texture = ExtResource("12_4bah7")
+confused_texture = ExtResource("13_je4sg")
+
+[node name="VHS_Shader" parent="greglayer" instance=ExtResource("6_4wu57")]
+
+[node name="VHS_Shader" parent="." instance=ExtResource("6_4wu57")]
+
+[node name="NonFunctionalMachine" parent="." instance=ExtResource("7_ymi0t")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0.82, 0)
+script = ExtResource("8_kh2rn")

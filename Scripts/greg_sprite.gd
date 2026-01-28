@@ -16,7 +16,7 @@ enum Emotion {
 	CONFUSED
 }
 
-#one and onlu core func
+#one and only core func
 func set_emotion(emotion: int) -> void:
 	match emotion:
 		Emotion.HAPPY:
