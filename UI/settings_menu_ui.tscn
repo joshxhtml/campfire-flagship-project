@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://btcavus3bxxwd"]
+[gd_scene load_steps=5 format=3 uid="uid://btcavus3bxxwd"]
 
 [ext_resource type="Script" uid="uid://cc2kug0e8hst2" path="res://Scripts/settings_menu.gd" id="1_21gfq"]
 [ext_resource type="Texture2D" uid="uid://d3wbu4rwi5ivb" path="res://images/settings.png" id="2_ngtxp"]
+[ext_resource type="Texture2D" uid="uid://cujmlxs15or3v" path="res://images/x.png" id="3_e3ljt"]
 [ext_resource type="PackedScene" uid="uid://dy3iuogudygra" path="res://shaders/vhs_shader.tscn" id="10_jf71s"]
 
 [node name="SettingsMenu" type="CanvasLayer"]
@@ -68,6 +69,9 @@ offset_left = 824.0
 offset_top = 140.0
 offset_right = 926.0
 offset_bottom = 246.0
+max_value = 1.0
+step = 0.1
+value = 1.0
 
 [node name="VHSToggler" type="CheckBox" parent="Panel/Buttons"]
 layout_mode = 0
@@ -77,6 +81,7 @@ offset_right = 931.0
 offset_bottom = 283.0
 
 [node name="FullScreenToggler" type="CheckBox" parent="Panel/Buttons"]
+visible = false
 layout_mode = 0
 offset_left = 903.0
 offset_top = 285.0
@@ -90,6 +95,15 @@ offset_top = 425.0
 offset_right = 934.0
 offset_bottom = 531.0
 flat = true
+
+[node name="TextureRect" type="TextureRect" parent="Panel/Buttons"]
+layout_mode = 0
+offset_left = 900.0
+offset_top = 293.00003
+offset_right = 1924.0
+offset_bottom = 1317.0
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("3_e3ljt")
 
 [node name="VHS_Shader" parent="." instance=ExtResource("10_jf71s")]
 
@@ -119,7 +133,8 @@ offset_right = 1157.0
 offset_bottom = 843.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
-text = "If you see this: Please set your page zoom to either 100% or 80%, Thanks!"
+text = "If you see this: Please set your page zoom to either 100% or 80%, Thanks!
+This should hopefully be fixed one day, I just don't know how lmao"
 
 [connection signal="value_changed" from="Panel/Buttons/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
 [connection signal="toggled" from="Panel/Buttons/VHSToggler" to="." method="_on_vhs_toggler_toggled"]

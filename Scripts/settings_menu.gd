@@ -19,7 +19,7 @@ func _ready():
 
 #buttons/sliders
 func _on_volume_slider_value_changed(value: float) -> void:
-	SettingsManager.set_volume(value)
+	SettingsManager.set_volume(value/100.0)
 func _on_vhs_toggler_toggled(toggled_on: bool) -> void:
 	SettingsManager.set_vhs(toggled_on)
 func _on_full_screen_toggler_toggled(toggled_on: bool) -> void:

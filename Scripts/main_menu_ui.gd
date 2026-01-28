@@ -22,6 +22,7 @@ enum Emotion {
 
 #intialzaiton
 func _ready():
+	AudioManager.play_music(AudioManager.Music.MAIN_MENUS)
 	GameManager.state = GameManager.GameState.MENU
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	

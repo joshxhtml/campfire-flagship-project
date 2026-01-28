@@ -20,10 +20,28 @@ config/icon="res://images/icon.svg"
 GameManager="*res://Scripts/GameManager.gd"
 InputManager="*res://Scripts/InputManager.gd"
 SettingsManager="*res://Scripts/SettingsManager.gd"
+AudioManager="*res://sounds/AudioManager.gd"
 
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://Machine/": "blue",
+"res://PowerUps/": "pink",
+"res://Scripts/": "red",
+"res://ShopScenes/": "red",
+"res://SignDecor/": "yellow",
+"res://Target/": "blue",
+"res://UI/": "red",
+"res://images/": "yellow",
+"res://shaders/": "pink",
+"res://sounds/": "yellow",
+"res://textures/": "yellow",
+"res://tutorial_images/": "yellow"
+}
 
 [filesystem]
 

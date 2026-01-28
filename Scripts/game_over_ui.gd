@@ -8,6 +8,7 @@ extends CanvasLayer
 
 #intialization
 func _ready() -> void:
+	AudioManager.play_music(AudioManager.Music.MAIN_MENUS)
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	show_stats()
 

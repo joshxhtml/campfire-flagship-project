@@ -9,12 +9,13 @@ const WIDTH := 1152
 const HEIGHT := 648
 
 #vars
-var master_volume := 1
+var master_volume := 1.0
 var vhs_mode := true
 var fullscreen := false
 
 #intailzaiton
 func _ready() -> void:
+	apply_volume()
 	apply_all()
 func apply_all():
 	apply_volume()
@@ -22,9 +23,21 @@ func apply_all():
 	emit_signal("settings_changed")
 
 #apply things
+#thank you chatgpt
 func apply_volume():
-	#stole this code btw, idk how audio works but i want to make a polished game, i may need to add autio first too 💀💀
-	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(master_volume))
+	var bus := AudioServer.get_bus_index("Master")
+
+	if master_volume <= 0.001:
+		AudioServer.set_bus_mute(bus, true)
+		return
+
+	AudioServer.set_bus_mute(bus, false)
+
+	var curved := pow(master_volume, 0.1)
+	var db := linear_to_db(curved)
+	db = max(db, -60.0)
+
+	AudioServer.set_bus_volume_db(bus, db)
 func apply_fullscreen():
 	if fullscreen:
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
@@ -41,6 +54,7 @@ func set_vhs(value: bool):
 		return
 	vhs_mode = value
 	emit_signal("vhs_toggled", vhs_mode)
-func set_fullscreen(value: bool):
-	fullscreen = value
-	apply_fullscreen()
+func set_fullscreen(_value: bool):
+	#fullscreen = value
+	#apply_fullscreen()
+	pass
