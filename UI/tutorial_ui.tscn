@@ -62,12 +62,12 @@ offset_bottom = 798.0
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("5_22bvc")
 
-[node name="Points Scene" type="Control" parent="Panel"]
+[node name="Points" type="Control" parent="Panel"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="PointsShowerThing" type="TextureRect" parent="Panel/Points Scene"]
+[node name="PointsShowerThing" type="TextureRect" parent="Panel/Points"]
 visible = false
 layout_mode = 0
 offset_left = 387.0
@@ -76,7 +76,7 @@ offset_right = 794.0
 offset_bottom = 561.0
 texture = ExtResource("6_aci43")
 
-[node name="100Left" type="Label" parent="Panel/Points Scene/PointsShowerThing"]
+[node name="100Left" type="Label" parent="Panel/Points/PointsShowerThing"]
 layout_mode = 0
 offset_left = 88.0
 offset_top = 99.0
@@ -87,7 +87,7 @@ theme_override_fonts/font = ExtResource("3_ouy5e")
 theme_override_font_sizes/font_size = 30
 text = "100"
 
-[node name="100Right" type="Label" parent="Panel/Points Scene/PointsShowerThing"]
+[node name="100Right" type="Label" parent="Panel/Points/PointsShowerThing"]
 layout_mode = 0
 offset_left = 268.0
 offset_top = 100.0
@@ -98,7 +98,7 @@ theme_override_fonts/font = ExtResource("3_ouy5e")
 theme_override_font_sizes/font_size = 30
 text = "100"
 
-[node name="50" type="Label" parent="Panel/Points Scene/PointsShowerThing"]
+[node name="50" type="Label" parent="Panel/Points/PointsShowerThing"]
 layout_mode = 0
 offset_left = 176.0
 offset_top = 122.0
@@ -111,7 +111,7 @@ text = "50
 "
 horizontal_alignment = 1
 
-[node name="40" type="Label" parent="Panel/Points Scene/PointsShowerThing"]
+[node name="40" type="Label" parent="Panel/Points/PointsShowerThing"]
 layout_mode = 0
 offset_left = 175.0
 offset_top = 166.0
@@ -123,7 +123,7 @@ theme_override_font_sizes/font_size = 30
 text = "40"
 horizontal_alignment = 1
 
-[node name="30" type="Label" parent="Panel/Points Scene/PointsShowerThing"]
+[node name="30" type="Label" parent="Panel/Points/PointsShowerThing"]
 layout_mode = 0
 offset_left = 175.0
 offset_top = 208.0
@@ -135,7 +135,7 @@ theme_override_font_sizes/font_size = 30
 text = "30"
 horizontal_alignment = 1
 
-[node name="20" type="Label" parent="Panel/Points Scene/PointsShowerThing"]
+[node name="20" type="Label" parent="Panel/Points/PointsShowerThing"]
 layout_mode = 0
 offset_left = 175.0
 offset_top = 243.0
@@ -147,7 +147,7 @@ theme_override_font_sizes/font_size = 30
 text = "20"
 horizontal_alignment = 1
 
-[node name="10" type="Label" parent="Panel/Points Scene/PointsShowerThing"]
+[node name="10" type="Label" parent="Panel/Points/PointsShowerThing"]
 layout_mode = 0
 offset_left = 175.0
 offset_top = 276.0
@@ -177,3 +177,6 @@ flat = true
 
 [node name="VHS_Shader" parent="." instance=ExtResource("2_byvee")]
 visible = false
+
+[connection signal="pressed" from="Panel/next" to="." method="_on_next_pressed"]
+[connection signal="pressed" from="Panel/skip" to="." method="_on_skip_pressed"]

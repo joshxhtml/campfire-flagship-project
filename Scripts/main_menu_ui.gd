@@ -40,8 +40,12 @@ func _cycle_emotion():
 
 #buttons
 func _on_play_pressed() -> void:
-	GameManager.restart_run()
-	get_tree().change_scene_to_file("res://main.tscn")
+	if not GameManager.tutorial:
+		GameManager.tutorial = true
+		get_tree().change_scene_to_file("res://UI/tutorial.tscn")
+	else:
+		GameManager.restart_run()
+		get_tree().change_scene_to_file("res://main.tscn")
 func _on_settings_pressed() -> void:
 	var settings = SETTINGS.instantiate()
 	add_child(settings)

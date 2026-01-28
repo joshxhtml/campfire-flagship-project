@@ -80,7 +80,7 @@ var chaos_triggered := false
 #vars - misc
 var active_puase_menu: Node = null
 var locked_holes: Array[String] = []
-
+var tutorial := false
 
 
 #starting logic
