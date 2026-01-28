@@ -1,5 +1,8 @@
 extends CanvasLayer
 
+#signal
+signal change(slide_id: String)
+
 #const
 const SLIDES := [
 	{
@@ -40,7 +43,7 @@ const SLIDES := [
 	{
 		"id": "final",
 		"image": null,
-		"text": "thats all i got\ngood luck\nyour gonna need it\n\ntip from the dev: the best powerup is first/last ball",
+		"text": "thats all i got\ngood luck\nyour gonna need it\n\ntip from the dev: the best powerup is first/last ball\n another note from the dev: thanks for playing my game!!",
 		"show_arrow": false,
 		"show_points": false,
 	},
@@ -70,6 +73,7 @@ func _ready():
 func start(num: int):
 	index = num
 	var slide = SLIDES[num]
+	emit_signal("change", slide.id)
 	arrow.visible = slide.show_arrow
 	points.visible = slide.show_points
 	

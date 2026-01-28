@@ -94,6 +94,7 @@ neutral_texture = ExtResource("6_h6e1x")
 angry_texture = ExtResource("7_cqy2k")
 sad_texture = ExtResource("8_r8ljn")
 confused_texture = ExtResource("9_2a0yx")
+zesty_texture = ExtResource("3_clreq")
 
 [node name="VHS_Shader" parent="." instance=ExtResource("1_b0hjo")]
 

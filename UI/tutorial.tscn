@@ -1,5 +1,6 @@
-[gd_scene load_steps=21 format=3 uid="uid://cor6q4weeux38"]
+[gd_scene load_steps=22 format=3 uid="uid://cor6q4weeux38"]
 
+[ext_resource type="Script" uid="uid://c61eyea53uste" path="res://Scripts/tutorial.gd" id="1_q3qyw"]
 [ext_resource type="Texture2D" uid="uid://bpscffq3x0syl" path="res://textures/floor_tiles_06_diff_4k.png" id="1_yfxfi"]
 [ext_resource type="Texture2D" uid="uid://cdjfjync3bh53" path="res://textures/floor_tiles_06_nor_gl_4k.png" id="2_oe8iu"]
 [ext_resource type="Texture2D" uid="uid://bk0aukvageigw" path="res://textures/floor_tiles_06_rough_4k.png" id="3_84do4"]
@@ -35,6 +36,7 @@ material = ExtResource("4_x5oks")
 material = ExtResource("4_x5oks")
 
 [node name="tutorial" type="Node3D"]
+script = ExtResource("1_q3qyw")
 
 [node name="Room" type="Node3D" parent="."]
 
@@ -128,6 +130,7 @@ neutral_texture = ExtResource("10_o8v4v")
 angry_texture = ExtResource("11_vfquh")
 sad_texture = ExtResource("12_4bah7")
 confused_texture = ExtResource("13_je4sg")
+zesty_texture = ExtResource("7_nbux4")
 
 [node name="VHS_Shader" parent="greglayer" instance=ExtResource("6_4wu57")]
 
